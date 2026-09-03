@@ -1969,27 +1969,5 @@
         "Travail & retraites"
       ]
     }
-  ],
-  "communityRanking": [
-    {
-      "candidateId": "brun",
-      "matchCount": 3842
-    },
-    {
-      "candidateId": "glucksmann",
-      "matchCount": 2936
-    },
-    {
-      "candidateId": "faure",
-      "matchCount": 2421
-    },
-    {
-      "candidateId": "guedj",
-      "matchCount": 1874
-    },
-    {
-      "candidateId": "royal",
-      "matchCount": 1407
-    }
   ]
 }

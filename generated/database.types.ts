@@ -500,6 +500,7 @@ export type Database = {
           id: string
           is_current: boolean
           label: string
+          last_released_at: string | null
           notes: string | null
           publication_status: string
           published_at: string | null
@@ -512,6 +513,7 @@ export type Database = {
           id: string
           is_current?: boolean
           label: string
+          last_released_at?: string | null
           notes?: string | null
           publication_status?: string
           published_at?: string | null
@@ -524,6 +526,7 @@ export type Database = {
           id?: string
           is_current?: boolean
           label?: string
+          last_released_at?: string | null
           notes?: string | null
           publication_status?: string
           published_at?: string | null
@@ -1296,14 +1299,17 @@ export type Database = {
       }
       api_community_rankings: {
         Row: {
-          baseline_match_count: number | null
           candidate_id: string | null
-          contains_synthetic_baseline: boolean | null
-          data_origin: string | null
+          collection_enabled: boolean | null
           display_order: number | null
-          live_match_count: number | null
+          has_results: boolean | null
+          last_released_at: string | null
           match_count: number | null
+          match_percentage: number | null
           quiz_version_id: string | null
+          rank_position: number | null
+          ranking_enabled: boolean | null
+          release_batch_size: number | null
           tie_break_order: number | null
           total_match_count: number | null
         }

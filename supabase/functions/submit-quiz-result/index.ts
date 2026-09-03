@@ -9,6 +9,7 @@ import {
 } from "./scoring.ts";
 
 const maximumBodyBytes = 16_384;
+const maximumSharedSecretBytes = 256;
 
 type CurrentQuizRow = {
   id: string;
@@ -33,6 +34,22 @@ const requiredEnvironment = (name: string): string => {
   return value;
 };
 
+const requiredSupabaseSecretKey = (): string => {
+  const encodedKeys = Deno.env.get("SUPABASE_SECRET_KEYS");
+  if (encodedKeys) {
+    try {
+      const keys = JSON.parse(encodedKeys) as Record<string, unknown>;
+      if (typeof keys.default === "string" && keys.default.length > 0) {
+        return keys.default;
+      }
+    } catch {
+      throw new Error("Invalid SUPABASE_SECRET_KEYS environment variable");
+    }
+  }
+
+  return requiredEnvironment("SUPABASE_SERVICE_ROLE_KEY");
+};
+
 Deno.serve(async (request: Request) => {
   if (request.method !== "POST") {
     return jsonResponse({ error: "method_not_allowed" }, 405);
@@ -40,7 +57,12 @@ Deno.serve(async (request: Request) => {
 
   const expectedSecret = Deno.env.get("QUIZ_SUBMISSION_SHARED_SECRET") ?? "";
   const providedSecret = request.headers.get("x-quiz-submission-secret") ?? "";
-  if (!expectedSecret || !constantTimeEqual(expectedSecret, providedSecret)) {
+  if (
+    !expectedSecret ||
+    new TextEncoder().encode(providedSecret).byteLength >
+      maximumSharedSecretBytes ||
+    !constantTimeEqual(expectedSecret, providedSecret)
+  ) {
     return jsonResponse({ error: "unauthorized" }, 401);
   }
 
@@ -78,7 +100,7 @@ Deno.serve(async (request: Request) => {
 
     const supabase = createClient(
       requiredEnvironment("SUPABASE_URL"),
-      requiredEnvironment("SUPABASE_SERVICE_ROLE_KEY"),
+      requiredSupabaseSecretKey(),
       {
         auth: { persistSession: false, autoRefreshToken: false },
         global: {
@@ -201,9 +223,13 @@ Deno.serve(async (request: Request) => {
     }
     if (
       recordingStatus === "submissions_disabled" ||
-      recordingStatus === "synthetic_baseline_active"
+      recordingStatus === "ranking_not_collecting"
     ) {
       return jsonResponse({ error: recordingStatus }, 503);
+    }
+
+    if (recordingStatus !== "recorded" && recordingStatus !== "duplicate") {
+      throw new Error("Unexpected quiz result recording status");
     }
 
     return jsonResponse(

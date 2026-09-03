@@ -16,12 +16,11 @@ const server = await createServer({
 });
 
 try {
-  const [candidateModule, questionModule, sourceModule, rankingModule, configModule] =
+  const [candidateModule, questionModule, sourceModule, configModule] =
     await Promise.all([
       server.ssrLoadModule('/data/candidates.ts'),
       server.ssrLoadModule('/data/questions.ts'),
       server.ssrLoadModule('/data/sources.ts'),
-      server.ssrLoadModule('/data/community-ranking.ts'),
       server.ssrLoadModule('/data/config.ts'),
     ]);
 
@@ -48,7 +47,6 @@ try {
     candidates: candidateModule.candidates,
     questions: questionModule.questions,
     sources,
-    communityRanking: rankingModule.communityRanking,
   };
 
   const outputDirectory = path.join(backendRoot, 'content');

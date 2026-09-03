@@ -25,13 +25,18 @@ version courante et publie la nouvelle dans une même transaction.
 
 ## Classement communautaire
 
-`community_ranking_snapshots` et `community_ranking_entries` contiennent un
-socle importé ou synthétique et son origine. `community_ranking_counters`
-contient uniquement les incréments réels et n'est lisible que par un admin ou
-la `service_role`. La vue `api_community_rankings` expose uniquement le dernier
-snapshot publié et indique si ce socle contient encore des données
-synthétiques. Les compteurs doivent être relâchés par lots dans un nouveau
-snapshot afin de ne jamais publier un delta individuel en temps réel.
+`community_ranking_counters` contient le cumul réel collecté et n'est lisible
+que par un admin ou la clé serveur. `community_ranking_snapshots` et
+`community_ranking_entries` contiennent uniquement le dernier cumul relâché.
+La RPC d'enregistrement copie atomiquement tous les compteurs vers le snapshot
+dès que 10 nouvelles contributions sont en attente. La vue
+`api_community_rankings` expose donc un classement réel qui démarre à zéro et
+ne révèle jamais un delta individuel en temps réel.
+
+Les origines autorisées sont `collected` pour les contributions du site et
+`imported` pour un éventuel jeu externe réel, explicitement contrôlé par un
+administrateur. Un snapshot `collected` ne peut pas être saisi arbitrairement
+depuis le backoffice : ses valeurs doivent correspondre aux compteurs privés.
 
 Les tables privées `quiz_submission_receipts` et
 `quiz_rate_limit_buckets` ne contiennent que des HMAC à durée de vie limitée.
@@ -52,6 +57,11 @@ Les vues publiques sont les seules formes que le frontend doit mapper :
 Elles utilisent `security_invoker = true`, donc les RLS des tables sous-jacentes
 restent actives. Les tables de travail en `draft` ne sont jamais visibles avec
 la clé publique.
+
+`api_community_rankings` expose `match_count`, `total_match_count`,
+`match_percentage`, `rank_position`, `has_results`, les drapeaux de
+fonctionnalité et la date du dernier relâchement. Tant que le premier lot n'est
+pas complet, les cinq candidats ont un compteur nul et aucun rang.
 
 Le backoffice authentifié travaille sur les tables normalisées, toujours sous
 RLS. Son unique surface privée est constituée de RPC bornées : profil staff de

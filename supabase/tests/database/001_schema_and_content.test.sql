@@ -139,32 +139,32 @@ select results_eq(
 );
 
 select results_eq(
-  $$ select candidate_id from public.api_community_rankings order by match_count desc limit 1 $$,
-  $$ values ('brun'::text) $$,
-  'Philippe Brun leads the synthetic baseline'
+  $$ select count(*)::bigint from public.api_community_rankings $$,
+  $$ values (5::bigint) $$,
+  'the ranking API starts with one truthful row per candidate'
 );
 
 select results_eq(
   $$ select distinct total_match_count from public.api_community_rankings $$,
-  $$ values (12480::numeric) $$,
-  'synthetic baseline total is explicit and stable'
+  $$ values (0::numeric) $$,
+  'the ranking API starts with zero real contributions'
 );
 
 select ok(
-  (select bool_and(contains_synthetic_baseline) from public.api_community_rankings),
-  'the ranking API labels its synthetic baseline'
+  (select bool_and(not has_results and rank_position is null) from public.api_community_rankings),
+  'an empty ranking exposes no artificial order'
 );
 
 select results_eq(
-  $$ select distinct live_match_count from public.api_community_rankings $$,
+  $$ select count(*)::bigint from information_schema.columns where table_schema = 'public' and table_name = 'api_community_rankings' and column_name in ('baseline_match_count', 'live_match_count') $$,
   $$ values (0::bigint) $$,
-  'the public ranking API never exposes live counter deltas'
+  'the public ranking API does not expose private counter deltas or baselines'
 );
 
 select results_eq(
   $$ select value from public.site_settings where key = 'anonymous_aggregate_submissions_enabled' $$,
-  $$ values ('false'::jsonb) $$,
-  'real submissions stay disabled while the baseline is synthetic'
+  $$ values ('true'::jsonb) $$,
+  'real aggregate submissions are enabled'
 );
 
 select results_eq(
@@ -266,7 +266,7 @@ select throws_ok(
 );
 
 select throws_ok(
-  $$ update public.community_ranking_snapshots set quiz_version_id = '2026-09-03-v2' where id = 'initial-demo-2026-09-03' $$,
+  $$ update public.community_ranking_snapshots set quiz_version_id = '2026-09-03-v2' where id = 'collected-2026-09-03-v1' $$,
   '55000',
   null,
   'a populated ranking snapshot cannot move to another quiz version'

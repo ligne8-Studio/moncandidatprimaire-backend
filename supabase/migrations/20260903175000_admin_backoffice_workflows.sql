@@ -537,7 +537,7 @@ begin
    and target_position.candidate_id = source_position.candidate_id
   where source_question.quiz_version_id = source_version.id;
 
-  draft_snapshot_id := 'draft-baseline-' || p_target_version_id;
+  draft_snapshot_id := 'collected-' || p_target_version_id;
 
   insert into public.community_ranking_snapshots (
     id,
@@ -550,9 +550,9 @@ begin
   ) values (
     draft_snapshot_id,
     p_target_version_id,
-    'Initialisation — ' || btrim(p_label),
-    'synthetic',
-    'Compteurs initialisés à zéro lors du clonage. À vérifier avant publication.',
+    'Résultats collectés — ' || btrim(p_label),
+    'collected',
+    'Compteurs réels initialisés à zéro lors du clonage.',
     false,
     'draft'
   );

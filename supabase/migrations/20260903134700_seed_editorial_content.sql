@@ -2,7 +2,7 @@
 
 -- Mon candidat primaire
 -- Canonical editorial seed imported from the original frontend snapshot.
--- The synthetic ranking is explicitly separated from future live counts.
+-- Community ranking counters start at zero and accept only real contributions.
 
 insert into public.campaigns (id, slug, name, short_name, description, publication_status, is_current, display_order, published_at) values
   ('ps-2026', 'primaire-ps-2026', 'Primaire du Parti socialiste 2026', 'Primaire PS 2026', 'Comparaison civique des candidatures déclarées ou étudiées pour la primaire.', 'published', true, 1, '2026-09-03T00:00:00+02:00');
@@ -497,17 +497,18 @@ insert into public.highlight_sources (highlight_id, source_id, display_order) va
 
 insert into public.site_settings (key, value, description, is_public) values
   ('community_ranking_enabled', 'true'::jsonb, 'Affiche le classement communautaire agrégé.', true),
-  ('anonymous_aggregate_submissions_enabled', 'false'::jsonb, 'À activer uniquement après suppression du socle synthétique et validation de la couverture éditoriale.', true),
+  ('anonymous_aggregate_submissions_enabled', 'true'::jsonb, 'Autorise les contributions anonymes agrégées au classement communautaire.', true),
+  ('community_ranking_release_batch_size', '10'::jsonb, 'Nombre minimal de nouvelles contributions avant publication atomique des agrégats.', true),
   ('privacy.quiz_storage', '{"storesRawAnswers":false,"storesPerUserScores":false,"aggregateOnly":true,"antiAbuseReceiptMaxDays":30,"rateLimitHashMaxDays":3}'::jsonb, 'Contrat technique de minimisation des données du quiz.', true);
 
-insert into public.community_ranking_snapshots (id, quiz_version_id, label, data_origin, notes, is_current, publication_status, published_at) values ('initial-demo-2026-09-03', '2026-09-03-v1', 'Données de démonstration initiales', 'synthetic', 'Chiffres inventés pour valider la présentation avant collecte réelle.', true, 'published', '2026-09-03T00:00:00+02:00');
+insert into public.community_ranking_snapshots (id, quiz_version_id, label, data_origin, notes, is_current, publication_status, published_at) values ('collected-2026-09-03-v1', '2026-09-03-v1', 'Résultats collectés', 'collected', 'Agrégats issus exclusivement de contributions consenties.', true, 'published', '2026-09-03T00:00:00+02:00');
 
 insert into public.community_ranking_entries (snapshot_id, candidate_id, match_count) values
-  ('initial-demo-2026-09-03', 'brun', 3842),
-  ('initial-demo-2026-09-03', 'glucksmann', 2936),
-  ('initial-demo-2026-09-03', 'faure', 2421),
-  ('initial-demo-2026-09-03', 'guedj', 1874),
-  ('initial-demo-2026-09-03', 'royal', 1407);
+  ('collected-2026-09-03-v1', 'brun', 0),
+  ('collected-2026-09-03-v1', 'faure', 0),
+  ('collected-2026-09-03-v1', 'glucksmann', 0),
+  ('collected-2026-09-03-v1', 'guedj', 0),
+  ('collected-2026-09-03-v1', 'royal', 0);
 
 insert into public.community_ranking_counters (quiz_version_id, candidate_id, live_match_count) values
   ('2026-09-03-v1', 'brun', 0),

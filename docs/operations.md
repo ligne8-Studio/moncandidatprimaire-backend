@@ -26,19 +26,19 @@ Faire ensuite un `db push --linked --dry-run`. Ne jamais lancer
 - régénérer `generated/database.types.ts` depuis le projet lié ;
 - vérifier les volumes par SQL et les vues avec la clé publique ;
 - charger puis vérifier les portraits avec `npm run assets:upload:linked` ;
-- appeler l'Edge Function sans secret (401 attendu), puis avec le secret
-  serveur (503 `submissions_disabled` attendu tant que le snapshot est
-  synthétique) ;
-- après activation sur un snapshot réel, envoyer un payload de test consentant
-  avec un identifiant d'idempotence neuf, puis le répéter (statut `duplicate`,
-  compteur inchangé) ;
+- appeler l'Edge Function sans secret (401 attendu) ;
+- envoyer un payload de test consentant avec un identifiant d'idempotence neuf,
+  puis le répéter (statut `duplicate`, compteur inchangé) ;
+- vérifier qu'aucun compteur public ne change avant 10 contributions nouvelles,
+  puis que le lot complet apparaît en une seule fois ;
 - inspecter les logs Edge pour confirmer qu'aucun payload n'est journalisé.
 
-La collecte reste volontairement désactivée tant que le snapshot courant est
-`synthetic`. Son activation exige d'abord un snapshot réel/importé complet, une
-couverture éditoriale suffisante pour tous les candidats, un consentement relu
-et une protection anti-bot. Ne mélangez jamais des compteurs réels à un socle
-de démonstration.
+La collecte réelle est activée. Le secret serveur, les reçus d'idempotence et la
+limite de cinq contributions par empreinte réseau et par jour constituent la
+première barrière anti-abus. Ajouter ensuite Turnstile avec validation côté
+serveur avant toute campagne de trafic importante ; ne jamais utiliser ses clés
+de test en production. Le réglage `anonymous_aggregate_submissions_enabled`
+reste le coupe-circuit immédiat.
 
 `supabase/config.toml` contient des URL locales et ne doit donc pas être poussé
 tel quel en production. Avant le futur dashboard, configurez dans Supabase Auth
@@ -51,8 +51,8 @@ les URL exactes du site et désactivez les inscriptions publiques.
 2. Modifier les questions, positions et liens du brouillon avec la session
    Supabase du membre du staff.
 3. Relire puis passer les questions et positions retenues à `published`.
-4. Vérifier le snapshot initial généré, son origine et ses valeurs. Un socle
-   synthétique maintient nécessairement la collecte réelle désactivée.
+4. Vérifier le snapshot `collected` vide généré et ses compteurs à zéro, ou un
+   import réel explicitement documenté.
 5. Appeler `publish_quiz_version(cible, snapshot)`. La RPC admin publie le
    snapshot, archive l'ancienne version courante et publie la cible dans une
    transaction unique.

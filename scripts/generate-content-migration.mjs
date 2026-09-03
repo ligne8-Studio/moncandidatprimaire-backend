@@ -79,7 +79,7 @@ const tieBreakOrder = new Map([
 const sections = [];
 const add = (...lines) => sections.push(lines.join('\n'));
 
-add(`-- Mon candidat primaire\n-- Canonical editorial seed imported from the original frontend snapshot.\n-- The synthetic ranking is explicitly separated from future live counts.`);
+add(`-- Mon candidat primaire\n-- Canonical editorial seed imported from the original frontend snapshot.\n-- Community ranking counters start at zero and accept only real contributions.`);
 
 add(`insert into public.campaigns (id, slug, name, short_name, description, publication_status, is_current, display_order, published_at) values\n  ('ps-2026', 'primaire-ps-2026', 'Primaire du Parti socialiste 2026', 'Primaire PS 2026', 'Comparaison civique des candidatures déclarées ou étudiées pour la primaire.', 'published', true, 1, '2026-09-03T00:00:00+02:00');`);
 
@@ -273,16 +273,19 @@ add(`insert into public.highlight_sources (highlight_id, source_id, display_orde
 
 add(`insert into public.site_settings (key, value, description, is_public) values\n${rowList([
   [sqlString('community_ranking_enabled'), sqlJson(true), sqlString('Affiche le classement communautaire agrégé.'), 'true'],
-  [sqlString('anonymous_aggregate_submissions_enabled'), sqlJson(false), sqlString('À activer uniquement après suppression du socle synthétique et validation de la couverture éditoriale.'), 'true'],
+  [sqlString('anonymous_aggregate_submissions_enabled'), sqlJson(true), sqlString('Autorise les contributions anonymes agrégées au classement communautaire.'), 'true'],
+  [sqlString('community_ranking_release_batch_size'), sqlJson(10), sqlString('Nombre minimal de nouvelles contributions avant publication atomique des agrégats.'), 'true'],
   [sqlString('privacy.quiz_storage'), sqlJson({ storesRawAnswers: false, storesPerUserScores: false, aggregateOnly: true, antiAbuseReceiptMaxDays: 30, rateLimitHashMaxDays: 3 }), sqlString('Contrat technique de minimisation des données du quiz.'), 'true'],
 ])};`);
 
-add(`insert into public.community_ranking_snapshots (id, quiz_version_id, label, data_origin, notes, is_current, publication_status, published_at) values ('initial-demo-2026-09-03', ${sqlString(content.dataVersion)}, 'Données de démonstration initiales', 'synthetic', 'Chiffres inventés pour valider la présentation avant collecte réelle.', true, 'published', '2026-09-03T00:00:00+02:00');`);
+const collectedSnapshotId = `collected-${content.dataVersion}`;
 
-add(`insert into public.community_ranking_entries (snapshot_id, candidate_id, match_count) values\n${rowList(content.communityRanking.map((entry) => [
-  sqlString('initial-demo-2026-09-03'),
-  sqlString(entry.candidateId),
-  String(entry.matchCount),
+add(`insert into public.community_ranking_snapshots (id, quiz_version_id, label, data_origin, notes, is_current, publication_status, published_at) values (${sqlString(collectedSnapshotId)}, ${sqlString(content.dataVersion)}, 'Résultats collectés', 'collected', 'Agrégats issus exclusivement de contributions consenties.', true, 'published', '2026-09-03T00:00:00+02:00');`);
+
+add(`insert into public.community_ranking_entries (snapshot_id, candidate_id, match_count) values\n${rowList(content.candidates.map((candidate) => [
+  sqlString(collectedSnapshotId),
+  sqlString(candidate.id),
+  '0',
 ]))};`);
 
 add(`insert into public.community_ranking_counters (quiz_version_id, candidate_id, live_match_count) values\n${rowList(content.candidates.map((candidate) => [

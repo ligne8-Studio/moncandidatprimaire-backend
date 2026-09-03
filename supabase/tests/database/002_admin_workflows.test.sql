@@ -2,7 +2,7 @@ create extension if not exists pgtap with schema extensions;
 
 begin;
 
-select plan(31);
+select plan(33);
 
 insert into auth.users (
   id,
@@ -89,6 +89,11 @@ select results_eq(
   'the staff profile returns only the email already present in the caller JWT'
 );
 
+select lives_ok(
+  $$ select last_counted_at from public.community_ranking_counters limit 1 $$,
+  'an administrator can inspect the private last collection time'
+);
+
 select set_config(
   'request.jwt.claims',
   '{"sub":"bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb","email":"visitor-test@example.test","role":"authenticated"}',
@@ -100,6 +105,11 @@ select is_empty(
   'an authenticated non-staff user has no staff profile'
 );
 
+select is_empty(
+  $$ select last_counted_at from public.community_ranking_counters $$,
+  'an authenticated non-staff user cannot inspect private collection timestamps'
+);
+
 select throws_ok(
   $$ select public.clone_quiz_version('2026-09-03-v1', '2026-09-03-v2', 'Unauthorized clone') $$,
   '42501',
@@ -108,7 +118,7 @@ select throws_ok(
 );
 
 select throws_ok(
-  $$ select public.publish_quiz_version('2026-09-03-v1', 'initial-demo-2026-09-03') $$,
+  $$ select public.publish_quiz_version('2026-09-03-v1', 'collected-2026-09-03-v1') $$,
   '42501',
   null,
   'an authenticated non-staff user cannot publish a quiz'
@@ -125,7 +135,7 @@ select throws_ok(
 );
 
 select throws_ok(
-  $$ select public.publish_quiz_version('2026-09-03-v1', 'initial-demo-2026-09-03') $$,
+  $$ select public.publish_quiz_version('2026-09-03-v1', 'collected-2026-09-03-v1') $$,
   '42501',
   null,
   'anonymous users cannot execute the publication workflow'
@@ -229,7 +239,7 @@ select results_eq(
   $$
     select count(*)::bigint
     from public.community_ranking_entries
-    where snapshot_id = 'draft-baseline-2026-09-03-v2'
+    where snapshot_id = 'collected-2026-09-03-v2'
       and match_count = 0
   $$,
   $$ values (5::bigint) $$,
@@ -238,7 +248,7 @@ select results_eq(
 
 update public.community_ranking_snapshots
 set publication_status = 'published', is_current = true
-where id = 'draft-baseline-2026-09-03-v2';
+where id = 'collected-2026-09-03-v2';
 
 reset role;
 set local role anon;
@@ -247,7 +257,7 @@ select is_empty(
   $$
     select id
     from public.community_ranking_snapshots
-    where id = 'draft-baseline-2026-09-03-v2'
+    where id = 'collected-2026-09-03-v2'
   $$,
   'a released snapshot stays private while its quiz version is a draft'
 );
@@ -287,7 +297,7 @@ select results_eq(
       (
         select count(*)::bigint
         from public.community_ranking_entries
-        where snapshot_id = 'draft-baseline-2026-09-03-v2'
+        where snapshot_id = 'collected-2026-09-03-v2'
       )
   $$,
   $$ values (4::bigint, 4::bigint) $$,
@@ -316,7 +326,7 @@ select results_eq(
 );
 
 select throws_ok(
-  $$ select public.publish_quiz_version('2026-09-03-v2', 'draft-baseline-2026-09-03-v2') $$,
+  $$ select public.publish_quiz_version('2026-09-03-v2', 'collected-2026-09-03-v2') $$,
   '42501',
   null,
   'an editor cannot publish a quiz version'
@@ -348,7 +358,7 @@ select results_eq(
       (
         select count(*)::bigint
         from public.community_ranking_entries
-        where snapshot_id = 'draft-baseline-2026-09-03-v2'
+        where snapshot_id = 'collected-2026-09-03-v2'
       )
   $$,
   $$ values (5::bigint, 5::bigint) $$,
@@ -373,7 +383,7 @@ where question.id = position.question_id
   and question.quiz_version_id = '2026-09-03-v2';
 
 select results_eq(
-  $$ select public.publish_quiz_version('2026-09-03-v2', 'draft-baseline-2026-09-03-v2') $$,
+  $$ select public.publish_quiz_version('2026-09-03-v2', 'collected-2026-09-03-v2') $$,
   $$ values ('2026-09-03-v2'::text) $$,
   'an administrator can atomically publish a ready draft'
 );

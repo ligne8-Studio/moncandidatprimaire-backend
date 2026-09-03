@@ -12,8 +12,8 @@ traitées comme des données particulièrement sensibles et ne sont pas persist�
 5. L'Edge Function relit la version publiée, recalcule tous les scores et
    détermine le premier candidat sans faire confiance au score du navigateur.
 6. Une transaction atomique incrémente un compteur.
-7. Les compteurs temps réel restent invisibles au public. Seul un snapshot
-   agrégé, publié par lot après un seuil suffisant, est exposé.
+7. Les compteurs temps réel restent invisibles au public. Le snapshot agrégé est
+   relâché automatiquement par cohortes de 10 contributions.
 8. Le corps de requête est abandonné ; aucune réponse individuelle n'est
    écrite en base ou dans les logs.
 
@@ -34,10 +34,11 @@ une contribution individuelle qui n'existe plus en tant que ligne.
 - aucun delta de compteur réel exposé publiquement ; les classements utilisent
   des snapshots relâchés par lots.
 
-Avant une collecte publique, faire relire le texte de consentement et la durée
-de conservation par un conseil juridique/DPO, puis ajouter un mécanisme
-anti-bot tel que Turnstile. Une clé publique Supabase et CORS ne constituent pas
-une protection anti-abus.
+Faire relire le texte de consentement et la durée de conservation par un conseil
+juridique/DPO. Avant une campagne de trafic importante, ajouter Turnstile et
+valider chaque jeton côté serveur. Une clé publique Supabase et CORS ne
+constituent pas une protection anti-abus ; les protections actives sont le
+secret serveur, l'idempotence et la limite quotidienne par empreinte réseau.
 
 ## Autorisations
 

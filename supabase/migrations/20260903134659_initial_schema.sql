@@ -388,12 +388,13 @@ create table public.community_ranking_snapshots (
   id text primary key check (id ~ '^[a-z0-9][a-z0-9-]*$'),
   quiz_version_id text not null references public.quiz_versions (id) on update cascade on delete restrict,
   label text not null check (length(btrim(label)) between 1 and 160),
-  data_origin text not null check (data_origin in ('synthetic', 'imported')),
+  data_origin text not null check (data_origin in ('collected', 'imported')),
   notes text,
   is_current boolean not null default false,
   publication_status text not null default 'draft'
     check (publication_status in ('draft', 'published', 'archived')),
   published_at timestamptz,
+  last_released_at timestamptz,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
   unique (id, quiz_version_id),
@@ -1689,7 +1690,7 @@ grant select, insert, update, delete on all tables in schema public to service_r
 -- Live counter deltas are sensitive and never public. Only admins may inspect
 -- them; public ranking views expose deliberately released snapshots.
 revoke select on public.community_ranking_counters from anon, authenticated;
-grant select (quiz_version_id, candidate_id, live_match_count)
+grant select (quiz_version_id, candidate_id, live_match_count, last_counted_at)
   on public.community_ranking_counters to authenticated;
 
 -- Public read models keep frontend mapping small while retaining RLS via
@@ -1874,35 +1875,67 @@ where version.publication_status = 'published'
 create view public.api_community_rankings
 with (security_invoker = true, security_barrier = true)
 as
+with ranking_rows as (
+  select
+    version.id as quiz_version_id,
+    candidate.id as candidate_id,
+    membership.display_order,
+    membership.tie_break_order,
+    entry.match_count,
+    sum(entry.match_count) over (partition by version.id) as total_match_count,
+    row_number() over (
+      partition by version.id
+      order by entry.match_count desc, membership.tie_break_order, candidate.id
+    ) as rank_position,
+    snapshot.last_released_at,
+    ranking_enabled.value = 'true'::jsonb as ranking_enabled,
+    submissions_enabled.value = 'true'::jsonb
+      and snapshot.data_origin = 'collected' as collection_enabled,
+    (batch_size.value #>> '{}')::integer as release_batch_size
+  from public.quiz_versions as version
+  join public.campaigns as campaign on campaign.id = version.campaign_id
+  join public.quiz_version_candidates as membership on membership.quiz_version_id = version.id
+  join public.candidates as candidate on candidate.id = membership.candidate_id
+  join public.community_ranking_snapshots as snapshot
+    on snapshot.quiz_version_id = version.id
+   and snapshot.is_current
+   and snapshot.publication_status = 'published'
+   and snapshot.data_origin in ('collected', 'imported')
+  join public.community_ranking_entries as entry
+    on entry.snapshot_id = snapshot.id
+   and entry.candidate_id = candidate.id
+  join public.site_settings as ranking_enabled
+    on ranking_enabled.key = 'community_ranking_enabled'
+  join public.site_settings as submissions_enabled
+    on submissions_enabled.key = 'anonymous_aggregate_submissions_enabled'
+  join public.site_settings as batch_size
+    on batch_size.key = 'community_ranking_release_batch_size'
+  where version.publication_status = 'published'
+    and version.is_current
+    and campaign.publication_status = 'published'
+    and campaign.is_current
+    and membership.is_active
+    and candidate.publication_status = 'published'
+    and candidate.campaign_id = version.campaign_id
+)
 select
-  version.id as quiz_version_id,
-  candidate.id as candidate_id,
-  membership.display_order,
-  membership.tie_break_order,
-  snapshot.data_origin,
-  entry.match_count as baseline_match_count,
-  0::bigint as live_match_count,
-  entry.match_count,
-  sum(entry.match_count) over (partition by version.id) as total_match_count,
-  snapshot.data_origin = 'synthetic' as contains_synthetic_baseline
-from public.quiz_versions as version
-join public.campaigns as campaign on campaign.id = version.campaign_id
-join public.quiz_version_candidates as membership on membership.quiz_version_id = version.id
-join public.candidates as candidate on candidate.id = membership.candidate_id
-join public.community_ranking_snapshots as snapshot
-  on snapshot.quiz_version_id = version.id
- and snapshot.is_current
- and snapshot.publication_status = 'published'
-join public.community_ranking_entries as entry
-  on entry.snapshot_id = snapshot.id
- and entry.candidate_id = candidate.id
-where version.publication_status = 'published'
-  and version.is_current
-  and campaign.publication_status = 'published'
-  and campaign.is_current
-  and membership.is_active
-  and candidate.publication_status = 'published'
-  and candidate.campaign_id = version.campaign_id;
+  quiz_version_id,
+  candidate_id,
+  display_order,
+  tie_break_order,
+  case when total_match_count = 0 then null else rank_position end as rank_position,
+  match_count,
+  total_match_count,
+  case
+    when total_match_count = 0 then 0::numeric
+    else round(match_count::numeric * 100 / total_match_count, 2)
+  end as match_percentage,
+  total_match_count > 0 as has_results,
+  ranking_enabled,
+  collection_enabled,
+  release_batch_size,
+  last_released_at
+from ranking_rows;
 
 grant select on public.api_current_quiz,
   public.api_candidates,
@@ -1957,15 +1990,15 @@ begin
     return 'submissions_disabled';
   end if;
 
-  if exists (
+  if not exists (
     select 1
     from public.community_ranking_snapshots as snapshot
     where snapshot.quiz_version_id = p_quiz_version_id
       and snapshot.is_current
       and snapshot.publication_status = 'published'
-      and snapshot.data_origin = 'synthetic'
+      and snapshot.data_origin = 'collected'
   ) then
-    return 'synthetic_baseline_active';
+    return 'ranking_not_collecting';
   end if;
 
   -- Opportunistic bounded-retention cleanup; both columns are indexed.

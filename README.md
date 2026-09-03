@@ -14,13 +14,15 @@ indépendant du frontend Next.js situé dans `../web`.
 - les futurs rôles `editor` et `admin`, plus un journal d'audit éditorial ;
 - un bucket public `editorial-assets`, les cinq portraits versionnés et une
   écriture réservée au staff ;
-- une Edge Function prête à calculer un résultat puis à ne conserver qu'un
-  compteur agrégé, actuellement désactivée tant que le socle est synthétique ;
+- une Edge Function qui recalcule chaque résultat puis ne conserve qu'un
+  compteur agrégé, avec idempotence et limitation quotidienne par empreinte ;
+- une publication automatique du classement par cohortes de 10 contributions,
+  sans exposer les deltas individuels ;
 - des tests pgTAP, tests Deno, types TypeScript générés et CI.
 
-Le classement initial de 12 480 résultats est marqué `synthetic` en base. Les
-futures contributions réelles sont stockées séparément dans
-`live_match_count`.
+Le classement démarre honnêtement à zéro. Aucun résultat de lancement n'est
+prérempli : `live_match_count` contient le cumul privé réellement collecté et
+la vue publique ne voit que les cohortes complètes déjà relâchées.
 
 ## Architecture
 
@@ -30,7 +32,8 @@ Navigateur
   └─ contribution consentie
        └─ POST /api/quiz-results ───> Next.js (secret serveur)
             └─ submit-quiz-result ──> calcul éphémère côté Edge
-                 └─ RPC atomique ──> compteur agrégé uniquement
+                 └─ RPC atomique ──> compteur privé
+                                      └─ cohorte de 10 ──> vue publique
 ```
 
 Les réponses, scores individuels, candidats favoris, comptes Auth, IP brutes et
@@ -65,7 +68,10 @@ Les migrations sont dans `supabase/migrations/` :
 4. `admin_backoffice_workflows` fournit le profil staff minimal, le journal
    d'audit admin, le clonage de brouillon et la publication atomique ;
 5. `harden_admin_rpc_surface` conserve les RPC publiques tout en isolant leurs
-   implémentations privilégiées dans le schéma privé.
+   implémentations privilégiées dans le schéma privé ;
+6. `admin_atomic_save_workflows` sécurise les écritures relationnelles ;
+7. `activate_real_community_rankings` supprime les chiffres de lancement,
+   active la collecte réelle et publie les agrégats par cohortes.
 
 Le snapshot reproductible se trouve dans `content/editorial-content.json`.
 `npm run content:generate` régénère déterministement la migration de contenu.
@@ -100,8 +106,9 @@ unset SUPABASE_DB_PASSWORD
 
 Les secrets `QUIZ_SUBMISSION_SHARED_SECRET` et `QUIZ_HASH_SECRET` doivent être
 définis dans les secrets Edge Function. Le premier doit aussi exister uniquement
-dans l'environnement serveur Next.js, sous le nom
-`SUPABASE_QUIZ_SUBMISSION_SECRET`.
+dans l'environnement serveur Vercel du frontend Next.js, sous le nom
+`SUPABASE_QUIZ_SUBMISSION_SECRET`. Il ne doit jamais porter le préfixe
+`NEXT_PUBLIC_`.
 
 Le déploiement du backend ne déploie jamais `../web`.
 
@@ -131,7 +138,7 @@ plateforme, à effectuer avec l'API Auth admin côté serveur ou dans le Dashboa
 Supabase. Le backoffice ne doit jamais embarquer de `service_role`.
 
 `clone_quiz_version()` crée en une transaction une version éditable avec ses
-questions, positions, preuves, compteurs à zéro et un snapshot de classement
+questions, positions, preuves, compteurs à zéro et un snapshot `collected` vide
 en brouillon. `publish_quiz_version()` est réservé aux admins et bascule les
 versions de façon atomique après les contrôles de complétude du schéma.
 

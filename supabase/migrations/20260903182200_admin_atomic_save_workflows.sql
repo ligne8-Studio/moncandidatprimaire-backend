@@ -452,7 +452,7 @@ begin
       using errcode = '22023';
   end if;
 
-  if p_data_origin is null or p_data_origin not in ('synthetic', 'imported') then
+  if p_data_origin is null or p_data_origin not in ('collected', 'imported') then
     raise exception 'Invalid ranking data origin'
       using errcode = '22023';
   end if;

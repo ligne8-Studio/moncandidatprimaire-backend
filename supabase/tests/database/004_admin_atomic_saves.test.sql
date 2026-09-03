@@ -297,7 +297,7 @@ where quiz_version_id = '2026-09-03-v2'
 
 update public.community_ranking_entries
 set match_count = 23
-where snapshot_id = 'draft-baseline-2026-09-03-v2'
+where snapshot_id = 'collected-2026-09-03-v2'
   and candidate_id = 'brun';
 
 set local role authenticated;
@@ -365,7 +365,7 @@ select results_eq(
       entry.match_count
     from public.community_ranking_counters as counter
     join public.community_ranking_entries as entry
-      on entry.snapshot_id = 'draft-baseline-2026-09-03-v2'
+      on entry.snapshot_id = 'collected-2026-09-03-v2'
      and entry.candidate_id = counter.candidate_id
     where counter.quiz_version_id = '2026-09-03-v2'
       and counter.candidate_id = 'brun'
@@ -672,14 +672,14 @@ select results_eq(
 select results_eq(
   $$
     select public.save_ranking_snapshot(
-      'draft-baseline-2026-09-03-v2',
+      'collected-2026-09-03-v2',
       ' Classement relu ',
       ' Notes éditoriales ',
       'imported',
       '{"brun":10,"faure":20,"glucksmann":30,"guedj":40,"royal":50}'::jsonb
     )
   $$,
-  $$ values ('draft-baseline-2026-09-03-v2'::text) $$,
+  $$ values ('collected-2026-09-03-v2'::text) $$,
   'an admin can atomically save a complete ranking snapshot'
 );
 
@@ -687,7 +687,7 @@ select results_eq(
   $$
     select label, notes, data_origin
     from public.community_ranking_snapshots
-    where id = 'draft-baseline-2026-09-03-v2'
+    where id = 'collected-2026-09-03-v2'
   $$,
   $$ values ('Classement relu'::text, 'Notes éditoriales'::text, 'imported'::text) $$,
   'ranking metadata is normalized and saved'
@@ -697,7 +697,7 @@ select results_eq(
   $$
     select count(*)::bigint, sum(match_count)::numeric
     from public.community_ranking_entries
-    where snapshot_id = 'draft-baseline-2026-09-03-v2'
+    where snapshot_id = 'collected-2026-09-03-v2'
   $$,
   $$ values (5::bigint, 150::numeric) $$,
   'ranking counts are upserted as one complete set'
@@ -706,10 +706,10 @@ select results_eq(
 select throws_ok(
   $$
     select public.save_ranking_snapshot(
-      'draft-baseline-2026-09-03-v2',
+      'collected-2026-09-03-v2',
       'Valeur qui doit être annulée',
       'Erreur attendue',
-      'synthetic',
+      'imported',
       '{"brun":1,"faure":2,"glucksmann":3,"guedj":4}'::jsonb
     )
   $$,
@@ -725,7 +725,7 @@ select results_eq(
       snapshot.data_origin,
       (select sum(entry.match_count)::numeric from public.community_ranking_entries as entry where entry.snapshot_id = snapshot.id)
     from public.community_ranking_snapshots as snapshot
-    where snapshot.id = 'draft-baseline-2026-09-03-v2'
+    where snapshot.id = 'collected-2026-09-03-v2'
   $$,
   $$ values ('Classement relu'::text, 'imported'::text, 150::numeric) $$,
   'ranking metadata and counts roll back together on set mismatch'
@@ -734,7 +734,7 @@ select results_eq(
 select throws_ok(
   $$
     select public.save_ranking_snapshot(
-      'draft-baseline-2026-09-03-v2',
+      'collected-2026-09-03-v2',
       'Valeur qui doit être annulée',
       null,
       'imported',
@@ -750,7 +750,7 @@ select results_eq(
   $$
     select label
     from public.community_ranking_snapshots
-    where id = 'draft-baseline-2026-09-03-v2'
+    where id = 'collected-2026-09-03-v2'
   $$,
   $$ values ('Classement relu'::text) $$,
   'ranking metadata rolls back when count validation fails'
@@ -766,7 +766,7 @@ insert into public.community_ranking_entries (
   candidate_id,
   match_count
 ) values (
-  'draft-baseline-2026-09-03-v2',
+  'collected-2026-09-03-v2',
   'royal',
   999
 );
@@ -774,14 +774,14 @@ insert into public.community_ranking_entries (
 select results_eq(
   $$
     select public.save_ranking_snapshot(
-      'draft-baseline-2026-09-03-v2',
+      'collected-2026-09-03-v2',
       'Classement à quatre',
       null,
       'imported',
       '{"brun":11,"faure":21,"glucksmann":31,"guedj":41}'::jsonb
     )
   $$,
-  $$ values ('draft-baseline-2026-09-03-v2'::text) $$,
+  $$ values ('collected-2026-09-03-v2'::text) $$,
   'ranking save accepts the exact current active-candidate set'
 );
 
@@ -789,7 +789,7 @@ select results_eq(
   $$
     select count(*)::bigint, sum(match_count)::numeric
     from public.community_ranking_entries
-    where snapshot_id = 'draft-baseline-2026-09-03-v2'
+    where snapshot_id = 'collected-2026-09-03-v2'
   $$,
   $$ values (4::bigint, 104::numeric) $$,
   'ranking save removes entries omitted from the active set'
@@ -809,7 +809,7 @@ select set_config(
 select throws_ok(
   $$
     select public.save_ranking_snapshot(
-      'draft-baseline-2026-09-03-v2',
+      'collected-2026-09-03-v2',
       'Interdit',
       null,
       'imported',
