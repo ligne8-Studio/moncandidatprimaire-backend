@@ -1421,6 +1421,41 @@ export type Database = {
       }
     }
     Functions: {
+      clone_quiz_version: {
+        Args: {
+          p_label: string
+          p_source_version_id: string
+          p_target_version_id: string
+        }
+        Returns: string
+      }
+      get_my_staff_profile: {
+        Args: never
+        Returns: {
+          email: string
+          role: string
+          user_id: string
+        }[]
+      }
+      list_editorial_audit_events: {
+        Args: { p_limit?: number; p_offset?: number }
+        Returns: {
+          actor_email: string
+          actor_user_id: string
+          id: number
+          new_data: Json
+          occurred_at: string
+          old_data: Json
+          operation: string
+          row_identity: Json
+          table_name: string
+          table_schema: string
+        }[]
+      }
+      publish_quiz_version: {
+        Args: { p_quiz_version_id: string; p_snapshot_id: string }
+        Returns: string
+      }
       record_quiz_result: {
         Args: {
           p_candidate_id: string

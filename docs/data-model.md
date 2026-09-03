@@ -17,6 +17,12 @@ départage de chaque version. Une position non documentée est une vraie ligne
 avec `documentation_status = 'undocumented'` et `stance is null` : elle ne peut
 donc pas être confondue avec une jointure oubliée.
 
+Le workflow de backoffice ne modifie jamais ces données dans une version
+publiée. `clone_quiz_version()` reconstruit les identifiants de questions et de
+positions dans un nouveau brouillon, puis recopie leurs liens de preuve.
+`publish_quiz_version()` sélectionne un snapshot relu, archive l'ancienne
+version courante et publie la nouvelle dans une même transaction.
+
 ## Classement communautaire
 
 `community_ranking_snapshots` et `community_ranking_entries` contiennent un
@@ -46,6 +52,11 @@ Les vues publiques sont les seules formes que le frontend doit mapper :
 Elles utilisent `security_invoker = true`, donc les RLS des tables sous-jacentes
 restent actives. Les tables de travail en `draft` ne sont jamais visibles avec
 la clé publique.
+
+Le backoffice authentifié travaille sur les tables normalisées, toujours sous
+RLS. Son unique surface privée est constituée de RPC bornées : profil staff de
+la session, journal d'audit admin et workflows de version. Aucune RPC ne liste
+les comptes Auth ni les autres membres du staff.
 
 ## État éditorial importé
 

@@ -46,15 +46,36 @@ les URL exactes du site et désactivez les inscriptions publiques.
 
 ## Publication d'une nouvelle version du quiz
 
-1. Créer la version en `draft`.
-2. Copier candidats, barème, questions, positions et liens de sources.
-3. Appliquer les changements et lancer les tests éditoriaux.
-4. Dans une transaction, archiver l'ancienne version courante et publier la
-   nouvelle.
-5. Créer ses compteurs de classement et son éventuel snapshot initial.
+1. Appeler `clone_quiz_version(source, cible, libellé)`. La cible doit respecter
+   le format `YYYY-MM-DD-vN` et est créée en `draft`.
+2. Modifier les questions, positions et liens du brouillon avec la session
+   Supabase du membre du staff.
+3. Relire puis passer les questions et positions retenues à `published`.
+4. Vérifier le snapshot initial généré, son origine et ses valeurs. Un socle
+   synthétique maintient nécessairement la collecte réelle désactivée.
+5. Appeler `publish_quiz_version(cible, snapshot)`. La RPC admin publie le
+   snapshot, archive l'ancienne version courante et publie la cible dans une
+   transaction unique.
 
 Les triggers bloquent les mutations des entrées de score d'une version déjà
-publiée.
+publiée, les créations directes en état `published` et les versions courantes
+rattachées à une campagne non publiée. Les éditeurs peuvent retirer les
+relations d'un brouillon, mais aucune relation d'une version publiée.
+
+## Accès du backoffice
+
+- authentifier la personne avec Supabase Auth email/mot de passe ;
+- appeler `get_my_staff_profile()` et refuser l'accès en l'absence de ligne ;
+- utiliser le JWT de cette même session pour toutes les écritures afin que
+  l'audit conserve l'acteur ;
+- réserver `list_editorial_audit_events()` aux écrans admin ;
+- gérer les invitations et rôles staff hors du navigateur, via le Dashboard ou
+  une future route serveur protégée utilisant l'API Auth admin.
+
+La clé `service_role` ne doit jamais être placée dans le backoffice. Une surface
+de gestion globale des comptes n'est volontairement pas exposée par la base :
+le profil courant suffit pour l'autorisation de ce lot et minimise les données
+Auth accessibles.
 
 ## Rotation et incidents
 

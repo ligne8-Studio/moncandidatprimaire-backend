@@ -61,7 +61,11 @@ Les migrations sont dans `supabase/migrations/` :
 1. `initial_schema` crée le modèle, la sécurité, les vues et la RPC interne ;
 2. `seed_editorial_content` charge le snapshot éditorial de lancement ;
 3. `harden_private_table_policies` explicite le refus d'accès client aux tables
-   réservées au service.
+   réservées au service ;
+4. `admin_backoffice_workflows` fournit le profil staff minimal, le journal
+   d'audit admin, le clonage de brouillon et la publication atomique ;
+5. `harden_admin_rpc_surface` conserve les RPC publiques tout en isolant leurs
+   implémentations privilégiées dans le schéma privé.
 
 Le snapshot reproductible se trouve dans `content/editorial-content.json`.
 `npm run content:generate` régénère déterministement la migration de contenu.
@@ -119,6 +123,17 @@ Ne créez pas de route publique permettant de devenir administrateur. Les
 éditeurs préparent uniquement des brouillons ; seuls les admins publient,
 modifient les réglages opérationnels ou gèrent les classements. Dans
 l'interface, privilégier l'archivage aux suppressions.
+
+Le navigateur ne lit jamais `auth.users` ni `private.staff_members`. Il obtient
+uniquement le profil de la session courante via `get_my_staff_profile()`. La
+gestion des autres membres staff reste volontairement une opération de
+plateforme, à effectuer avec l'API Auth admin côté serveur ou dans le Dashboard
+Supabase. Le backoffice ne doit jamais embarquer de `service_role`.
+
+`clone_quiz_version()` crée en une transaction une version éditable avec ses
+questions, positions, preuves, compteurs à zéro et un snapshot de classement
+en brouillon. `publish_quiz_version()` est réservé aux admins et bascule les
+versions de façon atomique après les contrôles de complétude du schéma.
 
 Le journal d'audit identifie les écritures réalisées avec le JWT du membre du
 staff. Les migrations, l'éditeur SQL du Dashboard et la `service_role` n'ont pas
