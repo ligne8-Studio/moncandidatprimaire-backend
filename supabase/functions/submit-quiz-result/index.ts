@@ -129,7 +129,7 @@ Deno.serve(async (request: Request) => {
     if (quizError) throw quizError;
     const quiz = quizRows?.[0] as CurrentQuizRow | undefined;
     if (!quiz) return jsonResponse({ error: "quiz_version_not_current" }, 409);
-    if (quiz.consent_notice_version !== payload.consentNoticeVersion) {
+    if (quiz.consent_notice_version !== payload.privacyNoticeVersion) {
       return jsonResponse({ error: "consent_notice_outdated" }, 409);
     }
 

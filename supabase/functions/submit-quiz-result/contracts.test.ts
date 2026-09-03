@@ -7,24 +7,34 @@ const assert = (condition: unknown, message: string) => {
 const validPayload = {
   quizVersion: "2026-09-03-v1",
   submissionId: "2dd530f2-3b9a-4ee4-aeee-0f11c8e89468",
-  consent: true,
-  consentNoticeVersion: "privacy-2026-09-v1",
+  privacyNoticeVersion: "privacy-2026-09-v1",
   answers: [
     { questionId: "Q01", stance: -2, important: false },
     { questionId: "Q02", stance: null, important: false },
   ],
 };
 
-Deno.test("accepts a valid, explicitly consented payload", () => {
+Deno.test("accepts a valid automatic submission payload", () => {
   const result = parseSubmissionPayload(validPayload);
   assert(result.ok, "expected payload to be valid");
 });
 
-Deno.test("rejects missing consent", () => {
-  const result = parseSubmissionPayload({ ...validPayload, consent: false });
-  assert(!result.ok, "expected missing consent to be rejected");
+Deno.test("accepts the legacy notice field during rolling deployment", () => {
+  const { privacyNoticeVersion: _, ...legacyPayload } = validPayload;
+  const result = parseSubmissionPayload({
+    ...legacyPayload,
+    consent: true,
+    consentNoticeVersion: "privacy-2026-09-v1",
+  });
+  assert(result.ok, "expected legacy payload to remain valid");
+});
+
+Deno.test("rejects a missing privacy notice version", () => {
+  const { privacyNoticeVersion: _, ...invalidPayload } = validPayload;
+  const result = parseSubmissionPayload(invalidPayload);
+  assert(!result.ok, "expected missing notice version to be rejected");
   if (!result.ok) {
-    assert(result.error === "explicit_consent_required", "wrong error");
+    assert(result.error === "invalid_privacy_notice_version", "wrong error");
   }
 });
 

@@ -29,7 +29,7 @@ la vue publique ne voit que les cohortes complètes déjà relâchées.
 ```text
 Navigateur
   ├─ lecture publique ───────────────> vues api_* + RLS
-  └─ contribution consentie
+  └─ résultat d'un quiz terminé
        └─ POST /api/quiz-results ───> Next.js (secret serveur)
             └─ submit-quiz-result ──> calcul éphémère côté Edge
                  └─ RPC atomique ──> compteur privé

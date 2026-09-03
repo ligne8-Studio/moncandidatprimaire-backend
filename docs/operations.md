@@ -27,7 +27,7 @@ Faire ensuite un `db push --linked --dry-run`. Ne jamais lancer
 - vérifier les volumes par SQL et les vues avec la clé publique ;
 - charger puis vérifier les portraits avec `npm run assets:upload:linked` ;
 - appeler l'Edge Function sans secret (401 attendu) ;
-- envoyer un payload de test consentant avec un identifiant d'idempotence neuf,
+- envoyer un payload de test avec un identifiant d'idempotence neuf,
   puis le répéter (statut `duplicate`, compteur inchangé) ;
 - vérifier qu'aucun compteur public ne change avant 10 contributions nouvelles,
   puis que le lot complet apparaît en une seule fois ;

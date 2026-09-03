@@ -6,8 +6,9 @@ traitées comme des données particulièrement sensibles et ne sont pas persist�
 ## Flux de contribution
 
 1. L'utilisateur termine son quiz localement.
-2. Une contribution au classement exige un consentement séparé et explicite.
-3. Le navigateur envoie les réponses au serveur Next.js du même site.
+2. Le navigateur envoie automatiquement les réponses au serveur Next.js du
+   même site pour intégrer le résultat au classement collectif.
+3. Une notice d'information visible avant le démarrage décrit ce traitement.
 4. Next.js authentifie son appel vers l'Edge Function avec un secret serveur.
 5. L'Edge Function relit la version publiée, recalcule tous les scores et
    détermine le premier candidat sans faire confiance au score du navigateur.
@@ -34,8 +35,9 @@ une contribution individuelle qui n'existe plus en tant que ligne.
 - aucun delta de compteur réel exposé publiquement ; les classements utilisent
   des snapshots relâchés par lots.
 
-Faire relire le texte de consentement et la durée de conservation par un conseil
-juridique/DPO. Avant une campagne de trafic importante, ajouter Turnstile et
+Faire valider la base légale, la notice d'information et la durée de conservation
+par un conseil juridique/DPO avant toute campagne de trafic importante. Ajouter
+ensuite Turnstile et
 valider chaque jeton côté serveur. Une clé publique Supabase et CORS ne
 constituent pas une protection anti-abus ; les protections actives sont le
 secret serveur, l'idempotence et la limite quotidienne par empreinte réseau.

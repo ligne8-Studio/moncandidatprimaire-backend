@@ -9,8 +9,7 @@ export type SubmittedAnswer = {
 export type SubmissionPayload = {
   quizVersion: string;
   submissionId: string;
-  consent: true;
-  consentNoticeVersion: string;
+  privacyNoticeVersion: string;
   answers: SubmittedAnswer[];
 };
 
@@ -41,15 +40,17 @@ export function parseSubmissionPayload(input: unknown): ParseResult {
   ) {
     return { ok: false, error: "invalid_submission_id" };
   }
-  if (input.consent !== true) {
-    return { ok: false, error: "explicit_consent_required" };
-  }
+  // `consentNoticeVersion` remains accepted during the rolling deployment so
+  // the previous frontend can still submit while production instances drain.
+  const privacyNoticeVersion = typeof input.privacyNoticeVersion === "string"
+    ? input.privacyNoticeVersion
+    : input.consentNoticeVersion;
   if (
-    typeof input.consentNoticeVersion !== "string" ||
-    input.consentNoticeVersion.length < 1 ||
-    input.consentNoticeVersion.length > 80
+    typeof privacyNoticeVersion !== "string" ||
+    privacyNoticeVersion.length < 1 ||
+    privacyNoticeVersion.length > 80
   ) {
-    return { ok: false, error: "invalid_consent_notice_version" };
+    return { ok: false, error: "invalid_privacy_notice_version" };
   }
   if (!Array.isArray(input.answers) || input.answers.length > 100) {
     return { ok: false, error: "invalid_answers" };
@@ -90,8 +91,7 @@ export function parseSubmissionPayload(input: unknown): ParseResult {
     value: {
       quizVersion: input.quizVersion,
       submissionId: input.submissionId,
-      consent: true,
-      consentNoticeVersion: input.consentNoticeVersion,
+      privacyNoticeVersion,
       answers,
     },
   };
