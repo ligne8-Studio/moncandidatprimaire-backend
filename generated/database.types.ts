@@ -1452,6 +1452,10 @@ export type Database = {
           table_schema: string
         }[]
       }
+      mark_quiz_version_ready: {
+        Args: { p_quiz_version_id: string }
+        Returns: string
+      }
       publish_quiz_version: {
         Args: { p_quiz_version_id: string; p_snapshot_id: string }
         Returns: string
@@ -1462,6 +1466,44 @@ export type Database = {
           p_quiz_version_id: string
           p_rate_limit_hash: string
           p_receipt_hash: string
+        }
+        Returns: string
+      }
+      save_highlight_sources: {
+        Args: { p_highlight_id: string; p_source_ids: string[] }
+        Returns: string
+      }
+      save_position_sources: {
+        Args: {
+          p_position_id: string
+          p_primary_source_id?: string
+          p_source_ids: string[]
+        }
+        Returns: string
+      }
+      save_quiz_composition: {
+        Args: {
+          p_memberships: Json
+          p_quiz_version_id: string
+          p_scale_options: Json
+        }
+        Returns: string
+      }
+      save_ranking_snapshot: {
+        Args: {
+          p_counts: Json
+          p_data_origin: string
+          p_label: string
+          p_notes: string
+          p_snapshot_id: string
+        }
+        Returns: string
+      }
+      save_source_relations: {
+        Args: {
+          p_candidate_ids: string[]
+          p_source_id: string
+          p_theme_ids: string[]
         }
         Returns: string
       }
