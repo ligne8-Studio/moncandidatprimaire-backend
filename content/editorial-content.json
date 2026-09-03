@@ -1,0 +1,1995 @@
+{
+  "importedAt": "2026-09-03",
+  "dataVersion": "2026-09-03-v1",
+  "minComparableAnswers": 8,
+  "themes": [
+    "Économie & fiscalité",
+    "Travail & retraites",
+    "Immigration",
+    "Sécurité & justice",
+    "Écologie & énergie",
+    "Europe",
+    "International & défense",
+    "Institutions",
+    "Santé",
+    "Éducation"
+  ],
+  "candidates": [
+    {
+      "id": "brun",
+      "slug": "philippe-brun",
+      "fullName": "Philippe Brun",
+      "shortName": "Brun",
+      "party": "Parti socialiste",
+      "portrait": "/candidates/brun.webp",
+      "positioning": "Réindustrialisation, salaires et partage de l’effort fiscal.",
+      "shortBio": "Il place la réindustrialisation, le pouvoir d’achat et la maîtrise publique de l’énergie au cœur de sa démarche.",
+      "highlights": [
+        {
+          "title": "Le « salaire Brun »",
+          "summary": "Rendre la CSG progressive pour augmenter le salaire net, surtout pour les revenus modestes et moyens.",
+          "theme": "Travail & retraites",
+          "id": "brun-h1",
+          "sourceIds": [
+            "brun-program-2026"
+          ]
+        },
+        {
+          "title": "Taxer le capital pour alléger le travail",
+          "summary": "Financer une baisse de CSG par une contribution accrue des revenus du capital.",
+          "theme": "Économie & fiscalité",
+          "id": "brun-h2",
+          "sourceIds": [
+            "brun-program-2026"
+          ]
+        },
+        {
+          "title": "Rétablir un ISF",
+          "summary": "Rétablir un impôt sur les grandes fortunes, en particulier sur les actifs non professionnels.",
+          "theme": "Économie & fiscalité",
+          "id": "brun-h3",
+          "sourceIds": [
+            "brun-program-2026"
+          ]
+        },
+        {
+          "title": "Supprimer la flat tax",
+          "summary": "Réintégrer les revenus du capital dans un système d’imposition plus progressif.",
+          "theme": "Économie & fiscalité",
+          "id": "brun-h4",
+          "sourceIds": [
+            "brun-program-2026"
+          ]
+        },
+        {
+          "title": "Cinq usines par département",
+          "summary": "Fixer un objectif de cinq nouvelles usines par département au cours du quinquennat.",
+          "theme": "Économie & fiscalité",
+          "number": "5",
+          "id": "brun-h5",
+          "sourceIds": [
+            "brun-program-2026"
+          ]
+        },
+        {
+          "title": "Un monopole public d’EDF",
+          "summary": "Revenir à un monopole public pour produire une électricité décarbonée moins chère.",
+          "theme": "Écologie & énergie",
+          "id": "brun-h6",
+          "sourceIds": [
+            "brun-program-2026"
+          ]
+        },
+        {
+          "title": "Une compagnie minière nationale",
+          "summary": "Créer une entreprise publique française pour sécuriser l’accès aux minerais stratégiques.",
+          "theme": "Économie & fiscalité",
+          "id": "brun-h7",
+          "sourceIds": [
+            "brun-program-2026"
+          ]
+        },
+        {
+          "title": "Une capitalisation collective des retraites",
+          "summary": "Ajouter une part de capitalisation pilotée collectivement avec les organisations syndicales.",
+          "theme": "Travail & retraites",
+          "id": "brun-h8",
+          "sourceIds": [
+            "brun-program-2026"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faure",
+      "slug": "olivier-faure",
+      "fullName": "Olivier Faure",
+      "shortName": "Faure",
+      "party": "Parti socialiste",
+      "portrait": "/candidates/faure.webp",
+      "positioning": "École, services publics et justice fiscale au premier plan.",
+      "shortBio": "Il défend une ligne sociale, écologique et européenne, avec un accent fort sur l’école et les services publics.",
+      "highlights": [
+        {
+          "title": "19 élèves par classe",
+          "summary": "Profiter de la baisse démographique pour réduire les effectifs plutôt que fermer des classes.",
+          "theme": "Éducation",
+          "number": "19",
+          "id": "faure-h1",
+          "sourceIds": [
+            "faure-motion-2025"
+          ]
+        },
+        {
+          "title": "Petit-déjeuner gratuit à l’école",
+          "summary": "Proposer gratuitement un petit-déjeuner aux élèves qui en ont besoin.",
+          "theme": "Éducation",
+          "id": "faure-h2",
+          "sourceIds": [
+            "faure-motion-2025"
+          ]
+        },
+        {
+          "title": "Plus de santé scolaire",
+          "summary": "Augmenter fortement le nombre de médecins, infirmiers et psychologues scolaires.",
+          "theme": "Éducation",
+          "id": "faure-h3",
+          "sourceIds": [
+            "faure-motion-2025"
+          ]
+        },
+        {
+          "title": "Renforcer les AESH",
+          "summary": "Accroître les moyens consacrés à l’accompagnement des élèves en situation de handicap.",
+          "theme": "Éducation",
+          "id": "faure-h4",
+          "sourceIds": [
+            "faure-motion-2025"
+          ]
+        },
+        {
+          "title": "Dégeler le point d’indice",
+          "summary": "Revaloriser les agents publics, dont les enseignants, en dégelant d’abord le point d’indice.",
+          "theme": "Travail & retraites",
+          "id": "faure-h5",
+          "sourceIds": [
+            "faure-motion-2025"
+          ]
+        },
+        {
+          "title": "Revenir à la retraite à 62 ans",
+          "summary": "Annuler le recul de l’âge légal à 64 ans et restaurer un départ à 62 ans.",
+          "theme": "Travail & retraites",
+          "number": "62",
+          "id": "faure-h6",
+          "sourceIds": [
+            "faure-motion-2025"
+          ]
+        },
+        {
+          "title": "Taxer davantage les très grandes fortunes",
+          "summary": "Renforcer la progressivité de l’impôt sur les patrimoines et héritages les plus élevés.",
+          "theme": "Économie & fiscalité",
+          "id": "faure-h7",
+          "sourceIds": [
+            "faure-motion-2025"
+          ]
+        },
+        {
+          "title": "Un fonds pour l’alimentation",
+          "summary": "Permettre aux ménages modestes d’acheter une alimentation suffisante et de qualité à prix réduit.",
+          "theme": "Santé",
+          "id": "faure-h8",
+          "sourceIds": [
+            "faure-motion-2025"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "glucksmann",
+      "slug": "raphael-glucksmann",
+      "fullName": "Raphaël Glucksmann",
+      "shortName": "Glucksmann",
+      "party": "Place publique",
+      "portrait": "/candidates/glucksmann.webp",
+      "positioning": "Europe, transformation écologique et souveraineté démocratique.",
+      "shortBio": "Il articule son projet autour d’une transformation écologique rapide, d’une Europe plus forte et d’une meilleure rémunération du travail.",
+      "highlights": [
+        {
+          "title": "100 jours de transformation écologique",
+          "summary": "Ouvrir le quinquennat par cent jours consacrés à la transformation écologique.",
+          "theme": "Écologie & énergie",
+          "number": "100",
+          "id": "glucksmann-h1",
+          "sourceIds": [
+            "glucksmann-vision-2025"
+          ]
+        },
+        {
+          "title": "Sortir des énergies fossiles",
+          "summary": "Accélérer les renouvelables, l’électrification, la rénovation des bâtiments et les transports publics.",
+          "theme": "Écologie & énergie",
+          "id": "glucksmann-h2",
+          "sourceIds": [
+            "glucksmann-vision-2025"
+          ]
+        },
+        {
+          "title": "50 milliards pour l’écologie",
+          "summary": "Investir environ 50 milliards d’euros sur cinq ans dans la transition écologique.",
+          "theme": "Écologie & énergie",
+          "number": "50 Md€",
+          "id": "glucksmann-h3",
+          "sourceIds": [
+            "glucksmann-vision-2025"
+          ]
+        },
+        {
+          "title": "Taxer les méga-héritages",
+          "summary": "Taxer davantage le 1 % des héritages les plus élevés pour alléger les prélèvements sur le travail.",
+          "theme": "Économie & fiscalité",
+          "id": "glucksmann-h4",
+          "sourceIds": [
+            "glucksmann-vision-2025"
+          ]
+        },
+        {
+          "title": "Augmenter les salaires enseignants",
+          "summary": "Revaloriser tous les enseignants de 10 %, avec jusqu’à 25 % à certains moments de carrière.",
+          "theme": "Éducation",
+          "number": "+10 %",
+          "id": "glucksmann-h5",
+          "sourceIds": [
+            "glucksmann-vision-2025"
+          ]
+        },
+        {
+          "title": "Des classes plus petites et plus mixtes",
+          "summary": "Réduire les effectifs et lier davantage les aides au privé à des objectifs de mixité sociale.",
+          "theme": "Éducation",
+          "id": "glucksmann-h6",
+          "sourceIds": [
+            "glucksmann-vision-2025"
+          ]
+        },
+        {
+          "title": "Un service civique de dix mois",
+          "summary": "Créer un service civique universel obligatoire, le service militaire restant optionnel.",
+          "theme": "Institutions",
+          "number": "10 mois",
+          "id": "glucksmann-h7",
+          "sourceIds": [
+            "glucksmann-vision-2025"
+          ]
+        },
+        {
+          "title": "Une défense européenne plus forte",
+          "summary": "Soutenir l’Ukraine et construire des capacités communes de défense en Europe.",
+          "theme": "International & défense",
+          "id": "glucksmann-h8",
+          "sourceIds": [
+            "glucksmann-vision-2025"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "guedj",
+      "slug": "jerome-guedj",
+      "fullName": "Jérôme Guedj",
+      "shortName": "Guedj",
+      "party": "Parti socialiste",
+      "portrait": "/candidates/guedj.webp",
+      "positioning": "Soin, services publics, laïcité et intégration républicaine.",
+      "shortBio": "Il construit sa démarche autour de la « République du soin », du travail, de l’éducation et de l’intégration.",
+      "highlights": [
+        {
+          "title": "La République du soin",
+          "summary": "Renforcer massivement l’hôpital public, l’accès aux soins et les services dans les territoires sous-dotés.",
+          "theme": "Santé",
+          "id": "guedj-h1",
+          "sourceIds": [
+            "guedj-program-2026"
+          ]
+        },
+        {
+          "title": "Augmenter les bas salaires",
+          "summary": "Obtenir une hausse réelle de la rémunération des travailleurs les moins payés.",
+          "theme": "Travail & retraites",
+          "id": "guedj-h2",
+          "sourceIds": [
+            "guedj-program-2026"
+          ]
+        },
+        {
+          "title": "Récompenser les entreprises qui augmentent",
+          "summary": "Mieux soutenir les entreprises qui revalorisent les salaires et partagent la valeur.",
+          "theme": "Travail & retraites",
+          "id": "guedj-h3",
+          "sourceIds": [
+            "guedj-program-2026"
+          ]
+        },
+        {
+          "title": "Un défenseur de la laïcité",
+          "summary": "Créer une autorité indépendante chargée de protéger et faire vivre la laïcité.",
+          "theme": "Institutions",
+          "id": "guedj-h4",
+          "sourceIds": [
+            "guedj-program-2026"
+          ]
+        },
+        {
+          "title": "Réindustrialiser les secteurs stratégiques",
+          "summary": "Investir dans les filières stratégiques et dans des technologies comme l’intelligence artificielle.",
+          "theme": "Économie & fiscalité",
+          "id": "guedj-h5",
+          "sourceIds": [
+            "guedj-program-2026"
+          ]
+        },
+        {
+          "title": "Priorité à l’éducation",
+          "summary": "Mieux former et payer les enseignants et réduire les classes dans les territoires en difficulté.",
+          "theme": "Éducation",
+          "id": "guedj-h6",
+          "sourceIds": [
+            "guedj-program-2026"
+          ]
+        },
+        {
+          "title": "Une écologie du quotidien",
+          "summary": "Rénover les logements, améliorer les transports publics et développer une industrie verte.",
+          "theme": "Écologie & énergie",
+          "id": "guedj-h7",
+          "sourceIds": [
+            "guedj-program-2026"
+          ]
+        },
+        {
+          "title": "Planifier immigration et intégration",
+          "summary": "Faire débattre le Parlement des besoins migratoires, créer une carte de séjour durable et renforcer l’intégration.",
+          "theme": "Immigration",
+          "id": "guedj-h8",
+          "sourceIds": [
+            "guedj-program-2026"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "royal",
+      "slug": "segolene-royal",
+      "fullName": "Ségolène Royal",
+      "shortName": "Royal",
+      "party": "Parti socialiste",
+      "portrait": "/candidates/royal.webp",
+      "positioning": "Pouvoir d’achat, écologie et souveraineté énergétique.",
+      "shortBio": "Elle met en avant la protection du pouvoir d’achat, l’héritage de la COP21 et un rôle diplomatique renforcé pour la France.",
+      "highlights": [
+        {
+          "title": "Pouvoir d’achat et « ordre juste »",
+          "summary": "Lutter contre la vie chère tout en préservant la protection sociale.",
+          "theme": "Économie & fiscalité",
+          "status": "currentCampaignPriority",
+          "id": "royal-h1",
+          "sourceIds": [
+            "src-royal-seed"
+          ]
+        },
+        {
+          "title": "Mettre en œuvre l’agenda de la COP21",
+          "summary": "Accélérer la transition écologique et l’action climatique.",
+          "theme": "Écologie & énergie",
+          "status": "currentCampaignPriority",
+          "id": "royal-h2",
+          "sourceIds": [
+            "src-royal-seed"
+          ]
+        },
+        {
+          "title": "Reconquérir l’autonomie énergétique",
+          "summary": "Protéger les PME, artisans, industriels et agriculteurs du coût de l’énergie.",
+          "theme": "Écologie & énergie",
+          "status": "currentCampaignPriority",
+          "id": "royal-h3",
+          "sourceIds": [
+            "src-royal-seed"
+          ]
+        },
+        {
+          "title": "Réduire la fiscalité de l’énergie",
+          "summary": "Diminuer les taxes qui contribuent au coût élevé de l’énergie.",
+          "theme": "Écologie & énergie",
+          "status": "currentCampaignPriority",
+          "id": "royal-h4",
+          "sourceIds": [
+            "src-royal-seed"
+          ]
+        },
+        {
+          "title": "Un État fort qui protège les enfants",
+          "summary": "Appliquer une tolérance zéro face aux violences, notamment sexuelles, faites aux enfants.",
+          "theme": "Sécurité & justice",
+          "status": "currentCampaignPriority",
+          "id": "royal-h5",
+          "sourceIds": [
+            "src-royal-seed"
+          ]
+        },
+        {
+          "title": "Une France puissance de médiation",
+          "summary": "Redonner à la France un rôle diplomatique au service d’une paix négociée et durable.",
+          "theme": "International & défense",
+          "status": "currentCampaignPriority",
+          "id": "royal-h6",
+          "sourceIds": [
+            "src-royal-seed"
+          ]
+        },
+        {
+          "title": "Revenir sur la retraite à 64 ans",
+          "summary": "Soutenir l’abrogation de la réforme des retraites adoptée en 2023.",
+          "theme": "Travail & retraites",
+          "status": "documentedPublicPosition",
+          "id": "royal-h7",
+          "sourceIds": [
+            "src-royal-seed"
+          ]
+        },
+        {
+          "title": "Faire davantage contribuer les grandes fortunes",
+          "summary": "Accroître la contribution fiscale des ménages les plus fortunés.",
+          "theme": "Économie & fiscalité",
+          "status": "documentedPublicPosition",
+          "id": "royal-h8",
+          "sourceIds": [
+            "src-royal-seed"
+          ]
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q01",
+      "theme": "Économie & fiscalité",
+      "prompt": "Faut-il rétablir un impôt sur la fortune ou davantage taxer les très grands patrimoines ?",
+      "activeInQuiz": true,
+      "lastReviewedAt": "2026-09-03",
+      "positions": {
+        "brun": {
+          "stance": 2,
+          "summary": "Il propose un ISF sur le patrimoine non professionnel et une contribution sur les grandes fortunes professionnelles.",
+          "sourceIds": [
+            "brun-program-2026"
+          ],
+          "sourceDate": "2026-08-19",
+          "sourceKind": "official-program",
+          "confidence": "high"
+        },
+        "faure": {
+          "stance": 2,
+          "summary": "Il défend un ISF climatique et une contribution accrue des patrimoines et revenus du capital.",
+          "sourceIds": [
+            "faure-motion-2025"
+          ],
+          "sourceDate": "2025-04-07",
+          "sourceKind": "official-program",
+          "confidence": "high"
+        },
+        "glucksmann": {
+          "stance": 2,
+          "summary": "Il défend une taxation accrue des plus hauts patrimoines et des très grosses successions.",
+          "sourceIds": [
+            "glucksmann-interview-2026",
+            "glucksmann-vision-2025"
+          ],
+          "sourceDate": "2026-08-26",
+          "sourceKind": "interview",
+          "confidence": "high"
+        },
+        "guedj": {
+          "stance": 2,
+          "summary": "Il affirme que les grandes fortunes et les patrimoines les plus élevés doivent contribuer davantage.",
+          "sourceIds": [
+            "guedj-program-2026"
+          ],
+          "sourceDate": "2026-09-03",
+          "sourceKind": "official-program",
+          "confidence": "high"
+        },
+        "royal": {
+          "stance": 2,
+          "summary": "Elle exige que le rétablissement de l’ISF financier soit remis au cœur du débat fiscal.",
+          "sourceIds": [
+            "royal-isf-2026"
+          ],
+          "sourceDate": "2026-08-31",
+          "sourceKind": "interview",
+          "confidence": "high"
+        }
+      }
+    },
+    {
+      "id": "Q02",
+      "theme": "Économie & fiscalité",
+      "prompt": "Faut-il davantage protéger l'industrie française et européenne face aux importations qui ne respectent pas nos normes ?",
+      "activeInQuiz": true,
+      "lastReviewedAt": "2026-09-03",
+      "positions": {
+        "brun": {
+          "stance": 2,
+          "summary": "Il défend un protectionnisme européen et le blocage des produits qui ne respectent pas nos normes.",
+          "sourceIds": [
+            "brun-program-2026"
+          ],
+          "sourceDate": "2026-08-19",
+          "sourceKind": "official-program",
+          "confidence": "high"
+        },
+        "faure": {
+          "stance": 2,
+          "summary": "Il propose réciprocité commerciale et alignement des normes face à la concurrence déloyale.",
+          "sourceIds": [
+            "faure-motion-2025"
+          ],
+          "sourceDate": "2025-04-07",
+          "sourceKind": "official-program",
+          "confidence": "high"
+        },
+        "glucksmann": {
+          "stance": 2,
+          "summary": "Son projet défend l’achat européen, des instruments commerciaux défensifs et des mesures miroirs.",
+          "sourceIds": [
+            "glucksmann-vision-2025"
+          ],
+          "sourceDate": "2025-06-23",
+          "sourceKind": "official-program",
+          "confidence": "high"
+        },
+        "guedj": {
+          "stance": 2,
+          "summary": "Il défend un patriotisme économique contre la concurrence sociale et environnementale déloyale.",
+          "sourceIds": [
+            "guedj-program-2026"
+          ],
+          "sourceDate": "2026-09-03",
+          "sourceKind": "official-program",
+          "confidence": "high"
+        },
+        "royal": {
+          "stance": 2,
+          "summary": "Elle demande d’interdire les importations ne respectant pas les normes françaises et européennes.",
+          "sourceIds": [
+            "royal-imports-2025"
+          ],
+          "sourceDate": "2025-07-21",
+          "sourceKind": "interview",
+          "confidence": "high"
+        }
+      }
+    },
+    {
+      "id": "Q03",
+      "theme": "Travail & retraites",
+      "prompt": "Faut-il revenir sur la retraite à 64 ans et permettre un départ à 62 ans ou moins ?",
+      "activeInQuiz": true,
+      "lastReviewedAt": "2026-09-03",
+      "positions": {
+        "brun": {
+          "stance": 2,
+          "summary": "Il veut maintenir l’ouverture des droits à 62 ans et a voté l’abrogation de la réforme des 64 ans.",
+          "sourceIds": [
+            "brun-program-2026",
+            "retirement-vote-2025"
+          ],
+          "sourceDate": "2026-08-19",
+          "sourceKind": "official-program",
+          "confidence": "high"
+        },
+        "faure": {
+          "stance": 2,
+          "summary": "Il propose de ramener l’âge légal à 62 ans et a voté l’abrogation de la réforme.",
+          "sourceIds": [
+            "faure-motion-2025",
+            "retirement-vote-2025"
+          ],
+          "sourceDate": "2025-06-05",
+          "sourceKind": "parliamentary-vote",
+          "confidence": "high"
+        },
+        "glucksmann": {
+          "stance": 0,
+          "summary": "Il veut abroger la réforme de 2023 mais remplacer l’âge uniforme par un système différencié.",
+          "sourceIds": [
+            "glucksmann-vision-2025",
+            "glucksmann-interview-2026"
+          ],
+          "sourceDate": "2026-08-26",
+          "sourceKind": "interview",
+          "confidence": "high"
+        },
+        "guedj": {
+          "stance": 2,
+          "summary": "Il a voté l’abrogation de la réforme portant l’âge légal de départ à 64 ans.",
+          "sourceIds": [
+            "retirement-vote-2025"
+          ],
+          "sourceDate": "2025-06-05",
+          "sourceKind": "parliamentary-vote",
+          "confidence": "high"
+        },
+        "royal": {
+          "stance": 2,
+          "summary": "Elle soutient le retour sur la réforme des retraites de 2023.",
+          "sourceIds": [
+            "src-royal-seed"
+          ],
+          "sourceDate": "2026-09-03",
+          "confidence": "medium",
+          "sourceKind": "secondary"
+        }
+      }
+    },
+    {
+      "id": "Q04",
+      "theme": "Travail & retraites",
+      "prompt": "L'État doit-il intervenir davantage pour augmenter les bas salaires ?",
+      "activeInQuiz": true,
+      "lastReviewedAt": "2026-09-03",
+      "positions": {
+        "brun": {
+          "stance": 2,
+          "summary": "Il propose une CSG progressive pour augmenter les salaires nets modestes et mieux partager les profits.",
+          "sourceIds": [
+            "brun-program-2026"
+          ],
+          "sourceDate": "2026-08-19",
+          "sourceKind": "official-program",
+          "confidence": "high"
+        },
+        "faure": {
+          "stance": 2,
+          "summary": "Il défend une hausse du SMIC et des salaires, ainsi qu’une action sur les superprofits.",
+          "sourceIds": [
+            "faure-motion-2025"
+          ],
+          "sourceDate": "2025-04-07",
+          "sourceKind": "official-program",
+          "confidence": "high"
+        },
+        "glucksmann": {
+          "stance": 2,
+          "summary": "Son projet prévoit des conférences salariales et un SMIC porté à 1 600 euros nets en deux ans.",
+          "sourceIds": [
+            "glucksmann-vision-2025"
+          ],
+          "sourceDate": "2025-06-23",
+          "sourceKind": "official-program",
+          "confidence": "high"
+        },
+        "guedj": {
+          "stance": 2,
+          "summary": "Il propose une hausse réelle des bas salaires et un soutien aux entreprises qui augmentent les rémunérations.",
+          "sourceIds": [
+            "guedj-program-2026"
+          ],
+          "sourceDate": "2026-09-03",
+          "sourceKind": "official-program",
+          "confidence": "high"
+        },
+        "royal": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        }
+      }
+    },
+    {
+      "id": "Q05",
+      "theme": "Immigration",
+      "prompt": "Faut-il restreindre le droit du sol ?",
+      "activeInQuiz": true,
+      "lastReviewedAt": "2026-09-03",
+      "positions": {
+        "brun": {
+          "stance": -1,
+          "summary": "Il a voté contre le durcissement du droit du sol à Mayotte ; ce vote ne fixe pas une position générale.",
+          "sourceIds": [
+            "mayotte-vote-2025"
+          ],
+          "sourceDate": "2025-02-06",
+          "sourceKind": "parliamentary-vote",
+          "confidence": "medium"
+        },
+        "faure": {
+          "stance": -1,
+          "summary": "Il a voté contre le durcissement du droit du sol à Mayotte ; ce vote ne fixe pas une position générale.",
+          "sourceIds": [
+            "mayotte-vote-2025"
+          ],
+          "sourceDate": "2025-02-06",
+          "sourceKind": "parliamentary-vote",
+          "confidence": "medium"
+        },
+        "glucksmann": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        },
+        "guedj": {
+          "stance": -1,
+          "summary": "Il a voté contre le durcissement du droit du sol à Mayotte ; ce vote ne fixe pas une position générale.",
+          "sourceIds": [
+            "mayotte-vote-2025"
+          ],
+          "sourceDate": "2025-02-06",
+          "sourceKind": "parliamentary-vote",
+          "confidence": "medium"
+        },
+        "royal": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        }
+      }
+    },
+    {
+      "id": "Q06",
+      "theme": "Immigration",
+      "prompt": "Faut-il faciliter la régularisation des travailleurs sans papiers dans les métiers en tension ?",
+      "activeInQuiz": true,
+      "lastReviewedAt": "2026-09-03",
+      "positions": {
+        "brun": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        },
+        "faure": {
+          "stance": 2,
+          "summary": "Il affirme que la régularisation des personnes qui travaillent ne devrait pas faire débat.",
+          "sourceIds": [
+            "faure-speech-2025"
+          ],
+          "sourceDate": "2025-03-22",
+          "sourceKind": "speech",
+          "confidence": "high"
+        },
+        "glucksmann": {
+          "stance": 2,
+          "summary": "Il soutient la régularisation des travailleurs sans papiers qui contribuent à l’économie.",
+          "sourceIds": [
+            "glucksmann-immigration-2026",
+            "glucksmann-vision-2025"
+          ],
+          "sourceDate": "2026-08-30",
+          "sourceKind": "interview",
+          "confidence": "high"
+        },
+        "guedj": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        },
+        "royal": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        }
+      }
+    },
+    {
+      "id": "Q07",
+      "theme": "Sécurité & justice",
+      "prompt": "Faut-il instaurer des peines planchers pour les récidivistes ?",
+      "activeInQuiz": true,
+      "lastReviewedAt": "2026-09-03",
+      "positions": {
+        "brun": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        },
+        "faure": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        },
+        "glucksmann": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        },
+        "guedj": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        },
+        "royal": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        }
+      }
+    },
+    {
+      "id": "Q08",
+      "theme": "Sécurité & justice",
+      "prompt": "Faut-il renforcer le contrôle indépendant des forces de l'ordre ?",
+      "activeInQuiz": true,
+      "lastReviewedAt": "2026-09-03",
+      "positions": {
+        "brun": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        },
+        "faure": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        },
+        "glucksmann": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        },
+        "guedj": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        },
+        "royal": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        }
+      }
+    },
+    {
+      "id": "Q09",
+      "theme": "Écologie & énergie",
+      "prompt": "La France doit-elle construire de nouveaux réacteurs nucléaires ?",
+      "context": "La production nucléaire actuelle et la construction de nouveaux réacteurs sont deux sujets distincts.",
+      "activeInQuiz": true,
+      "lastReviewedAt": "2026-09-03",
+      "positions": {
+        "brun": {
+          "stance": 2,
+          "summary": "Il soutient la prolongation du parc existant et la construction de nouveaux réacteurs.",
+          "sourceIds": [
+            "brun-program-2026",
+            "nuclear-amendment-2025"
+          ],
+          "sourceDate": "2026-08-19",
+          "sourceKind": "official-program",
+          "confidence": "high"
+        },
+        "faure": {
+          "stance": 2,
+          "summary": "Il a cosigné un sous-amendement demandant huit nouveaux réacteurs représentant 10 GW.",
+          "sourceIds": [
+            "nuclear-amendment-2025"
+          ],
+          "sourceDate": "2025-06-18",
+          "sourceKind": "official-site",
+          "confidence": "high"
+        },
+        "glucksmann": {
+          "stance": 1,
+          "summary": "Il se dit favorable à de nouveaux EPR, tout en indiquant que l’orientation reste à arbitrer.",
+          "sourceIds": [
+            "glucksmann-nuclear-2026",
+            "glucksmann-vision-2025"
+          ],
+          "sourceDate": "2026-08-25",
+          "sourceKind": "speech",
+          "confidence": "medium"
+        },
+        "guedj": {
+          "stance": 2,
+          "summary": "Il a cosigné un sous-amendement demandant huit nouveaux réacteurs représentant 10 GW.",
+          "sourceIds": [
+            "nuclear-amendment-2025"
+          ],
+          "sourceDate": "2025-06-18",
+          "sourceKind": "official-site",
+          "confidence": "high"
+        },
+        "royal": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        }
+      }
+    },
+    {
+      "id": "Q10",
+      "theme": "Écologie & énergie",
+      "prompt": "Faut-il accélérer fortement le développement de l'éolien et du solaire ?",
+      "activeInQuiz": true,
+      "lastReviewedAt": "2026-09-03",
+      "positions": {
+        "brun": {
+          "stance": 2,
+          "summary": "Son programme prévoit de rattraper le retard dans les renouvelables, notamment le solaire et l’éolien.",
+          "sourceIds": [
+            "brun-program-2026"
+          ],
+          "sourceDate": "2026-08-19",
+          "sourceKind": "official-program",
+          "confidence": "high"
+        },
+        "faure": {
+          "stance": 2,
+          "summary": "Il appelle à développer massivement les renouvelables, notamment l’éolien en mer et le solaire.",
+          "sourceIds": [
+            "faure-motion-2025",
+            "faure-speech-2025"
+          ],
+          "sourceDate": "2025-04-07",
+          "sourceKind": "official-program",
+          "confidence": "high"
+        },
+        "glucksmann": {
+          "stance": 2,
+          "summary": "Il propose un développement rapide et planifié des renouvelables, dont l’éolien et le solaire.",
+          "sourceIds": [
+            "glucksmann-interview-2026",
+            "glucksmann-vision-2025"
+          ],
+          "sourceDate": "2026-08-26",
+          "sourceKind": "interview",
+          "confidence": "high"
+        },
+        "guedj": {
+          "stance": 1,
+          "summary": "Il demande d’accélérer l’éolien en mer, sans position équivalente retrouvée sur le solaire.",
+          "sourceIds": [
+            "guedj-wind-2025"
+          ],
+          "sourceDate": "2025-06-17",
+          "sourceKind": "official-site",
+          "confidence": "medium"
+        },
+        "royal": {
+          "stance": 2,
+          "summary": "Elle place l’application de l’agenda de la COP21 et l’accélération de la transition parmi ses priorités actuelles.",
+          "sourceIds": [
+            "src-royal-seed"
+          ],
+          "sourceDate": "2026-09-03",
+          "confidence": "medium",
+          "sourceKind": "secondary"
+        }
+      }
+    },
+    {
+      "id": "Q11",
+      "theme": "Europe",
+      "prompt": "Faut-il approfondir l'intégration européenne avec davantage de décisions et de moyens communs ?",
+      "activeInQuiz": true,
+      "lastReviewedAt": "2026-09-03",
+      "positions": {
+        "brun": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        },
+        "faure": {
+          "stance": 2,
+          "summary": "Il propose davantage de majorité qualifiée, un budget européen triplé et de nouvelles ressources propres.",
+          "sourceIds": [
+            "faure-motion-2025"
+          ],
+          "sourceDate": "2025-04-07",
+          "sourceKind": "official-program",
+          "confidence": "high"
+        },
+        "glucksmann": {
+          "stance": 2,
+          "summary": "Il défend une ambition fédérale, un budget européen fortement accru et davantage de décisions communes.",
+          "sourceIds": [
+            "glucksmann-vision-2025"
+          ],
+          "sourceDate": "2025-06-23",
+          "sourceKind": "official-program",
+          "confidence": "high"
+        },
+        "guedj": {
+          "stance": 1,
+          "summary": "Il veut une Europe-puissance sociale, écologique et capable de se défendre, sans détailler les transferts.",
+          "sourceIds": [
+            "guedj-program-2026"
+          ],
+          "sourceDate": "2026-09-03",
+          "sourceKind": "official-program",
+          "confidence": "medium"
+        },
+        "royal": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        }
+      }
+    },
+    {
+      "id": "Q12",
+      "theme": "Europe",
+      "prompt": "La France doit-elle s'opposer aux accords commerciaux comme l'accord UE-Mercosur ?",
+      "activeInQuiz": true,
+      "lastReviewedAt": "2026-09-03",
+      "positions": {
+        "brun": {
+          "stance": 1,
+          "summary": "Il veut bloquer les produits hors normes européennes, sans citer explicitement le Mercosur.",
+          "sourceIds": [
+            "brun-program-2026"
+          ],
+          "sourceDate": "2026-08-19",
+          "sourceKind": "official-program",
+          "confidence": "medium"
+        },
+        "faure": {
+          "stance": 2,
+          "summary": "Il a voté la résolution demandant au Gouvernement de s’opposer à l’accord UE-Mercosur.",
+          "sourceIds": [
+            "mercosur-vote-2025"
+          ],
+          "sourceDate": "2025-11-27",
+          "sourceKind": "parliamentary-vote",
+          "confidence": "high"
+        },
+        "glucksmann": {
+          "stance": 2,
+          "summary": "Son projet cite explicitement l’accord UE-Mercosur parmi les traités auxquels s’opposer.",
+          "sourceIds": [
+            "glucksmann-vision-2025"
+          ],
+          "sourceDate": "2025-06-23",
+          "sourceKind": "official-program",
+          "confidence": "high"
+        },
+        "guedj": {
+          "stance": 2,
+          "summary": "Il a voté la résolution demandant au Gouvernement de s’opposer à l’accord UE-Mercosur.",
+          "sourceIds": [
+            "mercosur-vote-2025"
+          ],
+          "sourceDate": "2025-11-27",
+          "sourceKind": "parliamentary-vote",
+          "confidence": "high"
+        },
+        "royal": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        }
+      }
+    },
+    {
+      "id": "Q13",
+      "theme": "International & défense",
+      "prompt": "La France doit-elle continuer à soutenir militairement l'Ukraine ?",
+      "activeInQuiz": true,
+      "lastReviewedAt": "2026-09-03",
+      "positions": {
+        "brun": {
+          "stance": 2,
+          "summary": "Il a voté la résolution demandant de renforcer le soutien européen, militaire et industriel, à l’Ukraine.",
+          "sourceIds": [
+            "ukraine-vote-2025"
+          ],
+          "sourceDate": "2025-03-12",
+          "sourceKind": "parliamentary-vote",
+          "confidence": "high"
+        },
+        "faure": {
+          "stance": 2,
+          "summary": "Il défend la poursuite du soutien militaire européen à l’Ukraine et a voté son renforcement.",
+          "sourceIds": [
+            "ukraine-vote-2025",
+            "faure-ukraine-2025"
+          ],
+          "sourceDate": "2025-03-12",
+          "sourceKind": "parliamentary-vote",
+          "confidence": "high"
+        },
+        "glucksmann": {
+          "stance": 2,
+          "summary": "Il demande d’augmenter radicalement l’aide militaire européenne à l’Ukraine.",
+          "sourceIds": [
+            "glucksmann-vision-2025"
+          ],
+          "sourceDate": "2025-06-23",
+          "sourceKind": "official-program",
+          "confidence": "high"
+        },
+        "guedj": {
+          "stance": 2,
+          "summary": "Il a voté la résolution appelant au renforcement du soutien militaire et industriel à l’Ukraine.",
+          "sourceIds": [
+            "ukraine-vote-2025"
+          ],
+          "sourceDate": "2025-03-12",
+          "sourceKind": "parliamentary-vote",
+          "confidence": "high"
+        },
+        "royal": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        }
+      }
+    },
+    {
+      "id": "Q14",
+      "theme": "International & défense",
+      "prompt": "Faut-il augmenter fortement les moyens consacrés à la défense ?",
+      "activeInQuiz": true,
+      "lastReviewedAt": "2026-09-03",
+      "positions": {
+        "brun": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        },
+        "faure": {
+          "stance": 2,
+          "summary": "Il demande un investissement militaire et industriel européen à la hauteur des enjeux.",
+          "sourceIds": [
+            "faure-ukraine-2025"
+          ],
+          "sourceDate": "2025-02-17",
+          "sourceKind": "official-site",
+          "confidence": "high"
+        },
+        "glucksmann": {
+          "stance": 2,
+          "summary": "Il défend un effort massif de réarmement européen et un fonds commun de défense.",
+          "sourceIds": [
+            "glucksmann-vision-2025"
+          ],
+          "sourceDate": "2025-06-23",
+          "sourceKind": "official-program",
+          "confidence": "high"
+        },
+        "guedj": {
+          "stance": 2,
+          "summary": "Il propose de porter l’effort de défense à 3,5 % du PIB à moyen terme.",
+          "sourceIds": [
+            "guedj-defense-2025"
+          ],
+          "sourceDate": "2025-03-26",
+          "sourceKind": "interview",
+          "confidence": "high"
+        },
+        "royal": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        }
+      }
+    },
+    {
+      "id": "Q15",
+      "theme": "Institutions",
+      "prompt": "Faut-il introduire davantage de proportionnelle pour les élections législatives ?",
+      "activeInQuiz": true,
+      "lastReviewedAt": "2026-09-03",
+      "positions": {
+        "brun": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        },
+        "faure": {
+          "stance": 1,
+          "summary": "Il se dit favorable à une dose de proportionnelle, tout en soulignant la question des majorités.",
+          "sourceIds": [
+            "faure-proportional-2025"
+          ],
+          "sourceDate": "2025-04-30",
+          "sourceKind": "interview",
+          "confidence": "medium"
+        },
+        "glucksmann": {
+          "stance": 2,
+          "summary": "Son projet prévoit une représentation proportionnelle régionale pour les législatives.",
+          "sourceIds": [
+            "glucksmann-vision-2025"
+          ],
+          "sourceDate": "2025-06-23",
+          "sourceKind": "official-program",
+          "confidence": "high"
+        },
+        "guedj": {
+          "stance": 2,
+          "summary": "Il présente la proportionnelle comme une réforme nécessaire pour revivifier la démocratie.",
+          "sourceIds": [
+            "guedj-proportional-2025"
+          ],
+          "sourceDate": "2025-06-03",
+          "sourceKind": "official-site",
+          "confidence": "high"
+        },
+        "royal": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        }
+      }
+    },
+    {
+      "id": "Q16",
+      "theme": "Institutions",
+      "prompt": "Faut-il réduire les pouvoirs du président au profit du Parlement ?",
+      "activeInQuiz": true,
+      "lastReviewedAt": "2026-09-03",
+      "positions": {
+        "brun": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        },
+        "faure": {
+          "stance": 1,
+          "summary": "Il veut gouverner par compromis et rétablir le Parlement dans son rôle, sans réforme détaillée.",
+          "sourceIds": [
+            "faure-parliament-2025",
+            "faure-motion-2025"
+          ],
+          "sourceDate": "2025-08-30",
+          "sourceKind": "interview",
+          "confidence": "medium"
+        },
+        "glucksmann": {
+          "stance": 2,
+          "summary": "Il veut réduire la concentration présidentielle du pouvoir et renforcer le Parlement.",
+          "sourceIds": [
+            "glucksmann-vision-2025"
+          ],
+          "sourceDate": "2025-06-23",
+          "sourceKind": "official-program",
+          "confidence": "high"
+        },
+        "guedj": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        },
+        "royal": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        }
+      }
+    },
+    {
+      "id": "Q17",
+      "theme": "Santé",
+      "prompt": "Faut-il augmenter fortement les moyens de l'hôpital public ?",
+      "activeInQuiz": true,
+      "lastReviewedAt": "2026-09-03",
+      "positions": {
+        "brun": {
+          "stance": 1,
+          "summary": "Il appelle à réinvestir dans l’hôpital public et à réformer son financement, sans montant chiffré.",
+          "sourceIds": [
+            "brun-program-2026"
+          ],
+          "sourceDate": "2026-08-19",
+          "sourceKind": "official-program",
+          "confidence": "medium"
+        },
+        "faure": {
+          "stance": 1,
+          "summary": "Il veut soustraire l’hôpital public à la logique de rentabilité, sans hausse chiffrée.",
+          "sourceIds": [
+            "faure-motion-2025"
+          ],
+          "sourceDate": "2025-04-07",
+          "sourceKind": "official-program",
+          "confidence": "medium"
+        },
+        "glucksmann": {
+          "stance": 1,
+          "summary": "Il veut redonner des moyens aux soignants et instaurer un financement hospitalier pluriannuel.",
+          "sourceIds": [
+            "glucksmann-vision-2025"
+          ],
+          "sourceDate": "2025-06-23",
+          "sourceKind": "official-program",
+          "confidence": "medium"
+        },
+        "guedj": {
+          "stance": 2,
+          "summary": "Il promet de redonner à l’hôpital public les ressources nécessaires à sa mission.",
+          "sourceIds": [
+            "guedj-program-2026"
+          ],
+          "sourceDate": "2026-09-03",
+          "sourceKind": "official-program",
+          "confidence": "high"
+        },
+        "royal": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        }
+      }
+    },
+    {
+      "id": "Q18",
+      "theme": "Santé",
+      "prompt": "Faut-il réguler l'installation des médecins pour lutter contre les déserts médicaux ?",
+      "activeInQuiz": true,
+      "lastReviewedAt": "2026-09-03",
+      "positions": {
+        "brun": {
+          "stance": 2,
+          "summary": "Il propose de soumettre certaines installations en zones bien dotées à une autorisation de l’ARS.",
+          "sourceIds": [
+            "brun-program-2026"
+          ],
+          "sourceDate": "2026-08-19",
+          "sourceKind": "official-program",
+          "confidence": "high"
+        },
+        "faure": {
+          "stance": 2,
+          "summary": "Il propose de réguler l’installation des médecins selon les besoins sanitaires des territoires.",
+          "sourceIds": [
+            "faure-motion-2025"
+          ],
+          "sourceDate": "2025-04-07",
+          "sourceKind": "official-program",
+          "confidence": "high"
+        },
+        "glucksmann": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        },
+        "guedj": {
+          "stance": 2,
+          "summary": "Il soutient une installation conditionnée en zone bien dotée et facilitée dans les déserts médicaux.",
+          "sourceIds": [
+            "guedj-doctors-2025"
+          ],
+          "sourceDate": "2025-04-08",
+          "sourceKind": "official-site",
+          "confidence": "high"
+        },
+        "royal": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        }
+      }
+    },
+    {
+      "id": "Q19",
+      "theme": "Éducation",
+      "prompt": "Faut-il conditionner davantage le financement des écoles privées à des objectifs de mixité sociale ?",
+      "activeInQuiz": true,
+      "lastReviewedAt": "2026-09-03",
+      "positions": {
+        "brun": {
+          "stance": 2,
+          "summary": "Il veut imposer des obligations de mixité au privé sous contrat et moduler les subventions.",
+          "sourceIds": [
+            "brun-program-2026"
+          ],
+          "sourceDate": "2026-08-19",
+          "sourceKind": "official-program",
+          "confidence": "high"
+        },
+        "faure": {
+          "stance": 2,
+          "summary": "Il veut conditionner le financement du privé sous contrat à des obligations de mixité.",
+          "sourceIds": [
+            "faure-motion-2025"
+          ],
+          "sourceDate": "2025-04-07",
+          "sourceKind": "official-program",
+          "confidence": "high"
+        },
+        "glucksmann": {
+          "stance": 2,
+          "summary": "Il propose de conditionner les subventions au privé à des critères de mixité sociale.",
+          "sourceIds": [
+            "glucksmann-interview-2026"
+          ],
+          "sourceDate": "2026-08-26",
+          "sourceKind": "interview",
+          "confidence": "high"
+        },
+        "guedj": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        },
+        "royal": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        }
+      }
+    },
+    {
+      "id": "Q20",
+      "theme": "Éducation",
+      "prompt": "Faut-il donner aux chefs d'établissement davantage d'autonomie, notamment dans le recrutement des enseignants ?",
+      "activeInQuiz": true,
+      "lastReviewedAt": "2026-09-03",
+      "positions": {
+        "brun": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        },
+        "faure": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        },
+        "glucksmann": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        },
+        "guedj": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        },
+        "royal": {
+          "stance": null,
+          "summary": "Aucune position suffisamment documentée dans la version éditoriale actuelle.",
+          "sourceIds": [],
+          "confidence": "low",
+          "sourceKind": "secondary"
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "id": "brun-program-2026",
+      "title": "Produire — Faire de la France la première puissance économique européenne",
+      "publisher": "Philippe Brun",
+      "date": "2026-08-19",
+      "url": "https://www.philippe-brun.fr/docs/programme.pdf",
+      "type": "official-program",
+      "candidateIds": [
+        "brun"
+      ],
+      "themes": [
+        "Économie & fiscalité",
+        "Travail & retraites",
+        "Écologie & énergie",
+        "Santé",
+        "Éducation",
+        "Europe"
+      ]
+    },
+    {
+      "id": "retirement-vote-2025",
+      "title": "Scrutin public n°2257 sur l’abrogation de la réforme des retraites",
+      "publisher": "Assemblée nationale",
+      "date": "2025-06-05",
+      "url": "https://www.assemblee-nationale.fr/dyn/17/scrutins/2257",
+      "type": "parliamentary-vote",
+      "candidateIds": [
+        "brun",
+        "faure",
+        "guedj"
+      ],
+      "themes": [
+        "Travail & retraites"
+      ]
+    },
+    {
+      "id": "mayotte-vote-2025",
+      "title": "Scrutin public n°738 sur l’accès à la nationalité française à Mayotte",
+      "publisher": "Assemblée nationale",
+      "date": "2025-02-06",
+      "url": "https://www.assemblee-nationale.fr/dyn/17/scrutins/738",
+      "type": "parliamentary-vote",
+      "candidateIds": [
+        "brun",
+        "faure",
+        "guedj"
+      ],
+      "themes": [
+        "Immigration"
+      ]
+    },
+    {
+      "id": "nuclear-amendment-2025",
+      "title": "Sous-amendement n°798 relatif à la programmation énergétique",
+      "publisher": "Assemblée nationale",
+      "date": "2025-06-18",
+      "url": "https://www.assemblee-nationale.fr/dyn/17/amendements/1522/AN/798",
+      "type": "official-site",
+      "candidateIds": [
+        "brun",
+        "faure",
+        "guedj"
+      ],
+      "themes": [
+        "Écologie & énergie"
+      ]
+    },
+    {
+      "id": "ukraine-vote-2025",
+      "title": "Scrutin public n°988 sur le renforcement du soutien à l’Ukraine",
+      "publisher": "Assemblée nationale",
+      "date": "2025-03-12",
+      "url": "https://www.assemblee-nationale.fr/dyn/17/scrutins/988",
+      "type": "parliamentary-vote",
+      "candidateIds": [
+        "brun",
+        "faure",
+        "guedj"
+      ],
+      "themes": [
+        "International & défense"
+      ]
+    },
+    {
+      "id": "mercosur-vote-2025",
+      "title": "Scrutin public n°4244 sur l’accord UE-Mercosur",
+      "publisher": "Assemblée nationale",
+      "date": "2025-11-27",
+      "url": "https://www.assemblee-nationale.fr/dyn/17/scrutins/4244",
+      "type": "parliamentary-vote",
+      "candidateIds": [
+        "faure",
+        "guedj"
+      ],
+      "themes": [
+        "Europe"
+      ]
+    },
+    {
+      "id": "faure-motion-2025",
+      "title": "Le Cœur de la gauche",
+      "publisher": "La Ruche socialiste / Olivier Faure",
+      "date": "2025-04-07",
+      "url": "https://assets.nationbuilder.com/laruchesocialiste/pages/35537/attachments/original/1744029438/Contrib_LeCoeurDeLaGauche.pdf?1744029438=",
+      "type": "official-program",
+      "candidateIds": [
+        "faure"
+      ],
+      "themes": [
+        "Économie & fiscalité",
+        "Travail & retraites",
+        "Écologie & énergie",
+        "Europe",
+        "Institutions",
+        "Santé",
+        "Éducation"
+      ]
+    },
+    {
+      "id": "faure-speech-2025",
+      "title": "Discours de restitution de « Notre France : parlons-en ! »",
+      "publisher": "Olivier Faure / Parti socialiste",
+      "date": "2025-03-22",
+      "url": "https://assets.nationbuilder.com/laruchesocialiste/mailings/7083/attachments/original/250322_DISCOURS_OF_NFPE.pdf?1742831777=",
+      "type": "speech",
+      "candidateIds": [
+        "faure"
+      ],
+      "themes": [
+        "Immigration",
+        "Écologie & énergie"
+      ]
+    },
+    {
+      "id": "faure-ukraine-2025",
+      "title": "Soutien à l’Ukraine : tout repose désormais sur les Européens",
+      "publisher": "Parti socialiste / Olivier Faure",
+      "date": "2025-02-17",
+      "url": "https://parti-socialiste.fr/communiques-de-presse/soutien-a-lukraine-tout-repose-desormais-sur-les-europeens/",
+      "type": "official-site",
+      "candidateIds": [
+        "faure"
+      ],
+      "themes": [
+        "International & défense"
+      ]
+    },
+    {
+      "id": "faure-proportional-2025",
+      "title": "Élection des députés à la proportionnelle : ce que réclament les partis",
+      "publisher": "BFM TV",
+      "date": "2025-04-30",
+      "url": "https://www.bfmtv.com/politique/gouvernement/election-des-deputes-a-la-proportionnelle-ce-que-reclament-les-partis-et-pourquoi-ils-n-arrivent-pas-a-se-mettre-d-accord_AN-202504300491.html",
+      "type": "interview",
+      "candidateIds": [
+        "faure"
+      ],
+      "themes": [
+        "Institutions"
+      ]
+    },
+    {
+      "id": "faure-parliament-2025",
+      "title": "Emmanuel Macron face au risque d’un mandat déstabilisé",
+      "publisher": "Le Monde",
+      "date": "2025-08-30",
+      "url": "https://www.lemonde.fr/politique/article/2025/08/30/avec-la-chute-annoncee-de-francois-bayrou-emmanuel-macron-face-au-risque-d-un-mandat-destabilise_6637509_823448.html",
+      "type": "interview",
+      "candidateIds": [
+        "faure"
+      ],
+      "themes": [
+        "Institutions"
+      ]
+    },
+    {
+      "id": "guedj-program-2026",
+      "title": "Mes premiers engagements",
+      "publisher": "Association Jérôme Guedj 2027",
+      "date": "2026-09-03",
+      "url": "https://www.jeromeguedj2027.fr/",
+      "type": "official-program",
+      "candidateIds": [
+        "guedj"
+      ],
+      "themes": [
+        "Économie & fiscalité",
+        "Travail & retraites",
+        "Immigration",
+        "Europe",
+        "Santé",
+        "Éducation",
+        "Institutions",
+        "Écologie & énergie"
+      ]
+    },
+    {
+      "id": "guedj-wind-2025",
+      "title": "Question écrite n°7529 sur le développement de l’éolien en mer",
+      "publisher": "Assemblée nationale",
+      "date": "2025-06-17",
+      "url": "https://questions.assemblee-nationale.fr/dyn/17/questions/QANR5L17QE7529",
+      "type": "official-site",
+      "candidateIds": [
+        "guedj"
+      ],
+      "themes": [
+        "Écologie & énergie"
+      ]
+    },
+    {
+      "id": "guedj-defense-2025",
+      "title": "L’effort de réarmement et les dépenses sociales",
+      "publisher": "Le Monde",
+      "date": "2025-03-26",
+      "url": "https://www.lemonde.fr/politique/article/2025/03/26/l-effort-de-rearmement-vient-percuter-les-discussions-sur-les-depenses-sociales_6586398_823448.html",
+      "type": "interview",
+      "candidateIds": [
+        "guedj"
+      ],
+      "themes": [
+        "International & défense"
+      ]
+    },
+    {
+      "id": "guedj-proportional-2025",
+      "title": "Proportionnelle : une réforme nécessaire pour revivifier notre démocratie",
+      "publisher": "Jérôme Guedj",
+      "date": "2025-06-03",
+      "url": "https://www.jerome-guedj.fr/proportionnelle-une-reforme-necessaire-pour-revivifier-notre-democratie/",
+      "type": "official-site",
+      "candidateIds": [
+        "guedj"
+      ],
+      "themes": [
+        "Institutions"
+      ]
+    },
+    {
+      "id": "guedj-doctors-2025",
+      "title": "Luttons contre les déserts médicaux !",
+      "publisher": "Jérôme Guedj",
+      "date": "2025-04-08",
+      "url": "https://www.jerome-guedj.fr/luttons-contre-les-deserts-medicaux/",
+      "type": "official-site",
+      "candidateIds": [
+        "guedj"
+      ],
+      "themes": [
+        "Santé"
+      ]
+    },
+    {
+      "id": "royal-isf-2026",
+      "title": "Ségolène Royal replace le retour de l’ISF au cœur du débat",
+      "publisher": "Franceinfo / France Télévisions",
+      "date": "2026-08-31",
+      "url": "https://www.franceinfo.fr/elections/presidentielle/primaire-populaire-gauche/retraites-je-refuse-ce-debat-tant-que-la-question-du-retour-de-l-isf-n-est-pas-posee-affirme-segolene-royal-candidate-a-la-primaire-du-pole-socialiste_8170295.html",
+      "type": "interview",
+      "candidateIds": [
+        "royal"
+      ],
+      "themes": [
+        "Économie & fiscalité",
+        "Travail & retraites"
+      ]
+    },
+    {
+      "id": "royal-imports-2025",
+      "title": "Loi Duplomb : Ségolène Royal défend les clauses miroirs",
+      "publisher": "BFM TV",
+      "date": "2025-07-21",
+      "url": "https://www.dailymotion.com/video/x9nbw16",
+      "type": "interview",
+      "candidateIds": [
+        "royal"
+      ],
+      "themes": [
+        "Économie & fiscalité"
+      ]
+    },
+    {
+      "id": "glucksmann-vision-2025",
+      "title": "Notre vision pour la France — Acte 1",
+      "publisher": "Place publique",
+      "date": "2025-06-23",
+      "url": "https://place-publique.eu/document/3Ari5O0s5O1L4iK1uyUhI0/pp-acte-un.pdf",
+      "type": "official-program",
+      "candidateIds": [
+        "glucksmann"
+      ],
+      "themes": [
+        "Économie & fiscalité",
+        "Travail & retraites",
+        "Immigration",
+        "Écologie & énergie",
+        "Europe",
+        "International & défense",
+        "Institutions",
+        "Santé",
+        "Éducation"
+      ]
+    },
+    {
+      "id": "glucksmann-interview-2026",
+      "title": "Raphaël Glucksmann : « La cohérence écologique, nous la portons »",
+      "publisher": "Le Monde",
+      "date": "2026-08-26",
+      "url": "https://www.lemonde.fr/politique/article/2026/08/26/raphael-glucksmann-l-europe-est-cruciale-pour-mener-a-bien-la-transformation-ecologique_6756834_823448.html",
+      "type": "interview",
+      "candidateIds": [
+        "glucksmann"
+      ],
+      "themes": [
+        "Économie & fiscalité",
+        "Travail & retraites",
+        "Écologie & énergie",
+        "Éducation"
+      ]
+    },
+    {
+      "id": "glucksmann-nuclear-2026",
+      "title": "Les « 100 jours de la révolution écologique »",
+      "publisher": "LCP – Assemblée nationale",
+      "date": "2026-08-25",
+      "url": "https://lcp.fr/actualites/presidentielle-2027-s-il-gagne-raphael-glucksmann-engagera-les-100-jours-de-la",
+      "type": "speech",
+      "candidateIds": [
+        "glucksmann"
+      ],
+      "themes": [
+        "Écologie & énergie"
+      ]
+    },
+    {
+      "id": "glucksmann-immigration-2026",
+      "title": "Immigration : « Il faut arrêter l’hypocrisie »",
+      "publisher": "France Inter",
+      "date": "2026-08-30",
+      "url": "https://fr.linkedin.com/posts/france-inter_immigration-il-faut-arr%C3%AAter-lhypocrisie-activity-7499854700255797248-CRvz",
+      "type": "interview",
+      "candidateIds": [
+        "glucksmann"
+      ],
+      "themes": [
+        "Immigration"
+      ]
+    },
+    {
+      "id": "src-brun-seed",
+      "title": "Socle éditorial transmis pour les 8 mesures de Philippe Brun",
+      "publisher": "Brief de lancement — référence publique à consolider",
+      "date": "2026-09-03",
+      "url": "/methodologie#donnees-a-consolider",
+      "type": "secondary",
+      "candidateIds": [
+        "brun"
+      ],
+      "themes": [
+        "Économie & fiscalité",
+        "Travail & retraites",
+        "Écologie & énergie"
+      ]
+    },
+    {
+      "id": "src-faure-seed",
+      "title": "Socle éditorial transmis pour les 8 mesures d’Olivier Faure",
+      "publisher": "Brief de lancement — référence publique à consolider",
+      "date": "2026-09-03",
+      "url": "/methodologie#donnees-a-consolider",
+      "type": "secondary",
+      "candidateIds": [
+        "faure"
+      ],
+      "themes": [
+        "Éducation",
+        "Travail & retraites",
+        "Économie & fiscalité",
+        "Santé"
+      ]
+    },
+    {
+      "id": "src-glucksmann-seed",
+      "title": "Socle éditorial transmis pour les 8 mesures de Raphaël Glucksmann",
+      "publisher": "Brief de lancement — référence publique à consolider",
+      "date": "2026-09-03",
+      "url": "/methodologie#donnees-a-consolider",
+      "type": "secondary",
+      "candidateIds": [
+        "glucksmann"
+      ],
+      "themes": [
+        "Écologie & énergie",
+        "Économie & fiscalité",
+        "Éducation",
+        "Institutions",
+        "International & défense"
+      ]
+    },
+    {
+      "id": "src-guedj-seed",
+      "title": "Socle éditorial transmis pour les 8 mesures de Jérôme Guedj",
+      "publisher": "Brief de lancement — référence publique à consolider",
+      "date": "2026-09-03",
+      "url": "/methodologie#donnees-a-consolider",
+      "type": "secondary",
+      "candidateIds": [
+        "guedj"
+      ],
+      "themes": [
+        "Santé",
+        "Travail & retraites",
+        "Institutions",
+        "Économie & fiscalité",
+        "Éducation",
+        "Écologie & énergie",
+        "Immigration"
+      ]
+    },
+    {
+      "id": "src-royal-seed",
+      "title": "Socle éditorial transmis pour les 8 mesures de Ségolène Royal",
+      "publisher": "Brief de lancement — référence publique à consolider",
+      "date": "2026-09-03",
+      "url": "/methodologie#donnees-a-consolider",
+      "type": "secondary",
+      "candidateIds": [
+        "royal"
+      ],
+      "themes": [
+        "Économie & fiscalité",
+        "Écologie & énergie",
+        "Sécurité & justice",
+        "International & défense",
+        "Travail & retraites"
+      ]
+    }
+  ],
+  "communityRanking": [
+    {
+      "candidateId": "brun",
+      "matchCount": 3842
+    },
+    {
+      "candidateId": "glucksmann",
+      "matchCount": 2936
+    },
+    {
+      "candidateId": "faure",
+      "matchCount": 2421
+    },
+    {
+      "candidateId": "guedj",
+      "matchCount": 1874
+    },
+    {
+      "candidateId": "royal",
+      "matchCount": 1407
+    }
+  ]
+}

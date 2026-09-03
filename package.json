@@ -1,0 +1,28 @@
+{
+  "name": "mon-candidat-primaire-backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "content:import": "node scripts/import-web-content.mjs",
+    "content:generate": "node scripts/generate-content-migration.mjs",
+    "assets:upload:local": "supabase storage cp -r assets/candidates ss:///editorial-assets/candidates --local --experimental --cache-control 'public, max-age=31536000, immutable' --jobs 5",
+    "assets:upload:linked": "supabase storage cp -r assets/candidates ss:///editorial-assets/candidates --linked --experimental --cache-control 'public, max-age=31536000, immutable' --jobs 5",
+    "db:start": "supabase start",
+    "db:stop": "supabase stop",
+    "db:reset": "supabase db reset --local",
+    "db:lint": "supabase db lint --local --level warning --fail-on error",
+    "db:test": "supabase test db --local",
+    "types:local": "supabase gen types typescript --local --schema public > generated/database.types.ts",
+    "functions:format-check": "deno fmt --check supabase/functions",
+    "functions:test": "deno test supabase/functions/submit-quiz-result",
+    "functions:check": "deno check --config supabase/functions/submit-quiz-result/deno.json supabase/functions/submit-quiz-result/index.ts",
+    "verify": "npm run content:generate && npm run db:reset && npm run assets:upload:local && npm run db:lint && npm run db:test && npm run functions:format-check && npm run functions:test && npm run functions:check"
+  },
+  "devDependencies": {
+    "supabase": "2.116.0"
+  }
+}

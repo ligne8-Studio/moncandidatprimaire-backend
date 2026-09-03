@@ -1,0 +1,32 @@
+name: Backend CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - run: npm ci
+      - run: npm run content:generate
+      - run: git diff --exit-code -- supabase/migrations/20260903134700_seed_editorial_content.sql
+      - run: npm run db:start
+      - run: npm run db:lint
+      - run: npm run db:test
+      - run: deno fmt --check supabase/functions
+      - run: deno test supabase/functions/submit-quiz-result
+      - run: npm run functions:check
