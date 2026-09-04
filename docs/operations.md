@@ -62,6 +62,27 @@ publiée, les créations directes en état `published` et les versions courantes
 rattachées à une campagne non publiée. Les éditeurs peuvent retirer les
 relations d'un brouillon, mais aucune relation d'une version publiée.
 
+## Publication d'un contexte explicatif
+
+Une correction pédagogique ne doit pas cloner le quiz : cela fragmenterait à
+tort les agrégats communautaires alors que les entrées de score n'ont pas
+changé.
+
+1. Appeler `save_question_context_draft(question_id, body, last_reviewed_at)`
+   avec la session d'un éditeur ou admin. Le texte nettoyé doit contenir entre
+   1 et 240 caractères et la date de revue ne peut pas être future.
+2. Relire l'unique brouillon visible par le staff.
+3. Appeler `publish_question_context_revision(question_id)` avec une session
+   admin. La nouvelle révision devient immédiatement le contexte effectif de
+   `api_questions` ; les publications antérieures restent immuables.
+
+Ces deux RPC publiques sont `security invoker`. Leurs implémentations
+`security definer` restent dans le schéma `private`, vérifient le rôle staff et
+écrivent dans le journal d'audit avec le JWT de la session.
+L'historique des révisions n'est jamais exposé directement aux rôles publics :
+seule la dernière explication d'une question du quiz courant est résolue dans
+`api_questions`.
+
 ## Accès du backoffice
 
 - authentifier la personne avec Supabase Auth email/mot de passe ;

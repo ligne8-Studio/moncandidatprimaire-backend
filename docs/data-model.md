@@ -6,7 +6,7 @@
 | --- | --- | --- |
 | Scrutin | `campaigns`, `quiz_versions` | Campagne et versions immuables du quiz |
 | Candidats | `parties`, `candidates`, `media_assets` | Profils, identité visuelle et portraits |
-| Quiz | `themes`, `questions`, `answer_scale_options` | Grille et libellés de réponse |
+| Quiz | `themes`, `questions`, `question_context_revisions`, `answer_scale_options` | Grille, explications et libellés de réponse |
 | Positions | `candidate_positions`, `position_sources` | Valeur −2…+2, niveau de preuve et sources |
 | Propositions | `candidate_highlights`, `highlight_sources` | Mesures phares affichées sur les fiches |
 | Sources | `sources`, `source_candidates`, `source_themes` | Registre documentaire normalisé |
@@ -22,6 +22,16 @@ publiée. `clone_quiz_version()` reconstruit les identifiants de questions et de
 positions dans un nouveau brouillon, puis recopie leurs liens de preuve.
 `publish_quiz_version()` sélectionne un snapshot relu, archive l'ancienne
 version courante et publie la nouvelle dans une même transaction.
+
+Le texte explicatif d'une question ne change pas son sens de score. Il possède
+donc son propre historique dans `question_context_revisions`, sans clonage du
+quiz : un seul brouillon peut exister par question et chaque publication ajoute
+une révision immuable. `api_questions.context` et `last_reviewed_at` résolvent la
+révision publiée au numéro le plus élevé, avec les colonnes de `questions` en
+fallback. Le contrat public de la vue reste inchangé. Lors d'un futur clonage,
+le contexte effectif et sa date de revue sont recopiés dans la question cible.
+La table d'historique n'est lisible que par le staff ; les clients publics ne
+reçoivent que la dernière révision effective via `api_questions`.
 
 ## Classement communautaire
 
@@ -72,7 +82,7 @@ les comptes Auth ni les autres membres du staff.
 
 - 5 candidats et 2 partis ;
 - 10 thèmes ;
-- 20 questions et 100 couples question/candidat ;
+- 20 questions, 20 contextes publiés et 100 couples question/candidat ;
 - 62 positions documentées, 38 explicitement non documentées ;
 - 27 sources conservées, dont 4 anciens placeholders archivés ;
 - 73 liens position/source ;

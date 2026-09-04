@@ -456,6 +456,7 @@
       "id": "Q01",
       "theme": "Économie & fiscalité",
       "prompt": "Faut-il rétablir un impôt sur la fortune ou davantage taxer les très grands patrimoines ?",
+      "context": "Cette question regroupe deux options : rétablir un impôt sur la fortune ou taxer davantage les patrimoines les plus élevés par d’autres mécanismes. Elle ne fixe pas de barème précis.",
       "activeInQuiz": true,
       "lastReviewedAt": "2026-09-03",
       "positions": {
@@ -516,6 +517,7 @@
       "id": "Q02",
       "theme": "Économie & fiscalité",
       "prompt": "Faut-il davantage protéger l'industrie française et européenne face aux importations qui ne respectent pas nos normes ?",
+      "context": "Protéger peut signifier conditionner l’accès au marché, appliquer des mesures de réciprocité ou privilégier les achats européens lorsque les normes diffèrent. Aucun outil précis n’est imposé.",
       "activeInQuiz": true,
       "lastReviewedAt": "2026-09-03",
       "positions": {
@@ -575,6 +577,7 @@
       "id": "Q03",
       "theme": "Travail & retraites",
       "prompt": "Faut-il revenir sur la retraite à 64 ans et permettre un départ à 62 ans ou moins ?",
+      "context": "La question porte sur l’abandon de l’âge légal de 64 ans et sur la règle qui le remplacerait. Un système adapté aux situations individuelles ne correspond pas forcément à un retour uniforme à 62 ans.",
       "activeInQuiz": true,
       "lastReviewedAt": "2026-09-03",
       "positions": {
@@ -637,6 +640,7 @@
       "id": "Q04",
       "theme": "Travail & retraites",
       "prompt": "L'État doit-il intervenir davantage pour augmenter les bas salaires ?",
+      "context": "L’État peut agir sur les bas salaires par le SMIC, les prélèvements qui déterminent le salaire net, la négociation salariale ou les aides aux entreprises. Aucun levier précis n’est privilégié ici.",
       "activeInQuiz": true,
       "lastReviewedAt": "2026-09-03",
       "positions": {
@@ -693,6 +697,7 @@
       "id": "Q05",
       "theme": "Immigration",
       "prompt": "Faut-il restreindre le droit du sol ?",
+      "context": "Restreindre le droit du sol signifie ici durcir, de manière générale, les conditions d’accès à la nationalité liées à la naissance en France. La question ne porte pas uniquement sur le cas de Mayotte.",
       "activeInQuiz": true,
       "lastReviewedAt": "2026-09-03",
       "positions": {
@@ -746,6 +751,7 @@
       "id": "Q06",
       "theme": "Immigration",
       "prompt": "Faut-il faciliter la régularisation des travailleurs sans papiers dans les métiers en tension ?",
+      "context": "La question vise une voie de régularisation liée au travail pour des personnes sans titre de séjour employées dans des secteurs qui recrutent difficilement. Elle ne concerne pas une régularisation générale.",
       "activeInQuiz": true,
       "lastReviewedAt": "2026-09-03",
       "positions": {
@@ -797,6 +803,7 @@
       "id": "Q07",
       "theme": "Sécurité & justice",
       "prompt": "Faut-il instaurer des peines planchers pour les récidivistes ?",
+      "context": "Une peine plancher est un minimum de peine prévu pour certaines infractions commises en récidive. La question porte sur ce principe, sans fixer les infractions concernées ni le niveau de la peine.",
       "activeInQuiz": true,
       "lastReviewedAt": "2026-09-03",
       "positions": {
@@ -841,6 +848,7 @@
       "id": "Q08",
       "theme": "Sécurité & justice",
       "prompt": "Faut-il renforcer le contrôle indépendant des forces de l'ordre ?",
+      "context": "La question porte sur un contrôle accru confié à une instance distincte de la hiérarchie des forces concernées. Elle ne présume ni de l’organisme compétent ni du mécanisme exact.",
       "activeInQuiz": true,
       "lastReviewedAt": "2026-09-03",
       "positions": {
@@ -885,7 +893,7 @@
       "id": "Q09",
       "theme": "Écologie & énergie",
       "prompt": "La France doit-elle construire de nouveaux réacteurs nucléaires ?",
-      "context": "La production nucléaire actuelle et la construction de nouveaux réacteurs sont deux sujets distincts.",
+      "context": "La question porte uniquement sur la construction de nouvelles capacités nucléaires. Elle est distincte de la prolongation des réacteurs existants et ne fixe ni technologie, ni nombre, ni calendrier.",
       "activeInQuiz": true,
       "lastReviewedAt": "2026-09-03",
       "positions": {
@@ -944,6 +952,7 @@
       "id": "Q10",
       "theme": "Écologie & énergie",
       "prompt": "Faut-il accélérer fortement le développement de l'éolien et du solaire ?",
+      "context": "Cette question demande une appréciation globale de l’accélération de l’éolien et du solaire. Si votre avis diffère selon la filière, une réponse intermédiaire permet de refléter cette nuance.",
       "activeInQuiz": true,
       "lastReviewedAt": "2026-09-03",
       "positions": {
@@ -1005,6 +1014,7 @@
       "id": "Q11",
       "theme": "Europe",
       "prompt": "Faut-il approfondir l'intégration européenne avec davantage de décisions et de moyens communs ?",
+      "context": "Approfondir l’intégration européenne peut signifier augmenter les moyens communs ou prendre davantage de décisions ensemble. La question ne suppose pas un transfert identique dans tous les domaines.",
       "activeInQuiz": true,
       "lastReviewedAt": "2026-09-03",
       "positions": {
@@ -1058,6 +1068,7 @@
       "id": "Q12",
       "theme": "Europe",
       "prompt": "La France doit-elle s'opposer aux accords commerciaux comme l'accord UE-Mercosur ?",
+      "context": "L’accord UE-Mercosur sert ici d’exemple d’un accord commercial auquel la France pourrait chercher à s’opposer. La question ne porte pas sur une fermeture générale des échanges internationaux.",
       "activeInQuiz": true,
       "lastReviewedAt": "2026-09-03",
       "positions": {
@@ -1114,6 +1125,7 @@
       "id": "Q13",
       "theme": "International & défense",
       "prompt": "La France doit-elle continuer à soutenir militairement l'Ukraine ?",
+      "context": "Le soutien militaire désigne ici l’aide apportée aux capacités de défense ukrainiennes, y compris son volet industriel. L’engagement direct de forces françaises constituerait une autre question.",
       "activeInQuiz": true,
       "lastReviewedAt": "2026-09-03",
       "positions": {
@@ -1171,6 +1183,7 @@
       "id": "Q14",
       "theme": "International & défense",
       "prompt": "Faut-il augmenter fortement les moyens consacrés à la défense ?",
+      "context": "Les « moyens » recouvrent l’effort budgétaire, les capacités militaires et l’investissement industriel, au niveau français ou européen. Aucun seuil chiffré n’est fixé dans cette question.",
       "activeInQuiz": true,
       "lastReviewedAt": "2026-09-03",
       "positions": {
@@ -1224,6 +1237,7 @@
       "id": "Q15",
       "theme": "Institutions",
       "prompt": "Faut-il introduire davantage de proportionnelle pour les élections législatives ?",
+      "context": "Davantage de proportionnelle peut désigner une part de sièges ajoutée au scrutin actuel ou un système plus largement proportionnel. La question porte sur le principe, pas sur une formule précise.",
       "activeInQuiz": true,
       "lastReviewedAt": "2026-09-03",
       "positions": {
@@ -1277,6 +1291,7 @@
       "id": "Q16",
       "theme": "Institutions",
       "prompt": "Faut-il réduire les pouvoirs du président au profit du Parlement ?",
+      "context": "La question porte sur l’équilibre institutionnel : donner davantage de poids au Parlement dans la décision et le contrôle, et réduire la concentration du pouvoir autour de la présidence.",
       "activeInQuiz": true,
       "lastReviewedAt": "2026-09-03",
       "positions": {
@@ -1328,6 +1343,7 @@
       "id": "Q17",
       "theme": "Santé",
       "prompt": "Faut-il augmenter fortement les moyens de l'hôpital public ?",
+      "context": "Par « moyens », on entend ici les ressources financières, les effectifs soignants et l’organisation du financement de l’hôpital public. Aucun montant ni dispositif précis n’est imposé.",
       "activeInQuiz": true,
       "lastReviewedAt": "2026-09-03",
       "positions": {
@@ -1384,6 +1400,7 @@
       "id": "Q18",
       "theme": "Santé",
       "prompt": "Faut-il réguler l'installation des médecins pour lutter contre les déserts médicaux ?",
+      "context": "Réguler l’installation signifie conditionner certaines nouvelles installations dans les zones déjà bien dotées afin de mieux répartir l’offre médicale. La question ne fixe pas le mécanisme précis.",
       "activeInQuiz": true,
       "lastReviewedAt": "2026-09-03",
       "positions": {
@@ -1437,6 +1454,7 @@
       "id": "Q19",
       "theme": "Éducation",
       "prompt": "Faut-il conditionner davantage le financement des écoles privées à des objectifs de mixité sociale ?",
+      "context": "La question concerne les établissements privés sous contrat qui reçoivent des financements publics. Conditionner peut signifier fixer des objectifs de mixité et moduler les aides selon leur respect.",
       "activeInQuiz": true,
       "lastReviewedAt": "2026-09-03",
       "positions": {
@@ -1490,6 +1508,7 @@
       "id": "Q20",
       "theme": "Éducation",
       "prompt": "Faut-il donner aux chefs d'établissement davantage d'autonomie, notamment dans le recrutement des enseignants ?",
+      "context": "L’autonomie vise ici principalement un rôle accru du chef d’établissement dans le recrutement des enseignants. Elle ne couvre pas à elle seule le budget, les programmes ou le statut des personnels.",
       "activeInQuiz": true,
       "lastReviewedAt": "2026-09-03",
       "positions": {

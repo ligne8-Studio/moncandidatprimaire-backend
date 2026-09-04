@@ -71,7 +71,10 @@ Les migrations sont dans `supabase/migrations/` :
    implémentations privilégiées dans le schéma privé ;
 6. `admin_atomic_save_workflows` sécurise les écritures relationnelles ;
 7. `activate_real_community_rankings` supprime les chiffres de lancement,
-   active la collecte réelle et publie les agrégats par cohortes.
+   active la collecte réelle et publie les agrégats par cohortes ;
+8. `add_question_context_revisions` sépare les explications pédagogiques des
+   données de score immuables et publie un premier contexte pour les 20
+   questions.
 
 Le snapshot reproductible se trouve dans `content/editorial-content.json`.
 `npm run content:generate` régénère déterministement la migration de contenu.
@@ -87,6 +90,13 @@ Une version publiée du quiz est immuable. Toute modification de question,
 barème, candidat inclus ou position demande de cloner une nouvelle version en
 `draft`, de la relire, puis de la publier. Cela évite de changer rétroactivement
 la signification des classements.
+
+Les paragraphes explicatifs suivent un cycle distinct dans
+`question_context_revisions` : un éditeur enregistre l'unique brouillon avec
+`save_question_context_draft()`, puis un admin le publie avec
+`publish_question_context_revision()`. Les révisions publiées sont append-only
+et la plus récente alimente `api_questions`. Une clarification ne crée donc pas
+de nouvelle version de score et ne remet jamais le classement à zéro.
 
 ## Déploiement Supabase
 

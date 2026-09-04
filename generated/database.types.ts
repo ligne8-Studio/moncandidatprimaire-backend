@@ -770,6 +770,50 @@ export type Database = {
           },
         ]
       }
+      question_context_revisions: {
+        Row: {
+          body: string
+          created_at: string
+          id: string
+          last_reviewed_at: string
+          publication_status: string
+          published_at: string | null
+          question_id: string
+          revision_number: number
+          updated_at: string
+        }
+        Insert: {
+          body: string
+          created_at?: string
+          id?: string
+          last_reviewed_at: string
+          publication_status?: string
+          published_at?: string | null
+          question_id: string
+          revision_number: number
+          updated_at?: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          id?: string
+          last_reviewed_at?: string
+          publication_status?: string
+          published_at?: string | null
+          question_id?: string
+          revision_number?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "question_context_revisions_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "questions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       questions: {
         Row: {
           active_in_quiz: boolean
@@ -1443,6 +1487,13 @@ export type Database = {
           user_id: string
         }[]
       }
+      get_public_question_context: {
+        Args: { p_question_id: string }
+        Returns: {
+          body: string
+          last_reviewed_at: string
+        }[]
+      }
       list_editorial_audit_events: {
         Args: { p_limit?: number; p_offset?: number }
         Returns: {
@@ -1460,6 +1511,10 @@ export type Database = {
       }
       mark_quiz_version_ready: {
         Args: { p_quiz_version_id: string }
+        Returns: string
+      }
+      publish_question_context_revision: {
+        Args: { p_question_id: string }
         Returns: string
       }
       publish_quiz_version: {
@@ -1484,6 +1539,14 @@ export type Database = {
           p_position_id: string
           p_primary_source_id?: string
           p_source_ids: string[]
+        }
+        Returns: string
+      }
+      save_question_context_draft: {
+        Args: {
+          p_body: string
+          p_last_reviewed_at: string
+          p_question_id: string
         }
         Returns: string
       }
