@@ -4,6 +4,22 @@ begin;
 
 select plan(34);
 
+create temporary table context_ranking_baseline
+on commit drop
+as
+select
+  (
+    select coalesce(sum(counter.live_match_count), 0)::bigint
+    from public.community_ranking_counters as counter
+    join public.quiz_versions as version on version.id = counter.quiz_version_id
+    where version.is_current
+      and version.publication_status = 'published'
+  ) as live_match_total,
+  (
+    select coalesce(max(ranking.total_match_count), 0)::bigint
+    from public.api_community_rankings as ranking
+  ) as released_match_total;
+
 insert into auth.users (
   id,
   instance_id,
@@ -463,8 +479,24 @@ select ok(
 );
 
 select results_eq(
-  $$ select distinct total_match_count from public.api_community_rankings $$,
-  $$ values (0::numeric) $$,
+  $$
+    select
+      (
+        select coalesce(sum(counter.live_match_count), 0)::bigint
+        from public.community_ranking_counters as counter
+        join public.quiz_versions as version on version.id = counter.quiz_version_id
+        where version.is_current
+          and version.publication_status = 'published'
+      ) as live_match_total,
+      (
+        select coalesce(max(ranking.total_match_count), 0)::bigint
+        from public.api_community_rankings as ranking
+      ) as released_match_total
+  $$,
+  $$
+    select live_match_total, released_match_total
+    from context_ranking_baseline
+  $$,
   'publishing explanatory copy leaves collective ranking history untouched'
 );
 
