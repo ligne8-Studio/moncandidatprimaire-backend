@@ -17,12 +17,32 @@ export type CalculatedScore = {
   weightedQuestionCount: number;
 };
 
+export function getCommonQuestions(
+  questions: QuestionDefinition[],
+  candidates: CandidateDefinition[],
+): QuestionDefinition[] {
+  if (candidates.length === 0) return [];
+  return questions.filter((question) =>
+    candidates.every((candidate) =>
+      question.positions[candidate.id]?.stance != null
+    )
+  );
+}
+
+export function getComparisonMinimum(
+  configuredMinimum: number,
+  commonQuestionCount: number,
+): number {
+  return Math.max(1, Math.min(configuredMinimum, commonQuestionCount));
+}
+
 export function calculateAuthoritativeRanking(
   answers: SubmittedAnswer[],
   questions: QuestionDefinition[],
   candidates: CandidateDefinition[],
   importantWeight: number,
 ): CalculatedScore[] {
+  const commonQuestions = getCommonQuestions(questions, candidates);
   const answersByQuestion = new Map(
     answers.map((answer) => [answer.questionId, answer]),
   );
@@ -34,7 +54,7 @@ export function calculateAuthoritativeRanking(
       let comparableCount = 0;
       let weightedQuestionCount = 0;
 
-      for (const question of questions) {
+      for (const question of commonQuestions) {
         const answer = answersByQuestion.get(question.id);
         const candidateStance = question.positions[candidate.id]?.stance;
         if (!answer || answer.stance === null || candidateStance == null) {

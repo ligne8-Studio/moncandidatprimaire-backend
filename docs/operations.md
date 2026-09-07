@@ -98,6 +98,28 @@ de gestion globale des comptes n'est volontairement pas exposée par la base :
 le profil courant suffit pour l'autorisation de ce lot et minimise les données
 Auth accessibles.
 
+## Calcul commun des nouveaux matchs
+
+Le navigateur et la fonction `submit-quiz-result` retiennent uniquement les
+questions actives dont la position est renseignée pour tous les candidats.
+Chaque candidat est donc évalué sur les mêmes réponses et avec les mêmes poids.
+Le seuil effectif est `max(1, min(min_comparable_answers, nombre_commun))` :
+si le corpus commun est inférieur au seuil configuré, il faut répondre à toutes
+ses questions. Un corpus vide ne permet aucun enregistrement.
+
+La fonction exige exactement les identifiants de ce questionnaire commun. Un
+client envoyant un ancien questionnaire plus long reçoit une réponse 409, sans
+écriture. Le frontend et la fonction doivent donc être livrés ensemble lors
+d’une future mise en ligne autorisée. Les tests HTTP simulent entièrement la
+base et vérifient l’enregistrement ainsi que le rejet des réponses insuffisantes.
+
+Cette évolution du calcul conserve l’identifiant du quiz publié et le RPC
+`record_quiz_result`. Elle ne modifie ni les compteurs, ni les lots déjà publiés,
+ni le départage. Elle ne nécessite pas de nouvelle version éditoriale ou de
+remise à zéro du classement. Les corrections de positions locales de Royal
+restent distinctes du contenu publié en base et ne sont pas importées par les
+tests ou par le build web.
+
 ## Rotation et incidents
 
 - faire tourner immédiatement tout secret copié dans un canal non sûr ;

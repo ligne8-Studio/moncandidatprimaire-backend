@@ -5,6 +5,8 @@ import { firstClientAddress, jsonResponse } from "./http.ts";
 import {
   calculateAuthoritativeRanking,
   type CandidateDefinition,
+  getCommonQuestions,
+  getComparisonMinimum,
   type QuestionDefinition,
 } from "./scoring.ts";
 
@@ -151,12 +153,17 @@ Deno.serve(async (request: Request) => {
     if (questionError) throw questionError;
     if (candidateError) throw candidateError;
 
-    const questions = (questionRows ?? []) as QuestionRow[];
+    const editorialQuestions = (questionRows ?? []) as QuestionRow[];
     const candidates = (candidateRows ?? []).map(
       (candidate): CandidateDefinition => ({
         id: (candidate as CandidateRow).id,
         tieBreakOrder: (candidate as CandidateRow).tie_break_order,
       }),
+    );
+    const questions = getCommonQuestions(editorialQuestions, candidates);
+    const minimumAnswers = getComparisonMinimum(
+      quiz.min_comparable_answers,
+      questions.length,
     );
     const expectedQuestionIds = new Set(
       questions.map((question) => question.id),
@@ -173,7 +180,7 @@ Deno.serve(async (request: Request) => {
     const answeredCount = payload.answers.filter(
       (answer) => answer.stance !== null,
     ).length;
-    if (answeredCount < quiz.min_comparable_answers) {
+    if (answeredCount < minimumAnswers) {
       return jsonResponse({ error: "insufficient_answers" }, 422);
     }
 
@@ -184,7 +191,7 @@ Deno.serve(async (request: Request) => {
       quiz.important_weight,
     );
     const winner = ranking.find(
-      (candidate) => candidate.comparableCount >= quiz.min_comparable_answers,
+      (candidate) => candidate.comparableCount >= minimumAnswers,
     );
     if (!winner) {
       return jsonResponse({ error: "no_comparable_result" }, 422);

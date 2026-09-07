@@ -1,4 +1,9 @@
-import { calculateAuthoritativeRanking } from "./scoring.ts";
+import {
+  calculateAuthoritativeRanking,
+  getCommonQuestions,
+  getComparisonMinimum,
+  type QuestionDefinition,
+} from "./scoring.ts";
 
 const assertEquals = (actual: unknown, expected: unknown, message: string) => {
   if (JSON.stringify(actual) !== JSON.stringify(expected)) {
@@ -67,4 +72,78 @@ Deno.test("uses configured candidate order to break exact ties", () => {
     ["beta", "alpha"],
     "tie order changed",
   );
+});
+
+Deno.test("uses the same evidence and weights despite unequal candidate coverage", () => {
+  const candidates = [{ id: "royal", tieBreakOrder: 2 }, {
+    id: "other",
+    tieBreakOrder: 1,
+  }];
+  const questions: QuestionDefinition[] = [
+    { id: "Q01", positions: { royal: { stance: 0 }, other: { stance: 2 } } },
+    { id: "Q02", positions: { royal: { stance: -1 }, other: { stance: 1 } } },
+    { id: "Q03", positions: { royal: { stance: null }, other: { stance: 2 } } },
+    { id: "Q04", positions: { other: { stance: 2 } } },
+  ];
+  const common = getCommonQuestions(questions, candidates);
+  assertEquals(
+    common.map((q) => q.id),
+    ["Q01", "Q02"],
+    "unknown and absent positions must exclude the question for everyone",
+  );
+  assertEquals(
+    getComparisonMinimum(8, common.length),
+    2,
+    "require the whole smaller common pool",
+  );
+  assertEquals(
+    getComparisonMinimum(8, 20),
+    8,
+    "retain the configured threshold for larger pools",
+  );
+  assertEquals(
+    getComparisonMinimum(8, 0),
+    1,
+    "empty pools must not be eligible",
+  );
+  assertEquals(
+    getCommonQuestions(questions, []),
+    [],
+    "no candidates means no comparison",
+  );
+  for (let mask = 0; mask < 4; mask += 1) {
+    const answers = questions.map((q, index) => ({
+      questionId: q.id,
+      stance: index < 2 && (mask & (1 << index)) ? null : 0 as const,
+      important: index % 2 === 0,
+    }));
+    const ranking = calculateAuthoritativeRanking(
+      answers,
+      questions,
+      candidates,
+      2,
+    );
+    assertEquals(
+      ranking[0].comparableCount,
+      ranking[1].comparableCount,
+      "coverage differs",
+    );
+    assertEquals(
+      ranking[0].weightedQuestionCount,
+      ranking[1].weightedQuestionCount,
+      "weights differ",
+    );
+    assertEquals(
+      ranking,
+      calculateAuthoritativeRanking(answers, common, candidates, 2),
+      "extra documentation changes results",
+    );
+    if (mask === 0) {
+      assertEquals(
+        ranking[0].candidateId,
+        "royal",
+        "Royal must be able to lead without a bonus",
+      );
+    }
+  }
 });
