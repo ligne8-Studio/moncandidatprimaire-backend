@@ -1,7 +1,48 @@
 # Mon candidat primaire — backend
 
-Backend Supabase versionné pour le site **Mon candidat primaire**. Ce dépôt est
-indépendant du frontend Next.js situé dans `../web`.
+Code source du backend de [Mon candidat primaire](https://www.moncandidatprimaire.fr/),
+publié sous [licence MIT](LICENSE). Il contient l'algorithme de proximité
+politique, le modèle de données et le traitement des contributions au classement
+collectif, avec Supabase, PostgreSQL et TypeScript / Deno.
+
+Ce dépôt fonctionne indépendamment du frontend Next.js : aucun dossier `../web`
+n'est nécessaire pour lire le calcul, exécuter ses tests ou démarrer la base locale.
+
+## Comprendre l'algorithme
+
+Le calcul se trouve dans
+[`scoring.ts`](supabase/functions/submit-quiz-result/scoring.ts).
+La validation des requêtes et l'enregistrement des contributions se trouvent
+dans [`index.ts`](supabase/functions/submit-quiz-result/index.ts).
+
+1. Ne conserver que les questions actives dont la position est renseignée pour
+   **tous les candidats**. Leur nombre dépend du contenu publié ; une position
+   inconnue n'est jamais assimilée à une position neutre.
+2. Comparer chaque réponse sur une échelle de `-2` à `+2`. Une réponse passée
+   (`null`) est exclue pour tous les candidats.
+3. Pondérer chaque distance par `1`, ou par le poids d'importance configuré si
+   la personne a marqué la question comme importante.
+4. Calculer le score de proximité :
+
+   ```text
+   score = 100 × (1 − somme(poids × |réponse − position|) / (4 × somme(poids)))
+   ```
+
+5. Appliquer à tous le même minimum de réponses comparables :
+   `max(1, min(seuil configuré, nombre de questions communes))`. Un questionnaire
+   commun vide ne permet aucune contribution. En cas d'égalité de score, l'ordre
+   éditorial `tieBreakOrder` départage les candidats ; leurs scores restent égaux.
+
+La fonction serveur recalcule le résultat à partir des réponses et des positions
+publiées, sans accepter un score fourni par le navigateur. Les candidats sont
+évalués sur les mêmes questions et les mêmes poids. Ce score décrit une proximité
+sur ce corpus documenté, pas sur l'ensemble de leurs programmes.
+
+Les [tests du calcul](supabase/functions/submit-quiz-result/scoring.test.ts) et les
+[tests HTTP](supabase/functions/submit-quiz-result/index.test.ts) rendent ce
+comportement vérifiable. Les changements de code ne recalculent pas les
+contributions déjà enregistrées ; voir les
+[règles d'exploitation](docs/operations.md#calcul-commun-des-nouveaux-matchs).
 
 ## Ce qui est inclus
 
@@ -11,7 +52,7 @@ indépendant du frontend Next.js situé dans `../web`.
   sources ;
 - des vues publiques stables pour le frontend ;
 - RLS et privilèges explicites sur toutes les tables exposées ;
-- les futurs rôles `editor` et `admin`, plus un journal d'audit éditorial ;
+- les rôles `editor` et `admin`, plus un journal d'audit éditorial ;
 - un bucket public `editorial-assets`, les cinq portraits versionnés et une
   écriture réservée au staff ;
 - une Edge Function qui recalcule chaque résultat puis ne conserve qu'un
@@ -20,8 +61,8 @@ indépendant du frontend Next.js situé dans `../web`.
   sans exposer les deltas individuels ;
 - des tests pgTAP, tests Deno, types TypeScript générés et CI.
 
-Le classement démarre honnêtement à zéro. Aucun résultat de lancement n'est
-prérempli : `live_match_count` contient le cumul privé réellement collecté et
+Sur une nouvelle installation, le classement démarre à zéro. Aucun résultat de
+lancement n'est prérempli : `live_match_count` contient le cumul privé collecté et
 la vue publique ne voit que les cohortes complètes déjà relâchées.
 
 ## Architecture
@@ -36,26 +77,45 @@ Navigateur
                                       └─ cohorte de 10 ──> vue publique
 ```
 
-Les réponses, scores individuels, candidats favoris, comptes Auth, IP brutes et
-user-agents ne sont jamais enregistrés. Voir [docs/privacy.md](docs/privacy.md).
+Le traitement du quiz ne conserve pas les réponses détaillées, les scores
+individuels, les IP brutes ou les user-agents. Il ne crée aucun compte participant.
+Des empreintes temporaires servent à l'idempotence et à la limitation des abus ;
+les comptes Auth sont réservés au staff. Voir [docs/privacy.md](docs/privacy.md).
 
 ## Démarrage local
 
-Prérequis : Node.js 22, Docker et Deno 2.
+Prérequis : Node.js 22 et Deno 2. Docker est nécessaire uniquement pour la base
+Supabase locale.
 
 ```bash
-npm install
+git clone https://github.com/ligne8-Studio/moncandidatprimaire-backend.git
+cd moncandidatprimaire-backend
+npm ci
+npm run functions:format-check
+npm run functions:test
+npm run functions:check
+```
+
+Ces tests simulent les accès à la base : ils ne nécessitent ni compte Supabase,
+ni secret de production, ni Docker.
+
+Pour démarrer également la base et tester son schéma :
+
+```bash
 npm run db:start
 npm run db:reset
 npm run assets:upload:local
 npm run db:lint
 npm run db:test
-deno test supabase/functions/submit-quiz-result
-npm run functions:check
 ```
 
+`db:reset` réinitialise uniquement la base locale de ce projet.
 Supabase local utilise volontairement les ports `55320–55329`, afin de ne pas
 interrompre d'autres projets Supabase présents sur la machine.
+
+Les variables attendues sont décrites dans [`.env.example`](.env.example).
+Utilisez vos propres identifiants et secrets pour connecter une instance au
+frontend. Les fichiers `.env` réels sont exclus de Git.
 
 ## Contenu et migrations
 
@@ -78,8 +138,10 @@ Les migrations sont dans `supabase/migrations/` :
 
 Le snapshot reproductible se trouve dans `content/editorial-content.json`.
 `npm run content:generate` régénère déterministement la migration de contenu.
-L'import depuis `../web` est conservé uniquement pour tracer la migration
-initiale ; Supabase devient ensuite la source de vérité.
+L'import historique `npm run content:import` nécessite séparément `../web` et
+ses dépendances installées. Il n'est pas requis pour utiliser ce dépôt : le
+snapshot est déjà fourni. Pour une instance en service, la base publiée reste
+la source de vérité ; régénérer le snapshot ne met pas à jour les données distantes.
 
 Les portraits source sont versionnés dans `assets/candidates/`. Les lignes
 `media_assets` pointent vers Storage tout en conservant un fallback frontend.
@@ -105,12 +167,12 @@ versionné.
 
 ```bash
 export SUPABASE_DB_PASSWORD='...'
-npx supabase link --project-ref ejmgcqddrrfbrflguvku
+npx supabase link --project-ref your-project-ref
 npx supabase db push --linked --dry-run
 npx supabase db push --linked
 npm run assets:upload:linked
 npx supabase functions deploy submit-quiz-result \
-  --project-ref ejmgcqddrrfbrflguvku --use-api
+  --project-ref your-project-ref --use-api
 unset SUPABASE_DB_PASSWORD
 ```
 
@@ -122,7 +184,7 @@ dans l'environnement serveur Vercel du frontend Next.js, sous le nom
 
 Le déploiement du backend ne déploie jamais `../web`.
 
-## Administration future
+## Administration
 
 Le fichier local `supabase/config.toml` désactive l'inscription Auth publique,
 mais cette configuration n'est volontairement pas poussée sans connaître les
@@ -162,3 +224,25 @@ le client authentifié de l'utilisateur, pas avec une clé de service partagée.
 - [Modèle de données](docs/data-model.md)
 - [Sécurité et confidentialité](docs/privacy.md)
 - [Exploitation et mises en production](docs/operations.md)
+
+## Contribuer
+
+Ouvrez une issue pour discuter d'un problème ou proposez une pull request.
+Pour une modification du calcul, expliquez son effet sur les scores et ajoutez
+un cas de test reproductible. Pour une correction éditoriale, fournissez les
+sources et leurs dates. Exécutez les contrôles correspondant aux fichiers modifiés ;
+la CI vérifie aussi les migrations et les tests de la base.
+
+Ne joignez aucun secret, export de production ou donnée personnelle à une issue
+ou une pull request.
+
+## Licence
+
+Le code et la documentation originaux de ce dépôt sont sous [licence MIT](LICENSE).
+Vous pouvez les utiliser, modifier et redistribuer en conservant la notice de
+copyright et la licence.
+
+Cette licence n'accorde aucun droit supplémentaire sur les contenus de tiers,
+notamment les portraits des candidats, les marques et les documents cités comme
+sources. Leurs droits respectifs doivent être vérifiés avant réutilisation.
+Les dépendances conservent leurs propres licences.

@@ -12,7 +12,7 @@ npm run assets:upload:local
 npm run db:lint
 npm run db:test
 deno fmt --check supabase/functions
-deno test supabase/functions/submit-quiz-result
+npm run functions:test
 npm run functions:check
 ```
 

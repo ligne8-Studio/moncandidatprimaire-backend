@@ -28,5 +28,5 @@ jobs:
       - run: npm run db:lint
       - run: npm run db:test
       - run: deno fmt --check supabase/functions
-      - run: deno test supabase/functions/submit-quiz-result
+      - run: npm run functions:test
       - run: npm run functions:check
