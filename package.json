@@ -17,11 +17,12 @@
     "db:reset": "supabase db reset --local",
     "db:lint": "supabase db lint --local --level warning --fail-on error",
     "db:test": "supabase test db --local",
+    "db:test:correction": "node scripts/test-royal-correction.mjs",
     "types:local": "supabase gen types typescript --local --schema public > generated/database.types.ts",
     "functions:format-check": "deno fmt --check supabase/functions",
     "functions:test": "deno test --config supabase/functions/submit-quiz-result/deno.json supabase/functions/submit-quiz-result",
     "functions:check": "deno check --config supabase/functions/submit-quiz-result/deno.json supabase/functions/submit-quiz-result/index.ts",
-    "verify": "npm run content:generate && npm run db:reset && npm run assets:upload:local && npm run db:lint && npm run db:test && npm run functions:format-check && npm run functions:test && npm run functions:check"
+    "verify": "npm run content:generate && npm run db:reset && npm run assets:upload:local && npm run db:lint && npm run db:test && npm run db:test:correction && npm run functions:format-check && npm run functions:test && npm run functions:check"
   },
   "devDependencies": {
     "supabase": "2.116.0"
