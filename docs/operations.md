@@ -100,17 +100,21 @@ Auth accessibles.
 
 ## Calcul commun des nouveaux matchs
 
-Le navigateur et la fonction `submit-quiz-result` retiennent uniquement les
-questions actives dont la position est renseignée pour tous les candidats.
+Le navigateur affiche toutes les questions actives (20 dans cette version).
+Pour le calcul et la contribution uniquement, il retient les questions dont la
+position est renseignée pour tous les candidats, comme `submit-quiz-result`.
 Chaque candidat est donc évalué sur les mêmes réponses et avec les mêmes poids.
 Le seuil effectif est `max(1, min(min_comparable_answers, nombre_commun))` :
 si le corpus commun est inférieur au seuil configuré, il faut répondre à toutes
 ses questions. Un corpus vide ne permet aucun enregistrement.
 
-La fonction exige exactement les identifiants de ce questionnaire commun. Un
-client envoyant un ancien questionnaire plus long reçoit une réponse 409, sans
-écriture. Le frontend et la fonction doivent donc être livrés ensemble lors
-d’une future mise en ligne autorisée. Les tests HTTP simulent entièrement la
+La contribution attend que les 20 questions aient été parcourues, puis transmet
+uniquement les réponses communes à la fonction. Celle-ci exige exactement les
+identifiants de cette base commune : envoyer toute la grille reçoit une réponse
+409, sans écriture. La restauration des 20 écrans conserve donc le contrat de la
+fonction existante. Les anciennes sessions reprennent à la première question
+manquante en conservant leurs réponses et leur reçu de contribution, pour éviter
+une nouvelle comptabilisation. Les tests HTTP simulent entièrement la
 base et vérifient l’enregistrement ainsi que le rejet des réponses insuffisantes.
 
 Cette évolution du calcul conserve l’identifiant du quiz publié et le RPC

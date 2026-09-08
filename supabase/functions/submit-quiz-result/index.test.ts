@@ -23,12 +23,6 @@ const commonQuestions = Array.from({ length: 7 }, (_, index) => ({
     candidateIds.map((id) => [id, { stance: id === "royal" ? 1 : -1 }]),
   ),
 }));
-const extraQuestion = {
-  id: "Q08",
-  positions: Object.fromEntries(
-    candidateIds.map((id) => [id, { stance: id === "royal" ? null : 2 }]),
-  ),
-};
 const payload = (): SubmissionPayload => ({
   quizVersion: version,
   submissionId: "2dd530f2-3b9a-4ee4-aeee-0f11c8e89468",
@@ -40,7 +34,10 @@ const payload = (): SubmissionPayload => ({
   })),
 });
 
-async function submitWithMockDatabase(body: SubmissionPayload) {
+async function submitWithMockDatabase(
+  body: SubmissionPayload,
+  commonCount = 7,
+) {
   const writes: Record<string, unknown>[] = [];
   const originalFetch = globalThis.fetch;
   const originalGet = Deno.env.get;
@@ -72,7 +69,15 @@ async function submitWithMockDatabase(body: SubmissionPayload) {
         );
       case "api_questions":
         return Promise.resolve(
-          Response.json([...commonQuestions, extraQuestion]),
+          Response.json(Array.from({ length: 20 }, (_, index) => ({
+            id: `Q${String(index + 1).padStart(2, "0")}`,
+            positions: Object.fromEntries(candidateIds.map((id) => [
+              id,
+              {
+                stance: id === "royal" ? (index < commonCount ? 1 : null) : -1,
+              },
+            ])),
+          }))),
         );
       case "record_quiz_result":
         writes.push(JSON.parse(String((init as { body?: unknown })?.body)));
@@ -116,6 +121,19 @@ Deno.test("records a seven-question common result in the existing ranking versio
     throw new Error(
       "Expected only one contribution to the existing ranking version",
     );
+  }
+});
+
+Deno.test("accepts the four scoring answers from a full twenty-question catalog", async () => {
+  const body = payload();
+  body.answers = body.answers.slice(0, 4);
+  const result = await submitWithMockDatabase(body, 4);
+  if (
+    result.status !== 201 || result.body.candidateId !== "royal" ||
+    result.body.score !== 100 || result.writes.length !== 1 ||
+    result.writes[0].p_quiz_version_id !== version
+  ) {
+    throw new Error(JSON.stringify(result));
   }
 });
 

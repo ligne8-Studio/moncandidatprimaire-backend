@@ -15,7 +15,10 @@ Le calcul se trouve dans
 La validation des requêtes et l'enregistrement des contributions se trouvent
 dans [`index.ts`](supabase/functions/submit-quiz-result/index.ts).
 
-1. Ne conserver que les questions actives dont la position est renseignée pour
+Le navigateur affiche les 20 questions actives. Une fois ce questionnaire terminé,
+il transmet au serveur uniquement les réponses utilisées pour le score commun.
+
+1. Pour le calcul uniquement, ne conserver que les questions actives dont la position est renseignée pour
    **tous les candidats**. Leur nombre dépend du contenu publié ; une position
    inconnue n'est jamais assimilée à une position neutre.
 2. Comparer chaque réponse sur une échelle de `-2` à `+2`. Une réponse passée
