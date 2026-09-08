@@ -910,7 +910,7 @@ select results_eq(
       and position.stance is null
       and position.publication_status = 'published'
   $$,
-  $$ values (38::bigint) $$,
+  $$ values (34::bigint) $$,
   'valid undocumented positions are published with a null stance'
 );
 

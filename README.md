@@ -33,13 +33,26 @@ il transmet au serveur uniquement les réponses utilisées pour le score commun.
 
 5. Appliquer à tous le même minimum de réponses comparables :
    `max(1, min(seuil configuré, nombre de questions communes))`. Un questionnaire
-   commun vide ne permet aucune contribution. En cas d'égalité de score, l'ordre
-   éditorial `tieBreakOrder` départage les candidats ; leurs scores restent égaux.
+   commun vide ne permet aucune contribution. En cas d'égalité de score, un
+   tirage reproductible remplace toute priorité éditoriale :
+   [`tie-break.ts`](supabase/functions/submit-quiz-result/tie-break.ts) calcule
+   SHA-256 pour chaque candidat à partir de l'identifiant aléatoire du quiz
+   terminé, de sa version et de l'identifiant du candidat. Le plus petit hash
+   départage les scores égaux. Chaque ex æquo a la même chance ; recharger ou
+   renvoyer le même quiz ne change pas le choix. Une seule contribution est
+   enregistrée, et les scores égaux restent affichés comme tels.
 
 La fonction serveur recalcule le résultat à partir des réponses et des positions
 publiées, sans accepter un score fourni par le navigateur. Les candidats sont
 évalués sur les mêmes questions et les mêmes poids. Ce score décrit une proximité
 sur ce corpus documenté, pas sur l'ensemble de leurs programmes.
+
+La correction du 8 septembre conserve les **20 questions** et publie les
+positions relues de Royal dans la base : **7 questions communes** servent au
+calcul et chacun des cinq candidats peut obtenir un meilleur match unique.
+La migration conserve intégralement les compteurs, reçus et lots existants ;
+elle archive les anciennes positions dans le journal d'audit. Les contributions
+historiques ne sont pas recalculées et aucune voix compensatoire n'est ajoutée.
 
 Les [tests du calcul](supabase/functions/submit-quiz-result/scoring.test.ts) et les
 [tests HTTP](supabase/functions/submit-quiz-result/index.test.ts) rendent ce

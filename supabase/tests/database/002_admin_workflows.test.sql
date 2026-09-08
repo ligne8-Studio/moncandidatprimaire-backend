@@ -220,7 +220,7 @@ select results_eq(
     join public.questions as question on question.id = position.question_id
     where question.quiz_version_id = '2026-09-03-v2'
   $$,
-  $$ values (73::bigint) $$,
+  $$ values (80::bigint) $$,
   'all position provenance links are copied into the draft'
 );
 

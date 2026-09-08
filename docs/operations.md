@@ -117,12 +117,30 @@ manquante en conservant leurs réponses et leur reçu de contribution, pour évi
 une nouvelle comptabilisation. Les tests HTTP simulent entièrement la
 base et vérifient l’enregistrement ainsi que le rejet des réponses insuffisantes.
 
-Cette évolution du calcul conserve l’identifiant du quiz publié et le RPC
-`record_quiz_result`. Elle ne modifie ni les compteurs, ni les lots déjà publiés,
-ni le départage. Elle ne nécessite pas de nouvelle version éditoriale ou de
-remise à zéro du classement. Les corrections de positions locales de Royal
-restent distinctes du contenu publié en base et ne sont pas importées par les
-tests ou par le build web.
+Cette évolution conserve l’identifiant du quiz publié et le RPC
+`record_quiz_result`. Le départage des scores égaux utilise désormais le tirage
+SHA-256 stable de `tie-break.ts`, identique côté navigateur et côté serveur.
+L’ordre éditorial ne décide plus à qui attribuer une contribution.
+
+La migration `20260908102845_correct_royal_positions_preserve_rankings.sql`
+publie explicitement les positions relues de Royal, contrairement à un simple
+build du frontend qui ne met pas à jour la base. Cette réparation exceptionnelle
+du contenu publié s’exécute dans un seul bloc atomique : elle conserve les
+anciennes positions et références dans `private.editorial_audit_log`, restaure
+les deux triggers d’immutabilité avant de terminer, et annule toute l’opération
+si les compteurs, snapshots ou positions des autres candidats ont changé.
+Le verrou de collecte empêche une contribution concurrente pendant ce contrôle.
+Le quiz conserve son identifiant, ses vingt questions et son historique. La base
+commune devient Q01, Q02, Q04, Q09, Q10, Q12 et Q17.
+
+Pour la publication : valider les migrations et les tests sur une base locale
+isolée, déployer le nouveau départage serveur, appliquer la migration puis
+publier le frontend avec la nouvelle clé de cache de contenu. Les anciens
+onglets qui soumettent encore quatre réponses reçoivent un 409 explicite et
+doivent être rechargés ; leurs réponses et reçus locaux restent conservés.
+Après publication, lire `api_questions` pour vérifier vingt questions et sept
+questions communes, puis exécuter le calcul déployé sur ces données pour les
+cinq profils. Ne pas ajouter de fausses contributions dans la base publique.
 
 ## Rotation et incidents
 

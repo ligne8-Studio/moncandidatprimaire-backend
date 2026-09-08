@@ -1,5 +1,15 @@
 import type { SubmissionPayload } from "./contracts.ts";
 
+import type { QuestionDefinition } from "./scoring.ts";
+import { getCommonQuestions } from "./scoring.ts";
+import { createQuizTieBreakOrder } from "./tie-break.ts";
+import launchContent from "../../../content/editorial-content.json" with {
+  type: "json",
+};
+import correction from "../../../content/royal-correction-2026-09-08.json" with {
+  type: "json",
+};
+
 let handler: (request: Request) => Promise<Response>;
 const originalServe = Object.getOwnPropertyDescriptor(Deno, "serve")!;
 Object.defineProperty(Deno, "serve", {
@@ -37,6 +47,7 @@ const payload = (): SubmissionPayload => ({
 async function submitWithMockDatabase(
   body: SubmissionPayload,
   commonCount = 7,
+  questionFixture?: QuestionDefinition[],
 ) {
   const writes: Record<string, unknown>[] = [];
   const originalFetch = globalThis.fetch;
@@ -69,15 +80,19 @@ async function submitWithMockDatabase(
         );
       case "api_questions":
         return Promise.resolve(
-          Response.json(Array.from({ length: 20 }, (_, index) => ({
-            id: `Q${String(index + 1).padStart(2, "0")}`,
-            positions: Object.fromEntries(candidateIds.map((id) => [
-              id,
-              {
-                stance: id === "royal" ? (index < commonCount ? 1 : null) : -1,
-              },
-            ])),
-          }))),
+          Response.json(
+            questionFixture ?? Array.from({ length: 20 }, (_, index) => ({
+              id: `Q${String(index + 1).padStart(2, "0")}`,
+              positions: Object.fromEntries(candidateIds.map((id) => [
+                id,
+                {
+                  stance: id === "royal"
+                    ? (index < commonCount ? 1 : null)
+                    : -1,
+                },
+              ])),
+            })),
+          ),
         );
       case "record_quiz_result":
         writes.push(JSON.parse(String((init as { body?: unknown })?.body)));
@@ -160,4 +175,76 @@ Deno.test("rejects a previous questionnaire instead of silently recording a diff
   ) {
     throw new Error(JSON.stringify(result));
   }
+});
+
+Deno.test("the HTTP endpoint credits each tied launch candidate independently of editorial order", async () => {
+  const questions = launchContent.questions as QuestionDefinition[];
+  const definitions = candidateIds.map((id, index) => ({
+    id,
+    tieBreakOrder: index,
+  }));
+  const common = getCommonQuestions(questions, definitions);
+  const winners = new Set<string>();
+  for (let n = 0; n < 30; n++) {
+    const body = payload();
+    body.submissionId = `00000000-0000-4000-8000-${
+      n.toString(16).padStart(12, "0")
+    }`;
+    body.answers = common.map((q) => ({
+      questionId: q.id,
+      stance: q.positions.royal.stance,
+      important: false,
+    }));
+    const order = await createQuizTieBreakOrder(
+      version,
+      body.submissionId,
+      candidateIds,
+    );
+    const expected = ["brun", "faure", "royal"].sort((a, b) =>
+      order[a] - order[b]
+    )[0];
+    const first = await submitWithMockDatabase(body, 4, questions);
+    const repeated = await submitWithMockDatabase(body, 4, questions);
+    if (
+      first.status !== 201 || first.body.candidateId !== expected ||
+      first.writes.length !== 1 ||
+      repeated.body.candidateId !== expected ||
+      first.writes[0].p_receipt_hash !== repeated.writes[0].p_receipt_hash ||
+      first.writes[0].p_quiz_version_id !== version
+    ) {
+      throw new Error(JSON.stringify({ expected, first, repeated }));
+    }
+    winners.add(first.body.candidateId);
+  }
+  if ([...winners].sort().join(",") !== "brun,faure,royal") {
+    throw new Error("A tied candidate is still excluded");
+  }
+});
+
+Deno.test("the HTTP endpoint records Royal from the actual reviewed production correction", async () => {
+  const overrides = new Map(correction.positions.map((p) => [p.questionId, p]));
+  const questions = launchContent.questions.map((q) => ({
+    ...q,
+    positions: {
+      ...q.positions,
+      royal: overrides.get(q.id) ?? q.positions.royal,
+    },
+  })) as QuestionDefinition[];
+  const common = getCommonQuestions(
+    questions,
+    candidateIds.map((id) => ({ id, tieBreakOrder: 0 })),
+  );
+  const body = payload();
+  body.answers = common.map((q) => ({
+    questionId: q.id,
+    stance: q.positions.royal.stance,
+    important: false,
+  }));
+  const result = await submitWithMockDatabase(body, 7, questions);
+  if (
+    questions.length !== 20 || common.length !== 7 || result.status !== 201 ||
+    result.body.candidateId !== "royal" || result.body.score !== 100 ||
+    result.writes.length !== 1 || result.writes[0].p_candidate_id !== "royal" ||
+    result.writes[0].p_quiz_version_id !== version
+  ) throw new Error(JSON.stringify(result));
 });

@@ -2,6 +2,7 @@ import { createClient } from "@supabase/supabase-js";
 import { parseSubmissionPayload, type Stance } from "./contracts.ts";
 import { constantTimeEqual, hmacSha256Hex } from "./crypto.ts";
 import { firstClientAddress, jsonResponse } from "./http.ts";
+import { createQuizTieBreakOrder } from "./tie-break.ts";
 import {
   calculateAuthoritativeRanking,
   type CandidateDefinition,
@@ -22,7 +23,6 @@ type CurrentQuizRow = {
 
 type CandidateRow = {
   id: string;
-  tie_break_order: number;
 };
 
 type QuestionRow = {
@@ -147,8 +147,7 @@ Deno.serve(async (request: Request) => {
         .order("display_order"),
       supabase
         .from("api_candidates")
-        .select("id, tie_break_order")
-        .order("tie_break_order"),
+        .select("id"),
     ]);
     if (questionError) throw questionError;
     if (candidateError) throw candidateError;
@@ -157,7 +156,7 @@ Deno.serve(async (request: Request) => {
     const candidates = (candidateRows ?? []).map(
       (candidate): CandidateDefinition => ({
         id: (candidate as CandidateRow).id,
-        tieBreakOrder: (candidate as CandidateRow).tie_break_order,
+        tieBreakOrder: 0,
       }),
     );
     const questions = getCommonQuestions(editorialQuestions, candidates);
@@ -184,10 +183,18 @@ Deno.serve(async (request: Request) => {
       return jsonResponse({ error: "insufficient_answers" }, 422);
     }
 
+    const tieBreakOrder = await createQuizTieBreakOrder(
+      payload.quizVersion,
+      payload.submissionId,
+      candidates.map(({ id }) => id),
+    );
     const ranking = calculateAuthoritativeRanking(
       payload.answers,
       questions as QuestionDefinition[],
-      candidates,
+      candidates.map((candidate) => ({
+        ...candidate,
+        tieBreakOrder: tieBreakOrder[candidate.id],
+      })),
       quiz.important_weight,
     );
     const winner = ranking.find(

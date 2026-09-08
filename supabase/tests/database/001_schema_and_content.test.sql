@@ -36,31 +36,31 @@ select results_eq(
 
 select results_eq(
   $$ select count(*)::bigint from public.candidate_positions where documentation_status = 'documented' $$,
-  $$ values (62::bigint) $$,
-  'sixty-two positions are documented'
+  $$ values (66::bigint) $$,
+  'sixty-six positions are documented'
 );
 
 select results_eq(
   $$ select count(*)::bigint from public.sources $$,
-  $$ values (27::bigint) $$,
+  $$ values (33::bigint) $$,
   'all source records are preserved'
 );
 
 select results_eq(
   $$ select count(*)::bigint from public.source_candidates $$,
-  $$ values (36::bigint) $$,
+  $$ values (42::bigint) $$,
   'source/candidate links are complete'
 );
 
 select results_eq(
   $$ select count(*)::bigint from public.source_themes $$,
-  $$ values (77::bigint) $$,
+  $$ values (86::bigint) $$,
   'source/theme links include three normalized corrections'
 );
 
 select results_eq(
   $$ select count(*)::bigint from public.position_sources $$,
-  $$ values (73::bigint) $$,
+  $$ values (80::bigint) $$,
   'position/source provenance is complete'
 );
 
@@ -102,8 +102,8 @@ select results_eq(
     where position.candidate_id = 'royal'
       and position.documentation_status = 'documented'
   $$,
-  $$ values (4::bigint) $$,
-  'Royal currently has four documented quiz positions'
+  $$ values (8::bigint) $$,
+  'Royal has eight reviewed documented quiz positions'
 );
 
 select results_eq(
@@ -134,7 +134,7 @@ select results_eq(
 
 select results_eq(
   $$ select count(*)::bigint from public.api_sources $$,
-  $$ values (23::bigint) $$,
+  $$ values (29::bigint) $$,
   'source API view omits four archived placeholder sources'
 );
 
@@ -300,7 +300,7 @@ select results_eq(
 
 select results_eq(
   $$ select count(*)::bigint from public.sources $$,
-  $$ values (23::bigint) $$,
+  $$ values (29::bigint) $$,
   'anonymous users cannot read archived sources'
 );
 
