@@ -3,9 +3,9 @@ begin;
 select plan(8);
 select is((select count(*) from public.api_questions where active_in_quiz),20::bigint,'the deployed questionnaire retains twenty active questions');
 select results_eq(
-  $$ select array_agg(q.id order by q.id) from public.api_questions q where q.active_in_quiz and not exists (select 1 from public.api_candidates c where q.positions -> c.id ->> 'stance' is null) $$,
+  $$ select array_agg(q.id order by q.id) from public.api_questions q where q.active_in_quiz and not exists (select 1 from public.api_candidates c where c.is_matching_eligible and q.positions -> c.id ->> 'stance' is null) $$,
   $$ values(array['Q01','Q02','Q04','Q09','Q10','Q12','Q17']::text[]) $$,
-  'all five candidates share the seven reviewed questions'
+  'all six eligible candidates share the seven reviewed questions'
 );
 select is((select count(*) from public.api_questions where positions -> 'royal' ->> 'stance' is not null),8::bigint,'Royal has eight documented positions');
 select is((select positions -> 'royal' ->> 'stance' from public.api_questions where id='Q03'),null::text,'an unsupported retirement stance is not invented');

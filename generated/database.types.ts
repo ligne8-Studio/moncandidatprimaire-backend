@@ -904,6 +904,8 @@ export type Database = {
           created_at: string
           display_order: number
           is_active: boolean
+          is_matching_eligible: boolean
+          matching_ineligibility_reason: string | null
           quiz_version_id: string
           tie_break_order: number
           updated_at: string
@@ -913,6 +915,8 @@ export type Database = {
           created_at?: string
           display_order: number
           is_active?: boolean
+          is_matching_eligible?: boolean
+          matching_ineligibility_reason?: string | null
           quiz_version_id: string
           tie_break_order: number
           updated_at?: string
@@ -922,6 +926,8 @@ export type Database = {
           created_at?: string
           display_order?: number
           is_active?: boolean
+          is_matching_eligible?: boolean
+          matching_ineligibility_reason?: string | null
           quiz_version_id?: string
           tie_break_order?: number
           updated_at?: string
@@ -1327,6 +1333,8 @@ export type Database = {
           full_name: string | null
           highlights: Json | null
           id: string | null
+          is_matching_eligible: boolean | null
+          matching_ineligibility_reason: string | null
           party: string | null
           portrait: string | null
           portrait_alt: string | null

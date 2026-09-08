@@ -998,7 +998,7 @@ select results_eq(
           and position.publication_status = 'published'
       )
   $$,
-  $$ values (20::bigint, 100::bigint) $$,
+  $$ values (20::bigint, 140::bigint) $$,
   'admin readiness changes questions and positions together'
 );
 

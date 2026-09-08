@@ -10,6 +10,10 @@ import correction from "../../../content/royal-correction-2026-09-08.json" with 
   type: "json",
 };
 
+import additions from "../../../content/new-candidates-2026-09-08.json" with {
+  type: "json",
+};
+
 let handler: (request: Request) => Promise<Response>;
 const originalServe = Object.getOwnPropertyDescriptor(Deno, "serve")!;
 Object.defineProperty(Deno, "serve", {
@@ -48,6 +52,7 @@ async function submitWithMockDatabase(
   body: SubmissionPayload,
   commonCount = 7,
   questionFixture?: QuestionDefinition[],
+  candidateFixture?: { id: string; is_matching_eligible: boolean }[],
 ) {
   const writes: Record<string, unknown>[] = [];
   const originalFetch = globalThis.fetch;
@@ -75,7 +80,8 @@ async function submitWithMockDatabase(
       case "api_candidates":
         return Promise.resolve(
           Response.json(
-            candidateIds.map((id, index) => ({ id, tie_break_order: index })),
+            candidateFixture ??
+              candidateIds.map((id, index) => ({ id, tie_break_order: index })),
           ),
         );
       case "api_questions":
@@ -247,4 +253,61 @@ Deno.test("the HTTP endpoint records Royal from the actual reviewed production c
     result.writes.length !== 1 || result.writes[0].p_candidate_id !== "royal" ||
     result.writes[0].p_quiz_version_id !== version
   ) throw new Error(JSON.stringify(result));
+});
+
+Deno.test("the published seven-profile corpus retains twenty questions, excludes Verdier and lets every eligible candidate win", async () => {
+  const corrected = new Map(correction.positions.map((p) => [p.questionId, p]));
+  const extra = additions.positions as Record<
+    string,
+    Record<string, { stance: number | null }>
+  >;
+  const questions = launchContent.questions.map((q) => ({
+    ...q,
+    positions: {
+      ...q.positions,
+      royal: corrected.get(q.id) ?? q.positions.royal,
+      maurel: extra[q.id]?.maurel ?? { stance: null },
+      verdier: { stance: null },
+    },
+  })) as QuestionDefinition[];
+  const profiles = [
+    ...candidateIds.map((id) => ({ id, is_matching_eligible: true })),
+    ...additions.candidates.map((c) => ({
+      id: c.id,
+      is_matching_eligible: c.matchingEligible,
+    })),
+  ];
+  const common = getCommonQuestions(
+    questions,
+    profiles.map((c) => ({
+      id: c.id,
+      matchingEligible: c.is_matching_eligible,
+      tieBreakOrder: 0,
+    })),
+  );
+  if (questions.length !== 20 || common.length !== 7) {
+    throw new Error("The questionnaire or common pool changed");
+  }
+  for (const candidate of profiles.filter((c) => c.is_matching_eligible)) {
+    let won = false;
+    for (let n = 1; n <= 60 && !won; n++) {
+      const body = payload();
+      body.submissionId = `00000000-0000-4000-8000-${
+        n.toString(16).padStart(12, "0")
+      }`;
+      body.answers = common.map((q) => ({
+        questionId: q.id,
+        stance: q.positions[candidate.id].stance,
+        important: false,
+      }));
+      const result = await submitWithMockDatabase(body, 7, questions, profiles);
+      if (
+        result.status !== 201 || result.body.score !== 100 ||
+        result.body.candidateId === "verdier" || result.writes.length !== 1 ||
+        result.writes[0].p_quiz_version_id !== version
+      ) throw new Error(JSON.stringify(result));
+      won = result.body.candidateId === candidate.id;
+    }
+    if (!won) throw new Error(`Eligible candidate cannot win: ${candidate.id}`);
+  }
 });

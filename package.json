@@ -22,7 +22,8 @@
     "functions:format-check": "deno fmt --check supabase/functions",
     "functions:test": "deno test --config supabase/functions/submit-quiz-result/deno.json supabase/functions/submit-quiz-result",
     "functions:check": "deno check --config supabase/functions/submit-quiz-result/deno.json supabase/functions/submit-quiz-result/index.ts",
-    "verify": "npm run content:generate && npm run db:reset && npm run assets:upload:local && npm run db:lint && npm run db:test && npm run db:test:correction && npm run functions:format-check && npm run functions:test && npm run functions:check"
+    "verify": "npm run content:generate && npm run db:reset && npm run assets:upload:local && npm run db:lint && npm run db:test && npm run db:test:correction && npm run db:test:candidate-addition && npm run functions:format-check && npm run functions:test && npm run functions:check",
+    "db:test:candidate-addition": "node scripts/test-candidate-addition.mjs"
   },
   "devDependencies": {
     "supabase": "2.116.0"

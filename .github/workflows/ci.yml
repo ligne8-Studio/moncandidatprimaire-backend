@@ -28,6 +28,7 @@ jobs:
       - run: npm run db:lint
       - run: npm run db:test
       - run: npm run db:test:correction
+      - run: npm run db:test:candidate-addition
       - run: deno fmt --check supabase/functions
       - run: npm run functions:test
       - run: npm run functions:check

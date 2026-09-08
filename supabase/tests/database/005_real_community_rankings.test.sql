@@ -220,7 +220,8 @@ select results_eq(
       ('faure'::text, 5::bigint, 20::numeric),
       ('royal'::text, 5::bigint, 20::numeric),
       ('guedj'::text, 0::bigint, 20::numeric),
-      ('glucksmann'::text, 0::bigint, 20::numeric)
+      ('glucksmann'::text, 0::bigint, 20::numeric),
+      ('maurel'::text, 0::bigint, 20::numeric)
   $$,
   'the public ranking contains only the twenty released real contributions'
 );

@@ -147,3 +147,37 @@ Deno.test("uses the same evidence and weights despite unequal candidate coverage
     }
   }
 });
+
+Deno.test("published but ineligible profiles cannot shrink the pool or receive a match", () => {
+  const questions: QuestionDefinition[] = [{
+    id: "Q01",
+    positions: { maurel: { stance: 2 }, verdier: { stance: null } },
+  }];
+  const candidates = [{ id: "maurel", tieBreakOrder: 1 }, {
+    id: "verdier",
+    tieBreakOrder: 0,
+    matchingEligible: false,
+  }];
+  assertEquals(
+    getCommonQuestions(questions, candidates).length,
+    1,
+    "ineligible profile reduced the pool",
+  );
+  const ranking = calculateAuthoritativeRanking(
+    [{ questionId: "Q01", stance: 2, important: false }],
+    questions,
+    candidates,
+    2,
+  );
+  assertEquals(
+    ranking.map((score) => score.candidateId),
+    ["maurel"],
+    "ineligible candidate received a score",
+  );
+  assertEquals(ranking[0].score, 100, "eligible score changed");
+  assertEquals(
+    getCommonQuestions(questions, [candidates[1]]),
+    [],
+    "an entirely ineligible pool must be empty",
+  );
+});

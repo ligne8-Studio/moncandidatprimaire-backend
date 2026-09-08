@@ -208,7 +208,7 @@ select results_eq(
     join public.questions as question on question.id = position.question_id
     where question.quiz_version_id = '2026-09-03-v2'
   $$,
-  $$ values (100::bigint) $$,
+  $$ values (140::bigint) $$,
   'all candidate positions are copied into the draft'
 );
 
@@ -220,7 +220,7 @@ select results_eq(
     join public.questions as question on question.id = position.question_id
     where question.quiz_version_id = '2026-09-03-v2'
   $$,
-  $$ values (80::bigint) $$,
+  $$ values (89::bigint) $$,
   'all position provenance links are copied into the draft'
 );
 
@@ -231,7 +231,7 @@ select results_eq(
     where quiz_version_id = '2026-09-03-v2'
       and live_match_count = 0
   $$,
-  $$ values (5::bigint) $$,
+  $$ values (7::bigint) $$,
   'the clone receives one zeroed private counter per active candidate'
 );
 
@@ -242,7 +242,7 @@ select results_eq(
     where snapshot_id = 'collected-2026-09-03-v2'
       and match_count = 0
   $$,
-  $$ values (5::bigint) $$,
+  $$ values (7::bigint) $$,
   'the clone receives a complete zeroed draft ranking snapshot'
 );
 
@@ -300,7 +300,7 @@ select results_eq(
         where snapshot_id = 'collected-2026-09-03-v2'
       )
   $$,
-  $$ values (4::bigint, 4::bigint) $$,
+  $$ values (6::bigint, 6::bigint) $$,
   'removing a draft candidate also removes its operational ranking rows'
 );
 
@@ -361,7 +361,7 @@ select results_eq(
         where snapshot_id = 'collected-2026-09-03-v2'
       )
   $$,
-  $$ values (5::bigint, 5::bigint) $$,
+  $$ values (7::bigint, 7::bigint) $$,
   'restoring a draft candidate recreates its zeroed operational ranking rows'
 );
 

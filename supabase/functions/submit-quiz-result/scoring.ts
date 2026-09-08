@@ -3,6 +3,7 @@ import type { Stance, SubmittedAnswer } from "./contracts.ts";
 export type CandidateDefinition = {
   id: string;
   tieBreakOrder: number;
+  matchingEligible?: boolean;
 };
 
 export type QuestionDefinition = {
@@ -21,9 +22,12 @@ export function getCommonQuestions(
   questions: QuestionDefinition[],
   candidates: CandidateDefinition[],
 ): QuestionDefinition[] {
-  if (candidates.length === 0) return [];
+  const eligibleCandidates = candidates.filter((candidate) =>
+    candidate.matchingEligible !== false
+  );
+  if (eligibleCandidates.length === 0) return [];
   return questions.filter((question) =>
-    candidates.every((candidate) =>
+    eligibleCandidates.every((candidate) =>
       question.positions[candidate.id]?.stance != null
     )
   );
@@ -48,6 +52,7 @@ export function calculateAuthoritativeRanking(
   );
 
   return candidates
+    .filter((candidate) => candidate.matchingEligible !== false)
     .map((candidate) => {
       let weightedDistance = 0;
       let maximumWeightedDistance = 0;

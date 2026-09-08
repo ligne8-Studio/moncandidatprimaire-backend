@@ -12,8 +12,8 @@ select results_eq(
 
 select results_eq(
   $$ select count(*)::bigint from public.candidates $$,
-  $$ values (5::bigint) $$,
-  'five candidates are seeded'
+  $$ values (7::bigint) $$,
+  'seven candidates are published'
 );
 
 select results_eq(
@@ -30,49 +30,49 @@ select results_eq(
 
 select results_eq(
   $$ select count(*)::bigint from public.candidate_positions $$,
-  $$ values (100::bigint) $$,
+  $$ values (140::bigint) $$,
   'every question/candidate pair has a position row'
 );
 
 select results_eq(
   $$ select count(*)::bigint from public.candidate_positions where documentation_status = 'documented' $$,
-  $$ values (66::bigint) $$,
-  'sixty-six positions are documented'
+  $$ values (75::bigint) $$,
+  'seventy-five positions are documented'
 );
 
 select results_eq(
   $$ select count(*)::bigint from public.sources $$,
-  $$ values (33::bigint) $$,
+  $$ values (38::bigint) $$,
   'all source records are preserved'
 );
 
 select results_eq(
   $$ select count(*)::bigint from public.source_candidates $$,
-  $$ values (42::bigint) $$,
+  $$ values (47::bigint) $$,
   'source/candidate links are complete'
 );
 
 select results_eq(
   $$ select count(*)::bigint from public.source_themes $$,
-  $$ values (86::bigint) $$,
+  $$ values (97::bigint) $$,
   'source/theme links include three normalized corrections'
 );
 
 select results_eq(
   $$ select count(*)::bigint from public.position_sources $$,
-  $$ values (80::bigint) $$,
+  $$ values (89::bigint) $$,
   'position/source provenance is complete'
 );
 
 select results_eq(
   $$ select count(*)::bigint from public.candidate_highlights $$,
-  $$ values (40::bigint) $$,
-  'forty candidate highlights are seeded'
+  $$ values (56::bigint) $$,
+  'fifty-six candidate highlights are seeded'
 );
 
 select results_eq(
   $$ select count(*)::bigint from public.highlight_sources $$,
-  $$ values (40::bigint) $$,
+  $$ values (56::bigint) $$,
   'every highlight has a source'
 );
 
@@ -88,10 +88,10 @@ select results_eq(
     from public.questions as question
     join public.candidate_positions as position on position.question_id = question.id
     group by question.id
-    having count(*) <> 5
+    having count(*) <> 7
   $$,
   $$ select 0::bigint where false $$,
-  'each question has exactly five candidate positions'
+  'each question has exactly seven candidate positions'
 );
 
 select results_eq(
@@ -122,8 +122,8 @@ select results_eq(
 
 select results_eq(
   $$ select count(*)::bigint from public.api_candidates $$,
-  $$ values (5::bigint) $$,
-  'candidate API view exposes five published candidates'
+  $$ values (7::bigint) $$,
+  'candidate API view exposes seven published candidates'
 );
 
 select results_eq(
@@ -134,13 +134,13 @@ select results_eq(
 
 select results_eq(
   $$ select count(*)::bigint from public.api_sources $$,
-  $$ values (29::bigint) $$,
+  $$ values (34::bigint) $$,
   'source API view omits four archived placeholder sources'
 );
 
 select results_eq(
   $$ select count(*)::bigint from public.api_community_rankings $$,
-  $$ values (5::bigint) $$,
+  $$ values (6::bigint) $$,
   'the ranking API starts with one truthful row per candidate'
 );
 
@@ -294,13 +294,13 @@ set local role anon;
 
 select results_eq(
   $$ select count(*)::bigint from public.candidates $$,
-  $$ values (5::bigint) $$,
+  $$ values (7::bigint) $$,
   'anonymous users can read published candidates'
 );
 
 select results_eq(
   $$ select count(*)::bigint from public.sources $$,
-  $$ values (29::bigint) $$,
+  $$ values (34::bigint) $$,
   'anonymous users cannot read archived sources'
 );
 

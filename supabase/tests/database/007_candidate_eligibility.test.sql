@@ -1,0 +1,35 @@
+create extension if not exists pgtap with schema extensions;
+begin;
+select plan(17);
+select is((select count(*) from public.api_candidates),7::bigint,'seven profiles are visible');
+select is((select count(*) from public.api_candidates where is_matching_eligible),6::bigint,'six profiles are eligible for matching');
+select ok((select bool_and(jsonb_array_length(highlights)=8) from public.api_candidates),'every profile contains eight sourced highlights');
+select is((select count(*) from public.api_questions where active_in_quiz),20::bigint,'twenty quiz screens remain active');
+select is((select count(*) from public.api_questions where positions->'maurel'->>'stance' is not null),9::bigint,'nine Maurel stances are documented');
+select is((select count(*) from public.api_questions where positions->'verdier'->>'stance' is not null),0::bigint,'no unsupported Verdier stance is invented');
+select ok((select not is_matching_eligible and length(matching_ineligibility_reason)>30 from public.api_candidates where id='verdier'),'Verdier has a public explanation');
+select is_empty($$select 1 from public.api_community_rankings where candidate_id='verdier'$$,'Verdier is not displayed as a zero-percent match');
+select is((select match_count from public.api_community_rankings where candidate_id='maurel'),0::bigint,'Maurel starts with no fabricated contributions');
+select is((select count(*) from pg_trigger where tgname in ('quiz_version_candidates_guard','quiz_version_candidates_ranking_rows_sync','candidate_positions_guard','position_sources_guard') and tgenabled='O'),4::bigint,'all four publication and sync triggers remain enabled');
+set local role anon;
+select is((select is_matching_eligible from public.api_candidates where id='verdier'),false,'anonymous readers can read eligibility through the RLS view');
+reset role;
+set local role service_role;
+select throws_ok($$select public.record_quiz_result('2026-09-03-v1','verdier',repeat('a',64),repeat('b',64))$$,'22023','Unknown quiz version or candidate','the SQL writer rejects ineligible matches');
+select is(public.record_quiz_result('2026-09-03-v1','maurel',repeat('c',64),repeat('d',64)),'recorded','the SQL writer accepts Maurel');
+reset role;
+select is((select live_match_count from public.community_ranking_counters where quiz_version_id='2026-09-03-v1' and candidate_id='maurel'),1::bigint,'a Maurel match increments exactly his private counter');
+select is((select sum(match_count) from public.api_community_rankings),0::numeric,'the existing cohort privacy threshold remains in force');
+insert into auth.users (id,email) values ('bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbb1','eligibility-admin@example.test');
+insert into private.staff_members (user_id,role) values ('bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbb1','admin');
+set local role authenticated;
+select set_config('request.jwt.claims','{"sub":"bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbb1","role":"authenticated"}',true);
+select public.clone_quiz_version('2026-09-03-v1','2026-09-08-v1','Eligibility clone');
+select ok((select not is_matching_eligible and matching_ineligibility_reason is not null from public.quiz_version_candidates where quiz_version_id='2026-09-08-v1' and candidate_id='verdier'),'cloning a quiz retains the exclusion and explanation');
+select public.save_quiz_composition('2026-09-08-v1',
+  (select jsonb_agg(jsonb_build_object('candidate_id',candidate_id,'is_active',is_active,'display_order',display_order,'tie_break_order',tie_break_order)) from public.quiz_version_candidates where quiz_version_id='2026-09-08-v1'),
+  (select jsonb_agg(jsonb_build_object('value',value,'label',label,'short_label',short_label,'display_order',display_order)) from public.answer_scale_options where quiz_version_id='2026-09-08-v1'));
+select ok((select not is_matching_eligible and matching_ineligibility_reason is not null from public.quiz_version_candidates where quiz_version_id='2026-09-08-v1' and candidate_id='verdier'),'saving a draft composition preserves the exclusion and explanation');
+reset role;
+select * from finish();
+rollback;

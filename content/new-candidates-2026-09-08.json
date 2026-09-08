@@ -1,0 +1,75 @@
+{
+  "quizVersion": "2026-09-03-v1",
+  "reviewedAt": "2026-09-08",
+  "candidates": [
+    {
+      "id": "maurel",
+      "slug": "emmanuel-maurel",
+      "fullName": "Emmanuel Maurel",
+      "shortName": "Maurel",
+      "party": "Gauche républicaine et socialiste",
+      "partyId": "grs",
+      "portrait": "/candidates/maurel.webp",
+      "positioning": "Souveraineté économique, réindustrialisation et services publics.",
+      "shortBio": "Député du Val-d’Oise et cofondateur de la Gauche républicaine et socialiste, il défend une gauche attachée à la souveraineté et à la justice sociale.",
+      "matchingEligible": true,
+      "accentKey": "coral",
+      "displayOrder": 6,
+      "tieBreakOrder": 6,
+      "highlights": [
+        { "id": "maurel-h1", "title": "Rétablir un ISF", "summary": "Créer un nouvel impôt sur la fortune, supprimer la flat tax et taxer temporairement les superprofits.", "theme": "Économie & fiscalité", "sourceIds": ["maurel-sursaut-2024"], "status": "documentedPublicPosition" },
+        { "id": "maurel-h2", "title": "Relever le SMIC", "summary": "Augmenter immédiatement le SMIC et ouvrir une conférence salariale, notamment pour les métiers du soin et de l’éducation.", "theme": "Travail & retraites", "sourceIds": ["maurel-sursaut-2024"], "status": "documentedPublicPosition" },
+        { "id": "maurel-h3", "title": "Abroger la réforme des retraites", "summary": "Revenir sur la réforme de 2023 qui a relevé l’âge légal de départ à 64 ans.", "theme": "Travail & retraites", "sourceIds": ["maurel-sursaut-2024"], "status": "documentedPublicPosition" },
+        { "id": "maurel-h4", "title": "Protéger la production française", "summary": "Combattre le dumping et les importations qui ne respectent pas les normes imposées aux producteurs français.", "theme": "Économie & fiscalité", "sourceIds": ["maurel-bilan-2025"], "status": "documentedPublicPosition" },
+        { "id": "maurel-h5", "title": "Refuser l’accord Mercosur", "summary": "S’opposer à l’accord commercial avec le Mercosur pour protéger les filières agricoles et industrielles.", "theme": "Europe", "sourceIds": ["maurel-bilan-2025"], "status": "documentedPublicPosition" },
+        { "id": "maurel-h6", "title": "Réinvestir dans l’hôpital public", "summary": "Arrêter les coupes budgétaires et adopter un plan pluriannuel de financement de l’hôpital.", "theme": "Santé", "sourceIds": ["maurel-sursaut-2024"], "status": "documentedPublicPosition" },
+        { "id": "maurel-h7", "title": "Mieux répartir les médecins", "summary": "Réguler l’installation dans les zones déjà bien dotées, tout en la laissant libre dans les autres territoires.", "theme": "Santé", "sourceIds": ["maurel-bilan-2025"], "status": "documentedPublicPosition" },
+        { "id": "maurel-h8", "title": "Planifier la décarbonation", "summary": "La GRS propose un mix associant nouveaux réacteurs et renouvelables, sous maîtrise publique, pour sortir du carbone d’ici 2040.", "theme": "Écologie & énergie", "sourceIds": ["maurel-grs-ecologie-2026"], "number": "2040", "status": "documentedPublicPosition" }
+      ]
+    },
+    {
+      "id": "verdier",
+      "slug": "fabien-verdier",
+      "fullName": "Fabien Verdier",
+      "shortName": "Verdier",
+      "party": "Divers gauche",
+      "partyId": "divers-gauche",
+      "portrait": "/candidates/verdier.webp",
+      "positioning": "Villes sous-préfectures, finances locales et santé de proximité.",
+      "shortBio": "Ancien maire de Châteaudun, il porte une candidature centrée sur les petites villes et les territoires.",
+      "matchingEligible": false,
+      "matchingIneligibilityReason": "Pas encore intégré au calcul : il n’y a pas assez de propositions documentées sur les questions du quiz pour établir une comparaison fiable. Ses huit propositions publiques sont présentées ci-dessous.",
+      "accentKey": "sky",
+      "displayOrder": 7,
+      "tieBreakOrder": 7,
+      "highlights": [
+        { "id": "verdier-h1", "title": "Un plan pour les sous-préfectures", "summary": "Accélérer le développement des 235 villes sous-préfectures et de leurs arrondissements.", "theme": "Économie & fiscalité", "sourceIds": ["verdier-campagne-2026"], "number": "235", "status": "currentCampaignPriority" },
+        { "id": "verdier-h2", "title": "Des maires au gouvernement", "summary": "Réserver 20 % des postes gouvernementaux à des maires issus des villes et arrondissements sous-préfectures.", "theme": "Institutions", "sourceIds": ["verdier-campagne-2026"], "number": "20 %", "status": "currentCampaignPriority" },
+        { "id": "verdier-h3", "title": "Sécuriser les dotations locales", "summary": "Inscrire la DGF dans une loi organique, avec des baisses limitées aux efforts nationaux équitablement partagés.", "theme": "Économie & fiscalité", "sourceIds": ["verdier-campagne-2026"], "status": "currentCampaignPriority" },
+        { "id": "verdier-h4", "title": "Un budget dédié aux collectivités", "summary": "Créer une loi de finances des collectivités territoriales, examinée avant le budget de l’État.", "theme": "Institutions", "sourceIds": ["verdier-campagne-2026"], "status": "currentCampaignPriority" },
+        { "id": "verdier-h5", "title": "Financer les investissements locaux", "summary": "Affecter une part variable des dotations à l’industrie, la santé, les transports et la transition écologique.", "theme": "Économie & fiscalité", "sourceIds": ["verdier-campagne-2026"], "status": "currentCampaignPriority" },
+        { "id": "verdier-h6", "title": "Confier la santé aux élus", "summary": "Supprimer les agences régionales de santé et confier le pilotage sanitaire aux élus locaux.", "theme": "Santé", "sourceIds": ["verdier-campagne-2026"], "status": "currentCampaignPriority" },
+        { "id": "verdier-h7", "title": "Une alimentation plus accessible", "summary": "Favoriser les circuits courts, des produits essentiels abordables et une meilleure rémunération des agriculteurs.", "theme": "Économie & fiscalité", "sourceIds": ["verdier-campagne-2026"], "status": "currentCampaignPriority" },
+        { "id": "verdier-h8", "title": "Réexaminer les politiques publiques", "summary": "Évaluer les politiques de logement, d’école ou de fiscalité à l’aune des classes moyennes et populaires.", "theme": "Institutions", "sourceIds": ["verdier-campagne-2026"], "status": "currentCampaignPriority" }
+      ]
+    }
+  ],
+  "positions": {
+    "Q01": { "maurel": { "stance": 2, "summary": "Il cosigne un appel à créer un nouvel ISF, supprimer la flat tax et taxer les superprofits.", "sourceIds": ["maurel-sursaut-2024"], "sourceDate": "2024-08-26", "sourceKind": "official-site", "confidence": "high" } },
+    "Q02": { "maurel": { "stance": 2, "summary": "Son bilan de mandat défend la protection des filières françaises contre le dumping et les importations hors normes.", "sourceIds": ["maurel-bilan-2025"], "sourceDate": "2025-06-18", "sourceKind": "official-site", "confidence": "high" } },
+    "Q03": { "maurel": { "stance": 2, "summary": "Il cosigne la demande d’abrogation immédiate de la réforme des retraites de 2023.", "sourceIds": ["maurel-sursaut-2024"], "sourceDate": "2024-08-26", "sourceKind": "official-site", "confidence": "high" } },
+    "Q04": { "maurel": { "stance": 2, "summary": "Il demande une hausse immédiate du SMIC et une conférence salariale.", "sourceIds": ["maurel-sursaut-2024"], "sourceDate": "2024-08-26", "sourceKind": "official-site", "confidence": "high" } },
+    "Q09": { "maurel": { "stance": 2, "summary": "Le programme 2026 de la GRS, qu’il a cofondée, prévoit explicitement de nouveaux réacteurs dans le mix énergétique (p. 10). Position de son parti.", "sourceIds": ["maurel-grs-ecologie-2026"], "sourceDate": "2026-06-07", "sourceKind": "official-program", "confidence": "medium" } },
+    "Q10": { "maurel": { "stance": 1, "summary": "Le programme 2026 de la GRS prévoit de renforcer les renouvelables et de relancer le solaire, sans engagement aussi précis sur l’éolien (p. 10). Position de son parti.", "sourceIds": ["maurel-grs-ecologie-2026"], "sourceDate": "2026-06-07", "sourceKind": "official-program", "confidence": "medium" } },
+    "Q12": { "maurel": { "stance": 2, "summary": "Il réaffirme son opposition à l’accord Mercosur dans son bilan de mandat (p. 5–6).", "sourceIds": ["maurel-bilan-2025"], "sourceDate": "2025-06-18", "sourceKind": "official-site", "confidence": "high" } },
+    "Q17": { "maurel": { "stance": 2, "summary": "Il demande l’arrêt des coupes et un plan pluriannuel de financement de l’hôpital public.", "sourceIds": ["maurel-sursaut-2024"], "sourceDate": "2024-08-26", "sourceKind": "official-site", "confidence": "high" } },
+    "Q18": { "maurel": { "stance": 2, "summary": "Il défend une proposition cosignée pour réguler l’installation des médecins dans les zones surdotées (p. 8).", "sourceIds": ["maurel-bilan-2025"], "sourceDate": "2025-06-18", "sourceKind": "official-site", "confidence": "high" } }
+  },
+  "sources": [
+    { "id": "maurel-candidature-2026", "title": "Emmanuel Maurel candidat à la primaire de la gauche socialiste", "publisher": "Gauche républicaine et socialiste", "date": "2026-09-04", "url": "https://g-r-s.fr/emmanuel-maurel-candidat-a-la-primaire-de-la-gauche-socialiste/", "type": "official-site", "verificationStatus": "verified", "candidateIds": ["maurel"], "themes": ["Institutions"] },
+    { "id": "maurel-sursaut-2024", "title": "Pour un sursaut rapide — texte cosigné par Emmanuel Maurel", "publisher": "Gauche républicaine et socialiste", "date": "2024-08-26", "url": "https://g-r-s.fr/choix-du-premier-ministre-pour-un-sursaut-rapide/", "type": "official-site", "verificationStatus": "verified", "candidateIds": ["maurel"], "themes": ["Économie & fiscalité", "Travail & retraites", "Santé"] },
+    { "id": "maurel-bilan-2025", "title": "Bilan de mandat 2024–2025 — protection commerciale et accès aux soins", "publisher": "Emmanuel Maurel", "date": "2025-06-18", "url": "https://emmanuelmaurel.eu/wp-content/uploads/2025/06/Maquette-bilan-mandat-2024-2025_Web-Simples.pdf", "type": "official-site", "verificationStatus": "verified", "candidateIds": ["maurel"], "themes": ["Économie & fiscalité", "Europe", "Santé"] },
+    { "id": "maurel-grs-ecologie-2026", "title": "Vers la République écologique — programme de la GRS, congrès de juin 2026", "publisher": "Gauche républicaine et socialiste", "date": "2026-06-07", "url": "https://g-r-s.fr/wp-content/uploads/2026/08/Ecologie-republicaine.pdf", "type": "official-program", "verificationStatus": "verified", "candidateIds": ["maurel"], "themes": ["Écologie & énergie"] },
+    { "id": "verdier-campagne-2026", "title": "Nos terroirs au pouvoir — propositions de candidature, consultées le 8 septembre 2026", "publisher": "Fabien Verdier", "date": "2026-09-08", "url": "https://fabienverdier.fr/", "type": "official-site", "verificationStatus": "verified", "candidateIds": ["verdier"], "themes": ["Économie & fiscalité", "Institutions", "Santé"] }
+  ]
+}

@@ -20,13 +20,20 @@ const rankingState = `select jsonb_build_object(
 ) as state`;
 const sql = `
 begin;
+-- Reconstruct the public five-candidate perimeter that existed at this repair.
+-- Keep the extra candidates' rows and counters untouched, and roll back the test.
+alter table public.quiz_version_candidates disable trigger quiz_version_candidates_guard;
+alter table public.quiz_version_candidates disable trigger quiz_version_candidates_ranking_rows_sync;
+update public.quiz_version_candidates set is_active=false where candidate_id in ('maurel','verdier');
+alter table public.quiz_version_candidates enable trigger quiz_version_candidates_guard;
+alter table public.quiz_version_candidates enable trigger quiz_version_candidates_ranking_rows_sync;
 update public.community_ranking_counters
 set live_match_count = case when candidate_id='royal' then 51 else 50 end,
     last_counted_at='2026-09-08 00:01:00+00'
-where quiz_version_id='2026-09-03-v1';
+where quiz_version_id='2026-09-03-v1' and candidate_id not in ('maurel','verdier');
 update public.community_ranking_entries e set match_count=50
 from public.community_ranking_snapshots s
-where s.id=e.snapshot_id and s.quiz_version_id='2026-09-03-v1';
+where s.id=e.snapshot_id and s.quiz_version_id='2026-09-03-v1' and e.candidate_id not in ('maurel','verdier');
 update public.community_ranking_snapshots set last_released_at='2026-09-08 00:00:00+00'
 where quiz_version_id='2026-09-03-v1';
 create temporary table ranking_before_repair on commit drop as ${rankingState};

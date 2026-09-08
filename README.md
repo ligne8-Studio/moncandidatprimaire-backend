@@ -19,7 +19,7 @@ Le navigateur affiche les 20 questions actives. Une fois ce questionnaire termin
 il transmet au serveur uniquement les réponses utilisées pour le score commun.
 
 1. Pour le calcul uniquement, ne conserver que les questions actives dont la position est renseignée pour
-   **tous les candidats**. Leur nombre dépend du contenu publié ; une position
+   **tous les candidats éligibles au calcul**. Leur nombre dépend du contenu publié ; une position
    inconnue n'est jamais assimilée à une position neutre.
 2. Comparer chaque réponse sur une échelle de `-2` à `+2`. Une réponse passée
    (`null`) est exclue pour tous les candidats.
@@ -49,7 +49,11 @@ sur ce corpus documenté, pas sur l'ensemble de leurs programmes.
 
 La correction du 8 septembre conserve les **20 questions** et publie les
 positions relues de Royal dans la base : **7 questions communes** servent au
-calcul et chacun des cinq candidats peut obtenir un meilleur match unique.
+calcul. L’ajout de Maurel et Verdier conserve cette base : six candidats sont
+éligibles au score ; Verdier reste présenté avec huit propositions mais exclu
+du calcul faute de positions suffisamment documentées sur les questions du quiz.
+Les égalités documentées, notamment entre Maurel et Guedj, restent départagées
+par le même tirage équitable.
 La migration conserve intégralement les compteurs, reçus et lots existants ;
 elle archive les anciennes positions dans le journal d'audit. Les contributions
 historiques ne sont pas recalculées et aucune voix compensatoire n'est ajoutée.
@@ -64,12 +68,12 @@ contributions déjà enregistrées ; voir les
 
 - un schéma éditorial normalisé et administrable ;
 - une version immuable du quiz et de son algorithme ;
-- 5 candidats, 40 propositions phares, 20 questions, 100 positions et leurs
+- 7 candidats, 56 propositions phares, 20 questions, 140 positions et leurs
   sources ;
 - des vues publiques stables pour le frontend ;
 - RLS et privilèges explicites sur toutes les tables exposées ;
 - les rôles `editor` et `admin`, plus un journal d'audit éditorial ;
-- un bucket public `editorial-assets`, les cinq portraits versionnés et une
+- un bucket public `editorial-assets`, les sept portraits versionnés et une
   écriture réservée au staff ;
 - une Edge Function qui recalcule chaque résultat puis ne conserve qu'un
   compteur agrégé, avec idempotence et limitation quotidienne par empreinte ;
@@ -262,3 +266,5 @@ Cette licence n'accorde aucun droit supplémentaire sur les contenus de tiers,
 notamment les portraits des candidats, les marques et les documents cités comme
 sources. Leurs droits respectifs doivent être vérifiés avant réutilisation.
 Les dépendances conservent leurs propres licences.
+
+La [note éditoriale du 8 septembre](docs/new-candidates-2026-09-08.md) détaille les sources, l’éligibilité et la conservation de l’historique.

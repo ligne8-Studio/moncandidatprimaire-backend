@@ -147,13 +147,15 @@ Deno.serve(async (request: Request) => {
         .order("display_order"),
       supabase
         .from("api_candidates")
-        .select("id"),
+        .select("id,is_matching_eligible"),
     ]);
     if (questionError) throw questionError;
     if (candidateError) throw candidateError;
 
     const editorialQuestions = (questionRows ?? []) as QuestionRow[];
-    const candidates = (candidateRows ?? []).map(
+    const candidates = (candidateRows ?? []).filter((candidate) =>
+      candidate.is_matching_eligible !== false
+    ).map(
       (candidate): CandidateDefinition => ({
         id: (candidate as CandidateRow).id,
         tieBreakOrder: 0,
