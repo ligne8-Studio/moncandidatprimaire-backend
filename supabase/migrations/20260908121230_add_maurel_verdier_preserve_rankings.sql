@@ -87,6 +87,9 @@ $editorial$::jsonb;
   candidate_document jsonb; source_document jsonb; highlight_document jsonb;
   position_document jsonb; question_row record; position_id uuid; source_link record;
 begin
+  -- Writers read memberships before taking the submission lock. Follow the same
+  -- order so an in-flight quiz can finish before the short publication begins.
+  lock table public.quiz_version_candidates in access exclusive mode;
   perform pg_catalog.pg_advisory_xact_lock(pg_catalog.hashtextextended('quiz-result:' || version_id, 0));
   select jsonb_agg(to_jsonb(c) order by c.candidate_id) into before_counters from public.community_ranking_counters c where c.quiz_version_id=version_id;
   select jsonb_agg(to_jsonb(e) order by e.snapshot_id,e.candidate_id) into before_entries from public.community_ranking_entries e;
